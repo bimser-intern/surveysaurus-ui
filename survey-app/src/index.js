@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
 import {
   BrowserRouter,
   Routes,
@@ -9,6 +10,8 @@ import {
 } from "react-router-dom";
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
+import CreateSurvey from './screens/CreateSurvey';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +20,7 @@ root.render(
       <Route path="/" element={<App />} />
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<SignUp/>}/>
+      <Route path='/createSurvey' element={<CreateSurvey/>}/>
     </Routes>
   </BrowserRouter>
 );

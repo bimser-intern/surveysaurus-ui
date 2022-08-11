@@ -125,4 +125,11 @@
   top: -5px;
   margin-left: 5px;
   text-decoration: underline;
+}
+
+.borderMenuBottomLogin {
+  width: 100%;
+  border-bottom: 2px solid #D3D8FF;
+  position: fixed;
+  top: 60px;
 }/*# sourceMappingURL=Login.css.map */

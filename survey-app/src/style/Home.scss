@@ -39,8 +39,8 @@ body {
 }
 
 .Menu {
-    border-bottom: 2px solid #D3D8FF;
-    margin-top: 20px;
+    //border-bottom: 2px solid #D3D8FF;
+    margin-top: 10px;
     position: fixed;
     top: 0px;
     right: 20px;
@@ -91,15 +91,17 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 140px;
     background-image: url("../style/resim.png");
     background-position: top;
 
     .createButton {
         transition: padding 0.2s;
+        //text-decoration: none;
 
         &:hover {
-            padding: 25px 25px 25px 25px
+            padding: 25px 25px 25px 25px;
+            text-decoration: none;
         }
 
         padding: 20px 20px 20px 20px;
@@ -141,6 +143,7 @@ ul {
         height: 100%;
         background: rgba(84, 82, 82, 0.4);
         border-radius: 20px;
+        opacity: 0.4;
     }
 
     .aboutTextContainer {
@@ -198,9 +201,11 @@ ul {
 
     .createSurveyButton {
         transition: padding 0.5s;
-        &:hover{
-            padding:15px 55px 15px 55px;  
+
+        &:hover {
+            padding: 15px 55px 15px 55px;
         }
+
         background-color: #1B58E7;
         color: #FFFFFF;
         padding-left: 50px;
@@ -225,9 +230,11 @@ ul {
     ul {
         list-style-type: none;
         margin-top: 25px;
-        li{
+
+        li {
             //margin-right: 20px;
         }
+
         a {
             cursor: pointer;
             font-family: 'Inter';
@@ -240,4 +247,26 @@ ul {
             text-decoration: none;
         }
     }
+}
+
+.logoImage {
+    width: 70px;
+    height: 70px;
+    margin-left: 210px;
+}
+
+.borderMenuBottom {
+    width: 100%;
+    border-bottom: 2px solid #D3D8FF;
+    position: fixed;
+    top: 80px;
+}
+
+.createSurveysaurus {
+    position: absolute;
+    top: 300px;
+    right: 210px;
+    color: rgba(242, 126, 151, 0.8);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 30px;
 }

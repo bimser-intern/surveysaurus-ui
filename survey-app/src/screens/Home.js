@@ -3,6 +3,7 @@ import Menu from '../components/Menu';
 import "../style/Home.css"
 import SurveyCard from "../components/surveyCard"
 import "../style/surveyCard.css"
+import Logo from "../image/logo.png"
 import { Link } from 'react-router-dom';
 function Home() {
   const [value, setValue] = useState('1');
@@ -13,9 +14,11 @@ function Home() {
   return (
     <div className='Home' id='Home'>
       <Menu />
+      <div className="borderMenuBottom"></div>
       <div className='create' id='create'>
         <p className='appTitle'>Surveysaurus</p>
-        <button className='createButton'>Create A Survey</button>
+        <p className="createSurveysaurus">Create Your Surveysaurus</p>
+        <Link  to={"/createSurvey"} className='createButton'>Create A Survey</Link>
       </div>
       <div className="about" id='about'>
         <div className='imageAbout'></div>
@@ -45,7 +48,7 @@ function Home() {
           <div className='footerItem'>
             <ul>
               <li>
-                <Link className='linkStyle' to={"/"}>Home</Link>
+                <a href='#create' className='linkStyle' to={"/"}>Home</a>
               </li>
               <li>
               <a href='#about'>About</a>
@@ -53,7 +56,9 @@ function Home() {
               </li>
               <li>
               <a>Contact Us</a>
-
+              </li>
+              <li>
+              <img className='logoImage' src={Logo} alt="" />
               </li>
             </ul>
           </div>
