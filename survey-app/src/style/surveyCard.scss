@@ -1,0 +1,78 @@
+%layout-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.surveyCardItem {
+    width: 30%;
+    height: 500px;
+    //background-color: red;
+    border-left: 4px solid #D3D8FF;
+    border-right: 4px solid #D3D8FF;
+    transition: box-shadow 0.2s;
+
+    &:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
+    }
+
+    .imageSurveyCard {
+        width: 100%;
+        //background-color: blue;
+        @extend %layout-center;
+    }
+
+    .image {
+        margin: auto;
+        //margin-left: 80px;
+    }
+
+    .cardHeader {
+        @extend %layout-center;
+    }
+
+    .cardTextStyle {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 23px;
+        text-align: center;
+
+        color: #000000;
+    }
+}
+
+.surveyCardItems {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cardOptions {
+    //background-color: blue;
+    margin-left: 18px;
+    margin-right: 40px;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        li {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 21px;
+            /* or 105% */
+
+
+            color: #000000;
+        }
+    }
+}

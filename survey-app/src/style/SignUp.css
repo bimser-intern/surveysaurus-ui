@@ -1,0 +1,76 @@
+.SignUp .formControl, .SignUp .withGoogle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SignUp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SignUp {
+  width: 500px;
+  height: 700px;
+  background-color: red;
+  position: absolute;
+  left: 650px;
+  top: 150px;
+  border-radius: 20px;
+  background-color: aliceblue;
+}
+.SignUp .withGoogle {
+  width: 200px;
+  height: 30px;
+  border: 1px solid #5380EA;
+  background-color: #F7F8FF;
+  border-radius: 20px;
+  margin-top: 40px;
+  flex-direction: row;
+  padding-right: 10px;
+  cursor: pointer;
+}
+.SignUp .withGoogle:hover {
+  background-color: #b3c3e9;
+}
+.SignUp .withGoogle .googleIcon {
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: -15px;
+  right: 20px;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+.SignUp .withGoogle .continue {
+  color: #000000;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 0px;
+  margin-top: 8px;
+}
+.SignUp .SignUpBox {
+  width: 50%;
+  height: 500px;
+  background-color: white;
+  border-radius: 10px;
+}
+.SignUp .textfield {
+  width: 100% px;
+  height: 30px;
+  margin: 30px 10px 10px 10px;
+}
+.SignUp .formControl {
+  flex-direction: column;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 65px;
+  top: 520px;
+  width: 20px;
+  height: 20px;
+}/*# sourceMappingURL=SignUp.css.map */
