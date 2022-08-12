@@ -4,6 +4,7 @@
     justify-content: center;
     //align-items: center
 }
+
 %layout {
     display: flex;
     flex-direction: column;
@@ -21,13 +22,17 @@
     border-radius: 20px;
     background-color: aliceblue;
     @extend %layout;
+
     .withGoogle {
 
-        &:hover{
+        &:hover {
             background-color: #b3c3e9;
         }
+
         width: 200px;
-        height: 30px;
+        height: 70px;
+        padding-top: 5px;
+        padding-bottom: 5px;
         border: 1px solid #5380EA;
         background-color: #F7F8FF;
         border-radius: 20px;
@@ -64,21 +69,55 @@
         background-color: white;
         border-radius: 10px;
     }
-    .textfield{
+
+    .textfield {
         width: 100%px;
         height: 30px;
         margin: 30px 10px 10px 10px;
     }
-    .formControl{
+
+    .formControl {
         @extend %layout-shared;
         flex-direction: column;
-    
+
     }
 }
-.eyeIcon{
+
+.eyeIcon {
     position: absolute;
     right: 65px;
-    top:520px;
+    top: 520px;
     width: 20px;
     height: 20px;
+}
+
+.policy {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+
+
+    .textPolicy {
+        font-family: 'Roboto';
+        font-style: normal;
+        /* or 308% */
+        color: #000000;
+    }
+    .checkBox{
+        width: 20px;
+        height: 20px;
+        border: 2px solid black;
+        border-radius: 5px;
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.borderMenuBottomSign{
+    width: 100%;
+    border-bottom: 2px solid #D3D8FF;
+    position: fixed;
+    top: 60px;
 }

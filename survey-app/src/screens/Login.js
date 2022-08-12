@@ -7,13 +7,72 @@ import eyeIcon from "../image/eye.png"
 import "../style/Login.css"
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import '../style/Menu.css'
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
 function Login() {
 
+  const navigate=useNavigate();
   const [control,setControl]=useState(true);
+  const [controlVisible,setControlVisible]=useState(true);
+  const [email,setEmail]=useState("");
+  const [password,setPassword]=useState("");
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    console.log(email)
+    console.log(password)
+    axios.post('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/login',{
+      "email":email,
+      "password":password,
+    })
+    .then((result)=>{
+      console.log(result)
+      if(result.status===200){
+        navigate("/createSurvey");
+      }
+      else{
+        alert("kullanıcı adı veya şifre yanlış");
+      }
+    }).catch((result)=>{
+      console.log(result)
+    })
+  }
 
   return (
     <div>
-      <Menu />
+      <div className='Menu'>
+      <ul className='navInfo'>
+        <li><Link to={"/"} className='navItem'>Home</Link>
+        </li>
+        <li><a href="#about" className='navItem'>About</a></li>
+      </ul>
+
+      <ul>
+        <li>
+          <Link to={"/signup"} className='signUpButton'>
+            <p className='buttonTextLayout'>Sign Up</p>
+          </Link>
+        </li>
+        <li>
+          <div onClick={()=>setControl(!control)} className='UserIcon'>
+            <a href=""></a>
+            <div style={{display: control ? "none" :"block",top:"45px",zIndex:"100"}} className='openMenu'>
+               <div className='menuItem' style={{borderTopLeftRadius:"10px",borderTopRightRadius:"10px"}}>
+                <Link className='menuLink' to={"/login"}>User Info</Link>
+               </div>
+               <div className='menuItem'>
+                <Link className='menuLink' to={"/login"}>My Survey</Link>
+               </div>
+               <div className='backColor' style={{paddingTop:"10px",paddingBottom:"10px"}}>
+                <Link style={{color:"#FFFFFF",marginLeft:"5px"}} className='menuLink' to={"/login"}>Log Out</Link>
+               </div>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+      <div className="borderMenuBottomLogin"></div>
+    </div>
 
       <div className='tableImg'>
         <img src={TableImg} alt="" />
@@ -37,15 +96,17 @@ function Login() {
         </div>
 
         <div className='form'>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
-              <input required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+              <span style={{color:"red",marginLeft:"3px"}} className='form-required'>*</span>
+              <input value={email} onChange={(e)=>setEmail(e.target.value)} required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input  required type={control ? "password" : "text" } class="form-control" id="exampleInputPassword1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Password"/>
-              <div className='eyeIconImg' type='button' onClick={()=>setControl(!control)}>
+              <span style={{color:"red",marginLeft:"3px"}} className='form-required'>*</span>
+              <input value={password} onChange={(e)=>setPassword(e.target.value)}  required type={controlVisible ? "password" : "text" } class="form-control" id="exampleInputPassword1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Enter your password"/>
+              <div className='eyeIconImg' type='button' onClick={()=>setControlVisible(!controlVisible)}>
                   <img src={eyeIcon} alt="" />
               </div>
             </div>

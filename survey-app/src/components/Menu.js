@@ -3,15 +3,19 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../style/Home.css"
 import "../style/Menu.css"
+import Logo from "../image/logo.png"
 function Menu() {
   const [control,setControl]=useState(true);
   return (
-    <div className='Menu'>
+    <div className='Menu' id='#menu'>
       <ul className='navInfo'>
-        <li><Link to={"/"} className='navItem'>Home</Link>
+        <li><a href='#create' className='navItem'>Home</a>
         </li>
         <li><a href="#about" className='navItem'>About</a></li>
         <li><a href="#survey" className='navItem'>Survey</a></li>
+        <li>
+          <img className='logoImg' src={Logo} alt="" />
+        </li>
       </ul>
 
       <ul>
