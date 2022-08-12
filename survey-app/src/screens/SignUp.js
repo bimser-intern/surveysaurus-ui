@@ -10,11 +10,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Vector from "../image/Vector.png"
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
 function SignUp() {
+    const navigate=useNavigate();
     const countryCitylist = [
         {
             countryName: "Turkey",
-            id: "0",
+            id: 0,
             city: [
                 { cityName: "İstanbul" },
                 { cityName: "Kocaeli" },
@@ -23,7 +26,7 @@ function SignUp() {
         },
         {
             countryName: "Germany",
-            id: "1",
+            id: 1,
             city: [
                 { cityName: "Berlin" },
                 { cityName: "Hamburg" },
@@ -34,15 +37,41 @@ function SignUp() {
     ]
     const [countryId, setCountryId] = useState(0);
     const [countryOption, setcountryOption] = useState(0);
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
     const [controlVisible, setControlVisible] = useState(true);
     const [control, setControl] = useState(true);
     const [vectorControl, setvectorControl] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [gender, setgender] = useState("");
+    const [city, setCity] = useState("");
+    const [country, setCountry] = useState("");
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(name);
         console.log(email);
+        console.log(password);
+        console.log(gender);
+        console.log(city);
+        console.log(country);
+        axios.post('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/register',{
+            "userName": name,
+            "email": email,
+            "password":password,
+            "gender":gender,
+            "city":city,
+            "country":country
+          })
+          .then((result)=>{
+            if(result.status){
+                navigate("/login");
+            }
+          })
+          .catch((result)=>{
+            console.log(result);
+          })
+
+        //console.log(email);
     }
     return (
         <div className='App'>
@@ -102,21 +131,21 @@ function SignUp() {
                 </div>
 
                 <div className='form'>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Name</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-                            <input required type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your name" />
+                            <input value={name} onChange={(e)=>setName(e.target.value)} required type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your name" />
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-                            <input required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your e-mail address" />
+                            <input value={email} onChange={(e)=>setEmail(e.target.value)} required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your e-mail address" />
                         </div>
                         <div class="form-group">
                             <label for="sel1">Choose Gender</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-                            <select required class="form-control" id="sel1" name='sellist'>
+                            <select value={gender} onChange={(e)=>setgender(e.target.value)} required class="form-control" id="sel1" name='sellist'>
                                 <option></option>
                                 <option>Female</option>
                                 <option>Male</option>
@@ -128,6 +157,8 @@ function SignUp() {
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
                             <select onChange={(event) => {
                                 setcountryOption(event.target.value)
+                                //alert(event.target.value);
+                                setCountry(countryCitylist[event.target.value].countryName)
                                 //alert(countryOption)
                             }} required class="form-control" id="sel1">
                                 <option></option>
@@ -142,7 +173,7 @@ function SignUp() {
                         <div class="form-group">
                             <label for="sel1">Select City</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-                            <select required class="form-control" id="sel1">
+                            <select value={city} onChange={(e)=>setCity(e.target.value)} required class="form-control" id="sel1">
                                 <option></option>
                                 {countryCitylist[countryOption].city.map((item) => {
                                     return (
@@ -154,7 +185,7 @@ function SignUp() {
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-                            <input required type={controlVisible ? "password" : "text"} class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="exampleInputPassword1" placeholder="Enter your password" />
+                            <input value={password} onChange={(e)=>setPassword(e.target.value)} required type={controlVisible ? "password" : "text"} class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="exampleInputPassword1" placeholder="Enter your password" />
                             <div className='eyeIcon' type='button' onClick={() => setControlVisible(!controlVisible)}>
                                 <img src={eyeIcon} alt="" />
                             </div>

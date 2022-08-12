@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Menu from '../components/Menu';
 import "../style/Home.css"
 import SurveyCard from "../components/surveyCard"
 import "../style/surveyCard.css"
 import Logo from "../image/logo.png"
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 function Home() {
   const [value, setValue] = useState('1');
 
