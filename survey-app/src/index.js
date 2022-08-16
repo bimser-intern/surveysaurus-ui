@@ -11,6 +11,7 @@ import {
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 import CreateSurvey from './screens/CreateSurvey';
+import UserPage from './screens/UserPage';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,6 +22,7 @@ root.render(
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<SignUp/>}/>
       <Route path='/createSurvey' element={<CreateSurvey/>}/>
+      <Route path='/userPage' element={<UserPage/>}/>
     </Routes>
   </BrowserRouter>
 );
