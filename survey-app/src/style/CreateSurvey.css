@@ -1,0 +1,58 @@
+.borderBottom {
+  border: 2px solid #D3D8FF;
+  transform: rotate(0.04deg);
+}
+
+.createSurveyContainer {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+.createSurveyContainer .createSurvey {
+  width: 60%;
+  height: 90%;
+  background-color: #FFFFFF;
+  border-radius: 15px;
+}
+.createSurveyContainer .questionInput {
+  width: 80%;
+  height: 100%;
+  margin-top: 50px;
+}
+.createSurveyContainer .addOption {
+  width: 100%;
+  height: 50px;
+}
+.createSurveyContainer .createButtonContainer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.createSurveyContainer .createButtonContainer .createButton {
+  background: #F27E97;
+  border: 1px solid #F5DCD6;
+  box-shadow: 0px 4px 24px #E49192;
+  border-radius: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 24px;
+  /* identical to box height */
+  text-align: center;
+  color: #000000;
+}
+
+.borderMenuBottomCreateSurvey {
+  width: 100%;
+  border-bottom: 2px solid #D3D8FF;
+  position: fixed;
+  top: 60px;
+}/*# sourceMappingURL=CreateSurvey.css.map */
