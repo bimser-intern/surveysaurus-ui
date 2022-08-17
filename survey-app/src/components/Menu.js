@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import "../style/Home.css"
-import "../style/Menu.css"
+import "../style/Home.scss"
+import "../style/Menu.scss"
 import Logo from "../image/logo.png"
 import { useNavigate } from "react-router-dom";
 function Menu() {
@@ -32,7 +32,7 @@ function Menu() {
           </Link>
         </li>
         <li>
-          <div onClick={()=>setControl(!control)} className='UserIcon'>
+          <div onClick={() => setControl(!control)} className='UserIcon'>
             <a href=""></a>
             <div style={{display: control ? "none" :"block"}} className='openMenu'>
                <div onClick={()=>navigate("/login")} className='menuItem' style={{borderTopLeftRadius:"10px",borderTopRightRadius:"10px"}}>
@@ -50,6 +50,7 @@ function Menu() {
 
       </ul>
     </div>
+
   )
 }
 export default Menu;
