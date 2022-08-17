@@ -32,7 +32,7 @@ function Menu() {
           </Link>
         </li>
         <li>
-          <div onClick={()=>setControl(!control)} className='UserIcon'>
+          <div onClick={() => setControl(!control)} className='UserIcon'>
             <a href=""></a>
             <div style={{display: control ? "none" :"block"}} className='openMenu'>
                <div onClick={()=>navigate("/login")} className='menuItem' style={{borderTopLeftRadius:"10px",borderTopRightRadius:"10px"}}>
@@ -50,6 +50,7 @@ function Menu() {
 
       </ul>
     </div>
+
   )
 }
 export default Menu;

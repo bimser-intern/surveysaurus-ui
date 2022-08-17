@@ -6,6 +6,7 @@ import CasualLife from "../image/CasualLife.png"
 import googleIcon from "../image/google.png"
 import eyeIcon from "../image/eye.png"
 import Warning from "../image/warning.png"
+
 import "../style/Login.scss"
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
