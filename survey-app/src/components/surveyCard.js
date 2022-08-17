@@ -12,7 +12,7 @@ function SurveyCard() {
         <div className='imageSurveyCard'>
             <img className='image' src={cardImg} alt="" />
         </div>
-        <div className="cardHeader">
+        <div className=" cardHeader">
             <p className='cardTextStyle'>In which financial markets do you operate?</p>
         </div>
         <div className="cardOptions">
