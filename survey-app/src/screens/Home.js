@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Menu from '../components/Menu';
 import "../style/Home.css"
-import SurveyCard from "../components/surveyCard"
+import SurveyCard from "../components/SurveyCard"
 import "../style/surveyCard.css"
 import Logo from "../image/logo.png"
 import { Link } from 'react-router-dom';

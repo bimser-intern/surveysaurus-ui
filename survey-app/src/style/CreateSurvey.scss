@@ -3,8 +3,10 @@
     justify-content: center;
     align-items: center;
 }
-$width-container:100%;
-$length:50px;
+
+$width-container: 100%;
+$length: 50px;
+
 .borderBottom {
     border: 2px solid #D3D8FF;
     transform: rotate(0.04deg);
@@ -30,8 +32,11 @@ $length:50px;
     }
 
     .addOption {
-        width: $width-container;
+        width: 100px;
         height: $length;
+        display: flex;
+        flex-direction: row;
+        cursor: pointer;
     }
 
     .createButtonContainer {
@@ -62,11 +67,41 @@ $length:50px;
     }
 
 }
-.borderMenuBottom{
+
+.borderMenuBottom {
     width: $width-container;
     border-bottom: 2px solid #D3D8FF;
     position: fixed;
     top: 60px;
-    margin-top:15px;
-    
+    margin-top: 15px;
+}
+
+.circleStyle {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+.questionInputStyle {
+    background-color: rgba(240, 184, 13, 0.38);
+    margin-bottom: 50px;
+    border: 1px solid rgba(240, 184, 13, 0.38);
+    border-radius: 10px
+}
+.deleteStyle{
+    width: 15px; 
+    height: 15px; 
+    position: absolute; 
+    margin-left: 580px; 
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.optionInputStyle{
+    padding-left: 35px;
+    background-color: rgba(240, 184, 13, 0.38);
+    margin-bottom: 5px;
+    border: 1px solid rgba(240, 184, 13, 0.38);
+    border-radius: 10px
 }

@@ -31,23 +31,17 @@ function CreateSurvey() {
     data.splice(index, 1)
     setFormFields(data)
   }
-const data ={ backgroundColor: "rgba(240, 184, 13, 0.38)", marginBottom: "50px", border: "1px solid rgba(240, 184, 13, 0.38)", borderRadius: "10px" };
-const data1={ width: "20px", height: "20px", position: "absolute", marginLeft: "5px", marginTop: "3px" }
-const data2={ width: "15px", height: "15px", position: "absolute", marginLeft: "580px", marginTop: "5px" };
-const data3={ paddingLeft: "35px", backgroundColor: "rgba(240, 184, 13, 0.38)", marginBottom: "5px", border: "1px solid rgba(240, 184, 13, 0.38)", borderRadius: "10px" };
-const data4={ display: "flex", flexDirection: "row", cursor: "pointer" };
   return (
     <div>
       <Menu/>
       <div className="borderMenuBottom"></div>
-
       <div className='createSurveyContainer'>
         <div className='createSurvey'>
           <div className='questionInput'>
             <form>
               <div class="form-group">
                 <label for="exampleInputEmail1">Question</label>
-                <input style={data} type="text" class="form-control" id="exampleInputEmail1" placeholder="Add your question" />
+                <input  type="text" class="form-control questionInputStyle" id="exampleInputEmail1" placeholder="Add your question" />
               </div>
 
               <div class="form-group">
@@ -55,19 +49,19 @@ const data4={ display: "flex", flexDirection: "row", cursor: "pointer" };
                 {formFields.map((form, index) => {
                   return (
                     <div className='optionStyle'>
-                      <div style={data1}>
+                      <div className='circleStyle'>
                         <img src={Circle} alt="" />
                       </div>
-                      <div onClick={(e) => deleteOption(index)} style={data2}>
+                      <div onClick={(e) => deleteOption(index)} className="deleteStyle">
                         <img src={Delete} alt="" />
                       </div>
-                      <input name={form.option} onChange={(e) => handleFormChange(e, index)} style={data3} type="text" class="form-control" id="exampleInputEmail1" placeholder="Add your option" />
+                      <input name={form.option} onChange={(e) => handleFormChange(e, index)}  type="text" class="form-control optionInputStyle" id="exampleInputEmail1" placeholder="Add your option" />
                     </div>
                   )
                 })}
               </div>
 
-              <div onClick={addOption} style={data4} className='addOption'>
+              <div onClick={addOption} className='addOption'>
                 <FontAwesomeIcon icon={faPlus} />
                 <p style={{ marginLeft: "5px" }}>add Option</p>
               </div>

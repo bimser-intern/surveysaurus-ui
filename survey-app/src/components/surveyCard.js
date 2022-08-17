@@ -5,7 +5,7 @@ import Carousel from "react-bootstrap-carousel";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
 
-function surveyCard() {
+function SurveyCard() {
   return (
     
         <div className='surveyCardItem'>
@@ -28,4 +28,4 @@ function surveyCard() {
     
   )
 }
-export default surveyCard
+export default SurveyCard

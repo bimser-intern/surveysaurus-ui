@@ -26,8 +26,11 @@
   margin-top: 50px;
 }
 .createSurveyContainer .addOption {
-  width: 100%;
+  width: 100px;
   height: 50px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
 }
 .createSurveyContainer .createButtonContainer {
   width: 100%;
@@ -59,4 +62,36 @@
   position: fixed;
   top: 60px;
   margin-top: 15px;
+}
+
+.circleStyle {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin-left: 5px;
+  margin-top: 3px;
+}
+
+.questionInputStyle {
+  background-color: rgba(240, 184, 13, 0.38);
+  margin-bottom: 50px;
+  border: 1px solid rgba(240, 184, 13, 0.38);
+  border-radius: 10px;
+}
+
+.deleteStyle {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  margin-left: 580px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.optionInputStyle {
+  padding-left: 35px;
+  background-color: rgba(240, 184, 13, 0.38);
+  margin-bottom: 5px;
+  border: 1px solid rgba(240, 184, 13, 0.38);
+  border-radius: 10px;
 }/*# sourceMappingURL=CreateSurvey.css.map */
