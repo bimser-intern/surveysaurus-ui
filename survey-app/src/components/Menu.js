@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import "../style/Home.css"
-import "../style/Menu.css"
+import "../style/Home.scss"
+import "../style/Menu.scss"
 import Logo from "../image/logo.png"
 import { useNavigate } from "react-router-dom";
 function Menu() {

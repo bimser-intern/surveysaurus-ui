@@ -1,7 +1,7 @@
 import React from 'react'
 import "../style/surveyCard.css"
 import cardImg from "../style/surveyCardImg.png";
-function surveyCard() {
+function SurveyCard() {
   return (
     <div className='surveyCardItem'>
         <div className='imageSurveyCard'>
@@ -22,4 +22,4 @@ function surveyCard() {
     </div>
   )
 }
-export default surveyCard
+export default SurveyCard

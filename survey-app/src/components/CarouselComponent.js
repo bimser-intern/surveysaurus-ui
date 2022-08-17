@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Carousel } from 'react-bootstrap';
 //import 'bootstrap/dist/css/bootstrap.min.css';
-import SurveyCard from './surveyCard';
+import SurveyCard from './SurveyCard';
 function CarouselComponent() {
   const [index, setIndex] = useState(0);
 
