@@ -6,9 +6,9 @@ import "../style/surveyCard.scss"
 import Logo from "../image/logo.png"
 import { Link } from 'react-router-dom'; 
 import axios from 'axios';
-import {Carousel,CarouselItem} from "react-bootstrap-carousel";
+
 import "bootstrap/dist/css/bootstrap.css";
-import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
+
 
 function Home() {
   const [value, setValue] = useState('1');
