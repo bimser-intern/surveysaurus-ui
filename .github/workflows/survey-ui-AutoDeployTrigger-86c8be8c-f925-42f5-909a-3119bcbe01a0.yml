@@ -7,7 +7,7 @@ on:
     branches: 
       [ master ]
     paths:
-    - '.docker/dockerfile/**'
+    - 'survey-app/.docker/**'
     - '.github/workflows/survey-ui-AutoDeployTrigger-86c8be8c-f925-42f5-909a-3119bcbe01a0.yml'
 
   # Allow mannually trigger 
@@ -36,8 +36,8 @@ jobs:
         with:
           push: true
           tags: surveyacr.azurecr.io/survey-ui:${{ github.sha }}
-          file: .docker/dockerfile/Dockerfile
-          context: .docker/dockerfile/
+          file: survey-app/.docker/dockerfile
+          context: survey-app/.docker/
 
 
   deploy:
