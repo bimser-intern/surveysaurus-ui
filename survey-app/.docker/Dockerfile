@@ -1,7 +1,7 @@
 FROM node:lts-alpine as build
 WORKDIR /app
 COPY . .
-RUN npm install
+RUN npm install --force
 RUN npm run build
 
 FROM node:lts-alpine
