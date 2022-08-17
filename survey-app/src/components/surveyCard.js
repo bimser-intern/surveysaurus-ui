@@ -1,9 +1,14 @@
 import React from 'react'
 import "../style/surveyCard.css"
 import cardImg from "../style/surveyCardImg.png";
+import Carousel from "react-bootstrap-carousel";
+import "bootstrap/dist/css/bootstrap.css";
+import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
+
 function surveyCard() {
   return (
-    <div className='surveyCardItem'>
+    
+        <div className='surveyCardItem'>
         <div className='imageSurveyCard'>
             <img className='image' src={cardImg} alt="" />
         </div>
@@ -20,6 +25,7 @@ function surveyCard() {
             </ul>
         </div>
     </div>
+    
   )
 }
 export default surveyCard

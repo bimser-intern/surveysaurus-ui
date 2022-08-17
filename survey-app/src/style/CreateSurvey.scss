@@ -1,14 +1,19 @@
+%layout-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+$width-container:100%;
+$length:50px;
 .borderBottom {
     border: 2px solid #D3D8FF;
     transform: rotate(0.04deg);
 }
 
 .createSurveyContainer {
-    width: 100%;
+    width: $width-container;
     height: 600px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %layout-center;
     margin-top: 100px;
 
     .createSurvey {
@@ -21,17 +26,17 @@
     .questionInput {
         width: 80%;
         height: 100%;
-        margin-top: 50px;
+        margin-top: $length;
     }
 
     .addOption {
-        width: 100%;
-        height: 50px;
+        width: $width-container;
+        height: $length;
     }
 
     .createButtonContainer {
-        width: 100%;
-        height: 50px;
+        width: $width-container;
+        height: $length;
         display: flex;
         justify-content: flex-end;
         margin-top: 10px;
@@ -57,9 +62,11 @@
     }
 
 }
-.borderMenuBottomCreateSurvey{
-    width: 100%;
+.borderMenuBottom{
+    width: $width-container;
     border-bottom: 2px solid #D3D8FF;
     position: fixed;
     top: 60px;
+    margin-top:15px;
+    
 }

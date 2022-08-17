@@ -21,3 +21,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+survey-app/style/CreateSurvey.css.map
+
+survey-app/style/Home.css.map
+
+survey-app/style/login.css.map
+
+survey-app/style/Menu.css.map
+
+survey-app/style/surveyCard.css.map 
+
+survey-app/style/Signup.css.map
+

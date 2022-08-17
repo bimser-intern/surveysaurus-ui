@@ -6,6 +6,10 @@ import "../style/surveyCard.css"
 import Logo from "../image/logo.png"
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import {Carousel,CarouselItem} from "react-bootstrap-carousel";
+import "bootstrap/dist/css/bootstrap.css";
+import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
+
 function Home() {
   const [value, setValue] = useState('1');
 
@@ -19,7 +23,7 @@ function Home() {
       <div className='create' id='create'>
         <p className='appTitle'>Surveysaurus</p>
         <p className="createSurveysaurus">Create Your Surveysaurus</p>
-        <Link  to={"/createSurvey"} className='createButton'>Create A Survey</Link>
+        <Link to={"/createSurvey"} className='createButton'>Create A Survey</Link>
       </div>
       <div className="about" id='about'>
         <div className='imageAbout'></div>
@@ -34,14 +38,17 @@ function Home() {
           <p>Our Sample Surveys</p>
         </div>
         <div className="surveyCardItems" id='survey'>
+          
+          
           <SurveyCard />
           <SurveyCard />
           <SurveyCard />
+          
         </div>
 
         <div className="createSurvey">
           <p className='createSurveyTitle'>Create A Survey</p>
-          <button className='createSurveyButton'>Click to create</button>
+          <Link  className=' btn btn-primary createSurveyButton'  to={'./createsurvey'}>Click to create</Link>
         </div>
 
         <div className='footer'>
@@ -52,14 +59,14 @@ function Home() {
                 <a href='#create' className='linkStyle' to={"/"}>Home</a>
               </li>
               <li>
-              <a href='#about'>About</a>
+                <a href='#about'>About</a>
 
               </li>
               <li>
-              <a>Contact Us</a>
+                <a>Contact Us</a>
               </li>
               <li>
-              <img className='logoImage' src={Logo} alt="" />
+                <img className='logoImage' src={Logo} alt="" />
               </li>
             </ul>
           </div>
