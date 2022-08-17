@@ -4,10 +4,10 @@ import TableImg from "../image/table.png"
 import CasualLife from "../image/CasualLife.png"
 import googleIcon from "../image/google.png"
 import eyeIcon from "../image/eye.png"
-import "../style/Login.css"
+import "../style/Login.scss"
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import '../style/Menu.css'
+import '../style/Menu.scss'
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 function Login() {

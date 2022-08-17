@@ -23,10 +23,12 @@
         @extend %layout-center;
     }
 
+    
     .image {
         margin: auto;
         //margin-left: 80px;
     }
+
 
     .cardHeader {
         @extend %layout-center;
