@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Menu from '../components/Menu';
-import "../style/Home.css"
+import "../style/Home.scss"
 import SurveyCard from "../components/SurveyCard"
-import "../style/surveyCard.css"
+import "../style/surveyCard.scss"
 import Logo from "../image/logo.png"
 import { Link } from 'react-router-dom';
 import axios from 'axios';

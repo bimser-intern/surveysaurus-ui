@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Menu from '../components/Menu'
-import "../style/CreateSurvey.css"
+import "../style/CreateSurvey.scss"
 import Circle from "../image/circle.png"
 import Delete from "../image/delete.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

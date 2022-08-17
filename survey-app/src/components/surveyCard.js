@@ -1,5 +1,5 @@
 import React from 'react'
-import "../style/surveyCard.css"
+import "../style/surveyCard.scss"
 import cardImg from "../style/surveyCardImg.png";
 import Carousel from "react-bootstrap-carousel";
 import "bootstrap/dist/css/bootstrap.css";
