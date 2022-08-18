@@ -1,19 +1,35 @@
 import { fontSize, fontStyle, fontWeight, lineHeight, textAlign } from '@mui/system';
+import axios from 'axios';
 import { Button } from 'bootstrap';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import SignOut from "../image/signOut.png"
+import PlusIcon from "../image/plusIcon.png"
+import ListIcon from "../image/list.png"
+import "../style/UserPage.scss"
 function UserPage() {
     const navigate = useNavigate()
     const [control, setControl] = useState(true);
     const [userInfo, setUserInfo] = useState([])
+    const [userSurvey, setUserSurvey] = useState([])
     const logOut = () => {
         localStorage.removeItem("token")
         localStorage.removeItem('auth')
         navigate("/login")
     }
     useEffect(() => {
+        axios.get("https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/mysurveys", {
+            headers: {
+                authorization: localStorage.getItem("token"),
+            }
+        }).then((result) => {
+            const userSurveyData = [...userSurvey]
+            userSurveyData.push(result.data.data.surveys)
+            //console.log(userSurveyData)
+            setUserSurvey(userSurveyData);
+            //console.log(result.data.data.surveys)
+        })
         if (!localStorage.getItem("token")) {
             navigate("/login")
         }
@@ -25,7 +41,7 @@ function UserPage() {
             setUserInfo(todos)
             //setUserInfo(...userInfo,JSON.parse(localStorage.getItem("auth")))
             //console.log(todos)
-            console.log(userInfo)
+            //console.log(userInfo)
             //console.log(JSON.parse(localStorage.getItem("auth")))
         }
     }, [])
@@ -76,7 +92,7 @@ function UserPage() {
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center",
-                                    borderRadius:"10px"
+                                    borderRadius: "10px"
                                 }}>
                                     <Link style={{
                                         color: "#FFFFFF", marginLeft: "5px",
@@ -89,7 +105,7 @@ function UserPage() {
                                         color: "#000000",
 
                                     }} className='menuLink' to={"/login"}>Sign Out</Link>
-                                    <img style={{width:"15px",height:"15px",marginLeft:"10px"}} src={SignOut} alt="" />
+                                    <img style={{ width: "15px", height: "15px", marginLeft: "10px" }} src={SignOut} alt="" />
                                 </div>
                             </div>
                         </div>
@@ -97,6 +113,40 @@ function UserPage() {
 
                 </ul>
                 <div className="borderMenuBottomLogin"></div>
+            </div>
+
+            <div class="container" style={{ marginTop: "100px" }}>
+                <div class="row">
+                    {userSurvey && userSurvey.length > 0 &&
+                        userSurvey.map((result, index) => {
+                            console.log(result[index])
+                            return (
+                                <div class="col-sm">
+                                    <div className='SurveyCard'>
+                                        <h3>{result[index].title}</h3>
+                                        <p className='questionHeaderStyle'>{result[index].question}</p>
+                                        <ul className='choicesStyle'>
+                                            {result[index].choices.map((item) => {
+                                                return (
+                                                    <div className='ChoicesListStyle'>
+                                                        <img style={{width:"15px",height:"15px",marginTop:"2px"}} src={ListIcon} alt="" />
+                                                        <li className='ChoicesItem' style={{paddingLeft:"10px"}}>{item}</li>
+                                                    </div>
+                                                )
+                                            })}
+                                        </ul>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                    <div class="col-sm">
+                        <div className='SurveyCard'>
+                            <img src={PlusIcon} alt="" />
+                            <h1>Create Survey</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )
