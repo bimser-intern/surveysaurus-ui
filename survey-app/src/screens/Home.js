@@ -4,11 +4,11 @@ import "../style/Home.scss"
 import SurveyCard from "../components/SurveyCard"
 import "../style/surveyCard.scss"
 import Logo from "../image/logo.png"
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 import axios from 'axios';
-import {Carousel,CarouselItem} from "react-bootstrap-carousel";
+
 import "bootstrap/dist/css/bootstrap.css";
-import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
+
 
 function Home() {
   const [value, setValue] = useState('1');
@@ -16,6 +16,7 @@ function Home() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   return (
     <div className='Home' id='Home'>
       <Menu />
@@ -38,12 +39,9 @@ function Home() {
           <p>Our Sample Surveys</p>
         </div>
         <div className="surveyCardItems" id='survey'>
-          
-          
-          <SurveyCard />
-          <SurveyCard />
-          <SurveyCard />
-          
+           <SurveyCard/>
+           <SurveyCard/>
+           <SurveyCard/> 
         </div>
 
         <div className="createSurvey">

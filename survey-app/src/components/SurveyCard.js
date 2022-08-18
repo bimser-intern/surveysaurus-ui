@@ -1,10 +1,7 @@
 import React from 'react'
 import "../style/surveyCard.scss"
 import cardImg from "../style/surveyCardImg.png";
-import Carousel from "react-bootstrap-carousel";
 import "bootstrap/dist/css/bootstrap.css";
-import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
-
 function SurveyCard() {
   return (
     
