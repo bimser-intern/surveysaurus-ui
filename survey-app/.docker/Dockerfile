@@ -1,6 +1,7 @@
 FROM node:lts-alpine as build
 WORKDIR /app
-COPY package.json ./
+COPY package.json package-lock.json ./
+COPY . /usr/src/app
 RUN npm install
 RUN npm run build
 
