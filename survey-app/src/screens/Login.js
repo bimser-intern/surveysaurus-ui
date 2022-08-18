@@ -67,7 +67,7 @@ function Login() {
           navigate("/userPage");
         }
         else {
-          alert("kullanıcı adı veya şifre yanlış");
+          alert("username or password is wrong");
         }
       }).catch((result) => {
         setIsLogin(true)

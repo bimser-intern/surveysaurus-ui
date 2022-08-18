@@ -106,7 +106,7 @@ function SignUp() {
         })
             .then((result) => {
                 if (result.status) {
-                    alert("kullanıcı başarıyla kayıt edildi")
+                    alert("User successfully registered")
                     navigate("/login");
                 }
             })

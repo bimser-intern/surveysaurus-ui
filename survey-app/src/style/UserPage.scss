@@ -1,3 +1,10 @@
+%layout-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .openMenuUser {
     top: "45px";
     z-index: "100";
@@ -8,4 +15,53 @@
     align-items: "center";
     background-color: "#E491924D";
     margin-top: "10px";
+}
+
+.SurveyCard {
+    @extend %layout-center;
+    width: 250px;
+    height: 300px;
+    background-color: rgba(237, 219, 163, 0.55);
+    ;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.choicesStyle {
+    display: flex;
+    flex-direction: column;
+
+    li {
+        list-style-type: none;
+    }
+}
+
+.ChoicesListStyle {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 200px;
+}
+
+.questionHeaderStyle {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: center;
+
+    color: #000000;
+}
+
+.ChoicesItem {
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 21px;
+    /* or 175% */
+
+
+    color: #000000;
 }
