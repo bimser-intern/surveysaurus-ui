@@ -6,8 +6,9 @@ import "../style/surveyCard.scss"
 import Logo from "../image/logo.png"
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Carousel } from 'react-bootstrap';
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 
@@ -18,6 +19,14 @@ function Home() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3
+  };
   useEffect(() => {
     axios.get('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/sample', {
       params: {
@@ -25,7 +34,7 @@ function Home() {
       }
     }).then((result) => {
       const sampleSurveyData = []
-      if (result.data.data.surveys && result.data.data.surveys.length>0) {
+      if (result.data.data.surveys && result.data.data.surveys.length > 0) {
         result.data.data.surveys.map((item) => {
           sampleSurveyData.push(item)
         })
@@ -57,20 +66,15 @@ function Home() {
           <p>Our Sample Surveys</p>
         </div>
         <div className="surveyCardItems" id='survey'>
-          <Carousel variant='dark' style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center", marginLeft: "40px" }}>
-            <Carousel.Item style={{ display: "flex", flexDirection: "row", marginLeft: "30px" }}>
-              {sampleSurvey && sampleSurvey.length > 0 &&
-                sampleSurvey.map((item) => {
-                  return (
-                    <SurveyCard item={item} />
-                  )
-                })
-              }
-            </Carousel.Item>
-            <Carousel.Item style={{ display: "flex", flexDirection: "row" }}>
-
-            </Carousel.Item>
-          </Carousel>
+          <Slider {...settings} style={{ width: "80%", marginLeft: "50px"}}>
+            {sampleSurvey && sampleSurvey.length > 0 &&
+              sampleSurvey.map((item) => {
+                return (
+                  <SurveyCard item={item}/>
+                )
+              })
+            }
+          </Slider>
         </div>
 
         <div className="createSurvey">
@@ -90,7 +94,7 @@ function Home() {
 
               </li>
               <li>
-                <a>Contact Us</a>
+                <a href=''>Contact Us</a>
               </li>
               <li>
                 <img className='logoImage' src={Logo} alt="" />

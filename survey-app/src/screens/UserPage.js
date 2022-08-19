@@ -127,7 +127,7 @@ function UserPage() {
                             console.log("----------------")
                             console.log(userSurvey)
                             return (
-                                <div class="col-sm">
+                                <div class="col-sm-4">
                                     <div className='SurveyCard' style={{marginBottom:"10px"}}>
                                         <h3>{result.title}</h3>
                                         <p className='questionHeaderStyle'>{result.question}</p>
