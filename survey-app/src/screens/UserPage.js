@@ -24,11 +24,20 @@ function UserPage() {
                 authorization: localStorage.getItem("token"),
             }
         }).then((result) => {
-            const userSurveyData = [...userSurvey]
-            userSurveyData.push(result.data.data.surveys)
-            //console.log(userSurveyData)
-            setUserSurvey(userSurveyData);
-            //console.log(result.data.data.surveys)
+            
+            if (result.data.data.surveys && result.data.data.surveys.length>0) {
+                const userSurveyData = []
+                result.data.data.surveys.map((item)=>{
+                    console.log(item)
+                    userSurveyData.push(item)
+                })
+            
+                setUserSurvey(userSurveyData);
+                console.log("eeeeeeeeeeeeeee");
+                console.log(userSurvey)
+                
+            }
+            
         })
         if (!localStorage.getItem("token")) {
             navigate("/login")
@@ -36,13 +45,9 @@ function UserPage() {
         else {
             const todos = [...userInfo]
             todos.push(JSON.parse(localStorage.getItem("auth")))
-            //object.push(JSON.parse(localStorage.getItem("auth")))
-            //console.log(object)
+        
             setUserInfo(todos)
-            //setUserInfo(...userInfo,JSON.parse(localStorage.getItem("auth")))
-            //console.log(todos)
-            //console.log(userInfo)
-            //console.log(JSON.parse(localStorage.getItem("auth")))
+            
         }
     }, [])
     return (
@@ -119,18 +124,19 @@ function UserPage() {
                 <div class="row">
                     {userSurvey && userSurvey.length > 0 &&
                         userSurvey.map((result, index) => {
-                            console.log(result[index])
+                            console.log("----------------")
+                            console.log(userSurvey)
                             return (
                                 <div class="col-sm">
-                                    <div className='SurveyCard'>
-                                        <h3>{result[index].title}</h3>
-                                        <p className='questionHeaderStyle'>{result[index].question}</p>
+                                    <div className='SurveyCard' style={{marginBottom:"10px"}}>
+                                        <h3>{result.title}</h3>
+                                        <p className='questionHeaderStyle'>{result.question}</p>
                                         <ul className='choicesStyle'>
-                                            {result[index].choices.map((item) => {
+                                            {result.choices.map((item) => {
                                                 return (
                                                     <div className='ChoicesListStyle'>
-                                                        <img style={{width:"15px",height:"15px",marginTop:"2px"}} src={ListIcon} alt="" />
-                                                        <li className='ChoicesItem' style={{paddingLeft:"10px"}}>{item}</li>
+                                                        <img style={{ width: "15px", height: "15px", marginTop: "2px" }} src={ListIcon} alt="" />
+                                                        <li className='ChoicesItem' style={{ paddingLeft: "10px" }}>{item}</li>
                                                     </div>
                                                 )
                                             })}
@@ -141,7 +147,9 @@ function UserPage() {
                         })
                     }
                     <div class="col-sm">
-                        <div className='SurveyCard'>
+                        <div onClick={()=>navigate("/createSurveyWithLogin",{state:{
+                            auth:JSON.parse(localStorage.getItem("auth"))
+                        }})} className='SurveyCard'>
                             <img src={PlusIcon} alt="" />
                             <h1>Create Survey</h1>
                         </div>

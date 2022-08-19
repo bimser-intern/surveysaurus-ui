@@ -16,8 +16,10 @@ function CreateSurvey() {
   const [control, setControl] = useState(true);
   const navigate = useNavigate();
 
-  const handleFormChange = () => {
-
+  const handleFormChange = (e,index) => {
+    let data=[...formFields]
+    data[index].option=e.target.value;
+    setFormFields(data)
   }
   const addOption = () => {
     let object = {
@@ -30,6 +32,10 @@ function CreateSurvey() {
     let data = [...formFields]
     data.splice(index, 1)
     setFormFields(data)
+  }
+  const handleSubmit=()=>{
+    alert("You are redirected to the login page")
+    navigate("/login")
   }
   return (
     <div>
@@ -48,14 +54,14 @@ function CreateSurvey() {
                 <label for="exampleInputEmail1">Options</label>
                 {formFields.map((form, index) => {
                   return (
-                    <div className='optionStyle'>
+                    <div className='optionStyle' key={index}>
                       <div className='circleStyle'>
                         <img src={Circle} alt="" />
                       </div>
                       <div onClick={(e) => deleteOption(index)} className="deleteStyle">
                         <img src={Delete} alt="" />
                       </div>
-                      <input name={form.option} onChange={(e) => handleFormChange(e, index)}  type="text" class="form-control optionInputStyle" id="exampleInputEmail1" placeholder="Add your option" />
+                      <input name="option" value={form.option} onChange={(e) => handleFormChange(e, index)}  type="text" class="form-control optionInputStyle" id="exampleInputEmail1" placeholder="Add your option" />
                     </div>
                   )
                 })}
@@ -67,7 +73,7 @@ function CreateSurvey() {
               </div>
 
               <div className='createButtonContainer'>
-                <button type="submit" className='createButton'>Create</button>
+                <button onClick={handleSubmit} type="submit" className='createButton'>Create</button>
               </div>
             </form>
 

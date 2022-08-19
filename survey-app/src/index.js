@@ -13,6 +13,7 @@ import SignUp from './screens/SignUp';
 import CreateSurvey from './screens/CreateSurvey';
 import UserPage from './screens/UserPage';
 import CarouselComponent from './components/CarouselComponent';
+import CreateSurveyWithLogin from './screens/CreateSurveyWithLogin';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -24,6 +25,7 @@ root.render(
       <Route path='/signup' element={<SignUp/>}/>
       <Route path='/createSurvey' element={<CreateSurvey/>}/>
       <Route path='/userPage' element={<UserPage/>}/>
+      <Route path='/createSurveyWithLogin' element={<CreateSurveyWithLogin/>}/>
     </Routes>
   </BrowserRouter>
 );
