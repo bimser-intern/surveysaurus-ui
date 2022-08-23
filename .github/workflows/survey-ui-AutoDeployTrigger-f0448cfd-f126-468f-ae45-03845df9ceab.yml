@@ -7,7 +7,7 @@ on:
     branches: 
       [ master ]
     paths:
-    - 'survey-app/**'
+    - '**'
     - '.github/workflows/survey-ui-AutoDeployTrigger-f0448cfd-f126-468f-ae45-03845df9ceab.yml'
 
   # Allow mannually trigger 
