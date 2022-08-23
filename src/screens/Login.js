@@ -21,11 +21,6 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(()=>{
-    if(localStorage.getItem('token')){
-      navigate("/userPage")
-    }
-  })
   function InvalidMsg(e) {
     if (e.target.value == '') {
       e.target.setCustomValidity('Please fill in the marked fields');
@@ -64,7 +59,29 @@ function Login() {
           localStorage.setItem('token',result.data.accessToken)
           localStorage.setItem('auth',JSON.stringify(result.data.data))
           console.log(result.data.data)
-          navigate("/userPage");
+
+          if(localStorage.getItem('userSurvey')){
+            let object=JSON.parse(localStorage.getItem('userSurvey'))
+            axios.post(
+              'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/createSurvey',
+              {
+                  "title":object.title,
+                  "question":object.question,
+                  "choice":object.choice,
+              },
+              {
+                  headers: {
+                      authorization: localStorage.getItem("token"),
+                  },
+              }
+             ).then((result)=>{
+                 localStorage.removeItem("userSurvey")
+             })
+          }
+          setTimeout(() => {
+            console.log("lşmşlmşlmşlmşlm")
+            navigate("/userPage");
+          }, 200);
         }
         else {
           alert("username or password is wrong");

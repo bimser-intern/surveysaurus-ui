@@ -14,6 +14,8 @@ import CreateSurvey from './screens/CreateSurvey';
 import UserPage from './screens/UserPage';
 import CarouselComponent from './components/CarouselComponent';
 import CreateSurveyWithLogin from './screens/CreateSurveyWithLogin';
+import FillSurvey from './screens/FillSurvey';
+import Home from './screens/Home';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,11 +23,13 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App/>} />
+      <Route path="/home" element={<Home/>} />
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<SignUp/>}/>
       <Route path='/createSurvey' element={<CreateSurvey/>}/>
       <Route path='/userPage' element={<UserPage/>}/>
       <Route path='/createSurveyWithLogin' element={<CreateSurveyWithLogin/>}/>
+      <Route path='/fillSurvey' element={<FillSurvey/>}/>
     </Routes>
   </BrowserRouter>
 );
