@@ -36,8 +36,8 @@ jobs:
         with:
           push: true
           tags: surveyacr.azurecr.io/survey-ui:${{ github.sha }}
-          file: survey-app/Dockerfile
-          context: survey-app/
+          file: ./Dockerfile
+          context: ./
 
 
   deploy:
