@@ -43,14 +43,15 @@
     left: 650px;
     top: 150px;
     border-radius: 20px;
-    background-color: aliceblue;
+    background-color: #FFFFFF;
     @extend %layout;
+    font-size: 12px;
 
     .withGoogle {
         &:hover{
             background-color: #b3c3e9;
         }
-        width: 200px;
+        width: 280px;
         height: 30px;
         border: 1px solid #5380EA;
         background-color: #F7F8FF;
@@ -60,6 +61,7 @@
         @extend %layout-center;
         padding-right: 10px;
         cursor: pointer;
+
 
         .googleIcon {
             width: 10px;
@@ -100,6 +102,7 @@
     .OrText {
         margin-right: 10px;
         margin-left: 10px;
+        margin-top: 10px;
     }
 }
 
@@ -149,4 +152,11 @@
 .wrongLogIn{
     display: none;
     flex-direction: row;
+}
+.logoImg2{
+    position: relative;
+    width: 100px;
+    height: 80px;
+    margin-left: 375px;
+    margin-top:15px;
 }

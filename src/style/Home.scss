@@ -13,7 +13,7 @@
     font-style: normal;
     font-weight: 700;
 }
- 
+
 
 %layout-shared {
     display: flex;
@@ -50,6 +50,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
 
+
     ul {
         list-style-type: none;
         margin: 0;
@@ -75,6 +76,7 @@ ul {
     .signUpButton {
         @extend %button-shared;
         background-color: #F0B80D;
+        margin-right: 30px;
 
     }
 }
@@ -83,24 +85,39 @@ ul {
     @extend %button-shared;
     background-color: #E49192;
     box-shadow: 0px 4px 24px #E49192;
+    margin-right: 30px;
+}
+
+#side {
+    position: relative;
+    width: 585px;
+    height: 69px;
+    left: 425px;
+    top: 350px;
 }
 
 .create {
+    position: relative;
     width: 90%;
-    height: 800px;
+    height: 1100px;
     margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 140px;
-    background-image: url("../style/resim.png");
     background-position: top;
+    background: linear-gradient(0deg, rgba(239, 240, 243, 0.001), rgba(235, 240, 255, 0.001)),url("../style/resim.png");
+ 
 
     .createButton {
         transition: padding 0.2s;
-        //text-decoration: none;
+        width: 325px;
+        text-align: center;
+        text-decoration: none;
 
         &:hover {
+            position: relative;
+            top: 5px;
             padding: 25px 25px 25px 25px;
             text-decoration: none;
         }
@@ -131,7 +148,7 @@ ul {
 
     .imageAbout {
         width: 40%;
-        height: 100%;
+        height: 750px;
         background-image: url("../style/casual.png");
         background-position: top;
         background-size: cover;
@@ -142,7 +159,7 @@ ul {
     .aboutText {
         width: 80%;
         height: 100%;
-        background: #FFFFFF;
+        background-color: #FFFFFF;
         border-radius: 20px;
         opacity: 0.4;
     }
@@ -181,15 +198,20 @@ ul {
         font-size: 50px;
         line-height: 78px;
         text-align: center;
+
+        .surveySampleTitle>p {
+            color: #000000;
+        }
     }
 }
 
 .createSurvey {
     width: 100%;
-    height: 100px;
+    height: 300px;
     //background-color: red;
     @extend %layout-center;
     margin-top: 50px;
+
 
     .createSurveyTitle {
         font-family: 'Laila';
@@ -198,10 +220,15 @@ ul {
         font-size: 40px;
         line-height: 62px;
         text-align: center;
+        color: #000000;
+
     }
 
     .createSurveyButton {
         transition: padding 0.5s;
+        width: 300px;
+
+
 
         &:hover {
             padding: 15px 55px 15px 55px;
@@ -222,6 +249,11 @@ ul {
     }
 }
 
+#appTitle {
+    position: absolute;
+    top: 100px;
+}
+
 .footer {
     width: 100%;
     height: 100px;
@@ -232,7 +264,7 @@ ul {
         list-style-type: none;
         margin-top: 25px;
 
-    
+
         a {
             cursor: pointer;
             font-family: 'Inter';
@@ -241,16 +273,17 @@ ul {
             font-size: 19px;
             line-height: 23px;
             text-align: center;
-            margin-right: 20px;
+            margin-right: 80px;
             text-decoration: none;
         }
-    }
-}
 
-.logoImage {
-    width: 70px;
-    height: 70px;
-    margin-left: 210px;
+        .logoImage {
+            width: 100px;
+            height: 100px;
+            margin-left: 210px;
+        }
+
+    }
 }
 
 .borderMenuBottom {
@@ -262,16 +295,21 @@ ul {
 
 .createSurveysaurus {
     position: absolute;
-    top: 300px;
+    top: 250px;
     right: 210px;
     color: rgba(242, 126, 151, 0.8);
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 700;
     font-size: 30px;
+    line-height: 46px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.card-wrapper{
+
+.card-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
 }

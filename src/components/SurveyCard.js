@@ -14,7 +14,7 @@ function SurveyCard({item}) {
             <p className='cardTextStyle'>{item.question}</p>
         </div>
         <div className="cardOptions">
-            <ul>
+            <ul id="ul">
                 {item.choices.map((surveyItem)=>{
                     return(
                         <li>{surveyItem}</li>

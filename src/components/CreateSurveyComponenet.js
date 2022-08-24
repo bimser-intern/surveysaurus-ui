@@ -12,7 +12,7 @@ import SignOut from "../image/signOut.png"
 import { useLocation } from 'react-router-dom'
 
 
-function CreateSurveyComponent() {
+function CreateSurveyComponenet() {
 
   const [formFields, setFormFields] = useState([
     { option: ''},
@@ -111,15 +111,15 @@ function CreateSurveyComponent() {
           <div className='questionInput'>
             <form>
               <div class="form-group">
-                <label for="exampleInputEmail1">Title</label>
+                <label for="exampleInputEmail1" style={{fontSize:"16px"}}>Title</label>
                 <input value={title} onChange={(e) => setTitle(e.target.value)} onInput={InvalidMsg} onInvalidCapture={InvalidMsg} required style={{marginBottom:"0px"}} type="text" class="form-control questionInputStyle" id="exampleInputEmail1" placeholder="Add your title" />
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Question</label>
+                <label for="exampleInputEmail1" style={{fontSize:"16px"}}>Question</label>
                 <input value={question} onChange={(e) => setQuestion(e.target.value)} onInput={InvalidMsg} onInvalidCapture={InvalidMsg} required type="text" class="form-control questionInputStyle" id="exampleInputEmail1" placeholder="Add your question" />
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Options</label>
+                <label for="exampleInputEmail1" style={{fontSize:"16px"}}>Options</label>
                 {formFields.map((form, index) => {
                   return (
                     <div className='optionStyle'>
@@ -138,8 +138,8 @@ function CreateSurveyComponent() {
               </div>
 
               <div onClick={addOption} className='addOption'>
-                <FontAwesomeIcon icon={faPlus} />
-                <p style={{ marginLeft: "5px" }}>add Option</p>
+                <FontAwesomeIcon icon={faPlus} style={{opacity:"0.25", width:"16px", height:"16px"}} />
+                <p style={{ marginLeft: "5px", fontSize:"12px" }} >Add Option</p>
               </div>
 
               <div className='createButtonContainer'>
@@ -153,4 +153,4 @@ function CreateSurveyComponent() {
     </div>
   )
 }
-export default CreateSurveyComponent
+export default CreateSurveyComponenet

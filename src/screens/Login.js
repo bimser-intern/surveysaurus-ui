@@ -5,6 +5,7 @@ import CasualLife from "../image/CasualLife.png"
 import googleIcon from "../image/google.png"
 import eyeIcon from "../image/eye.png"
 import Warning from "../image/warning.png"
+import Logo from "../image/logo.png"
 import "../style/Login.scss"
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -93,11 +94,14 @@ function Login() {
 
   return (
     <div>
-      <div className='Menu'>
+      <div className='Menu' style={{ height: "60px" }}>
         <ul className='navInfo'>
           <li><Link to={"/"} className='navItem'>Home</Link>
           </li>
-          <li><a href="#about" className='navItem'>About</a></li>
+          <li><a href="/#about" className='navItem'>About</a></li>
+          <li>
+          <img className='logoImg2' src={Logo} alt="" />
+          </li>
         </ul>
 
         <ul>
@@ -111,13 +115,10 @@ function Login() {
               <a href=""></a>
               <div style={{ display: control ? "none" : "block", top: "45px", zIndex: "100" }} className='openMenu'>
                 <div onClick={() => navigate("/login")} className='menuItem' style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}>
-                  <Link className='menuLink' to={"/login"}>User Info</Link>
+                  <Link className='menuLink' style={{fontSize:"12px"}} to={"/login"}>User Info</Link>
                 </div>
                 <div onClick={() => navigate("/login")} className='menuItem'>
-                  <Link className='menuLink' to={"/login"}>My Survey</Link>
-                </div>
-                <div onClick={() => navigate("/login")} className='backColor' style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-                  <Link style={{ color: "#FFFFFF", marginLeft: "5px" }} className='menuLink' to={"/login"}>Log Out</Link>
+                  <Link className='menuLink'style={{fontSize:"12px"}} to={"/login"}>My Survey</Link>
                 </div>
               </div>
             </div>
@@ -144,7 +145,7 @@ function Login() {
 
         <div className='Or'>
           <div className='borderOr'></div>
-          <p className='OrText'>Or</p>
+          <h3><p className='OrText'>Or</p></h3>
           <div className='borderOr'></div>
         </div>
 
@@ -172,7 +173,7 @@ function Login() {
             </div>
           </form>
           <div className='haveAccount'>
-            <p>Dont't have an account?</p>
+            <p>Don't have an account?</p>
             <Link to={"/signup"} href="">Sign Up</Link>
           </div>
         </div>
