@@ -4,6 +4,7 @@ import "../style/Home.scss"
 import SurveyCard from "../components/SurveyCard"
 import "../style/surveyCard.scss"
 import Logo from "../image/logo.png"
+import Side from "../image/side.png"
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Slider from "react-slick";
@@ -47,9 +48,10 @@ function Home() {
   return (
     <div className='Home' id='Home'>
       <Menu />
+      <img id="side" src={Side}/>
       <div className="borderMenuBottom"></div>
       <div className='create' id='create'>
-        <p className='appTitle'>surveysaurus</p>
+        <p className='appTitle' id="appTitle">Surveysaurus</p>
         <p className="createSurveysaurus">Create Your Surveysaurus</p>
         <Link to={"/createSurvey"} className='createButton'>Create A Survey</Link>
       </div>
@@ -61,11 +63,11 @@ function Home() {
         </div>
       </div>
 
-      <div className="surveySample">
+      <div className="surveySample" id='survey'>
         <div className='surveySampleTitle'>
           <p>Our Sample Surveys</p>
         </div>
-        <div className="surveyCardItems" id='survey'>
+        <div className="surveyCardItems">
           <Slider {...settings} style={{ width: "80%", marginLeft: "50px"}}>
             {sampleSurvey && sampleSurvey.length > 0 &&
               sampleSurvey.map((item) => {

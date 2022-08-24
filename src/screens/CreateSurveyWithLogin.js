@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import SignOut from "../image/signOut.png"
 import { useLocation } from 'react-router-dom'
-import CreateSurveyComponent from '../components/CreateSurveyComponenet'
+import CreateSurveyComponenet from '../components/CreateSurveyComponenet'
 import Menu from '../components/Menu';
 
 function CreateSurveyWithLogin() {
@@ -23,7 +23,7 @@ useEffect(()=>{
   return (
     <div>
       <Menu isLogin={true}/>
-      <CreateSurveyComponent/>
+      <CreateSurveyComponenet/>
     </div>
   )
 }

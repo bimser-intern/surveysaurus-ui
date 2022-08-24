@@ -11,7 +11,12 @@
     //justify-content: center;
     align-items: center;
 }
-
+.OrText{
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    
+}
 .SignUp {
     width: 500px;
     height: 800px;
@@ -20,8 +25,9 @@
     left: 650px;
     top: 150px;
     border-radius: 20px;
-    background-color: aliceblue;
+    background-color: #FFFFFF;
     @extend %layout;
+    font-size:12px;
 
     .withGoogle {
 
@@ -29,7 +35,7 @@
             background-color: #b3c3e9;
         }
 
-        width: 200px;
+        width: 280px;
         //height: 50px;
         padding-top: 5px;
         padding-bottom: 5px;
@@ -82,6 +88,7 @@
     .formControl {
         @extend %layout-shared;
         flex-direction: column;
+        background-color: #FFFFFF;
 
     }
 }
@@ -127,4 +134,11 @@
 .wrongSignUp{
    display: flex;
    flex-direction: row;
+}
+.logoImg3{
+    position: relative;
+    width: 100px;
+    height: 80px;
+    margin-left: 375px;
+    margin-top:15px;
 }
