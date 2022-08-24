@@ -12,7 +12,7 @@ import SignOut from "../image/signOut.png"
 import { useLocation } from 'react-router-dom'
 
 
-function CreateSurveyWithLogin() {
+function CreateSurveyComponent() {
 
   const [formFields, setFormFields] = useState([
     { option: ''},
@@ -29,9 +29,6 @@ function CreateSurveyWithLogin() {
     localStorage.removeItem('auth')
     navigate("/login")
 }
-useEffect(()=>{
-  console.log(location.state.auth.name)
-})
 
   const navigate = useNavigate();
 
@@ -63,6 +60,7 @@ useEffect(()=>{
   }
 
   const handleSubmit=(e)=>{
+    //alert("handle submit")
     e.preventDefault()
     let storageData=[]
     formFields.map((item)=>{
@@ -72,99 +70,42 @@ useEffect(()=>{
     //console.log(storageData)
     setChoiceData(storageData)
     console.log(storageData)
+    console.log(title)
     //console.log(choiceData)
     //console.log(title)
     //console.log(question)
-    if(choiceData.length === formFields.length){
-      axios.post(
-        'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/createSurvey',
-        {
+    if(localStorage.getItem("token")){
+            axios.post(
+              'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/createSurvey',
+              {
+                  "title":title,
+                  "question":question,
+                  "choice":storageData,
+              },
+              {
+                  headers: {
+                      authorization: localStorage.getItem("token"),
+                  },
+              }
+             ).then((result)=>{
+                 alert("The survey creation process was successful.")
+                 navigate("/userPage")
+                 console.log(result)
+             })
+          
+    }else{
+        localStorage.setItem("userSurvey",JSON.stringify({
             "title":title,
             "question":question,
-            "choice":choiceData,
-        },
-        {
-            headers: {
-                authorization: localStorage.getItem("token"),
-            },
-        }
-       ).then((result)=>{
-           alert("The survey creation process was successful.")
-           navigate("/userPage")
-           console.log(result)
-       })
+            "choice":storageData,
+      
+          }))
+          alert("You are redirected to the login page")
+          navigate("/login")
     }
   }
   return (
     <div>
-      <div className='Menu'>
-                <ul className='navInfo'>
-                    <li><Link to={"/userPage"} className='navItem'>Home</Link>
-                    </li>
-                    <li><Link to={"/userPage"} className='navItem'>My Survey</Link></li>
-                </ul>
-
-                <ul>
-                    <li>
-                        <button className='signUpButton'>
-                            <p className='buttonTextLayout'>{location.state.auth.name}</p>
-                        </button>
-                    </li>
-                    <li>
-                        <div onClick={() => setControl(!control)} className='UserIcon'>
-                            <a href=""></a>
-                            <div style={{
-                                display: control ? "none" : "flex", top: "45px", zIndex: "100", height: "150px", width: "300px",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                backgroundColor: "#E491924D",
-                                marginTop: "10px"
-                            }} className='openMenu'>
-                                <div onClick={() => navigate("/login")} style={{
-                                    width: "80%", height: "30px", backgroundColor: "#F5F5F5CC", marginBottom: "10px", display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "10px"
-                                }}>
-                                    <Link style={{
-                                        fontFamily: 'Inter',
-                                        fontStyle: "normal",
-                                        fontWeight: "700",
-                                        fontSize: "13px",
-                                        lineHeight: "21px",
-                                        textAlign: "center",
-                                        color: "#000000",
-                                    }} className='menuLink' to={"/userInfo"}>Profile</Link>
-                                </div>
-                                <div onClick={logOut} style={{
-                                    width: "80%", height: "30px", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "#F5F5F5CC",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "10px"
-                                }}>
-                                    <Link style={{
-                                        color: "#FFFFFF", marginLeft: "5px",
-                                        fontFamily: 'Inter',
-                                        fontStyle: "normal",
-                                        fontWeight: "700",
-                                        fontSize: "13px",
-                                        lineHeight: "21px",
-                                        textAlign: "center",
-                                        color: "#000000",
-
-                                    }} className='menuLink' to={"/login"}>Sign Out</Link>
-                                    <img style={{ width: "15px", height: "15px", marginLeft: "10px" }} src={SignOut} alt="" />
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                </ul>
-                <div className="borderMenuBottomLogin"></div>
-            </div>
-
       <div className='createSurveyContainer'>
         <div className='createSurvey'>
           <div className='questionInput'>
@@ -212,4 +153,4 @@ useEffect(()=>{
     </div>
   )
 }
-export default CreateSurveyWithLogin
+export default CreateSurveyComponent

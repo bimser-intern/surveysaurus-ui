@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Menu from '../components/Menu'
 import "../style/SignUp.scss"
 import TableImg from "../image/table.png"
@@ -51,6 +51,24 @@ function SignUp() {
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
     const [islogin, setIsLogin] = useState(false);
+    const [countryList, setCountryList] = useState([]);
+    const [cityList, setCityList] = useState([]);
+
+    useEffect(() => {
+        axios.get(
+            'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/countries',
+
+            {}
+        ).then((result) => {
+            const countryData = []
+            result.data.data.surveys.map((item) => {
+                //console.log(item)
+                countryData.push(item)
+            })
+
+            setCountryList(countryData);
+        })
+    }, [])
 
     function InvalidMsg(e) {
         if (e.target.value == '') {
@@ -65,6 +83,7 @@ function SignUp() {
         return true;
     }
     function InvalidMsgPassword(e) {
+        console.log(password)
         if (e.target.value == '') {
             e.target.setCustomValidity('Please fill in the marked fields');
         }
@@ -199,16 +218,31 @@ function SignUp() {
                         <div class="form-group">
                             <label for="sel1">Select Country</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-                            <select onInput={(e) => e.target.setCustomValidity("")} onInvalidCapture={(e) => e.target.setCustomValidity("Please Choose Country")} onChange={(event) => {
-                                setcountryOption(event.target.value)
-                                //alert(event.target.value);
-                                setCountry(countryCitylist[event.target.value].countryName)
+                            <select value={country} onInput={(e) => e.target.setCustomValidity("")} onInvalidCapture={(e) => e.target.setCustomValidity("Please Choose Country")} onChange={(event) => {
+                                setCountry(event.target.value)
+                                axios.post(
+                                    'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/cities',
+                                    {
+                                        "country":event.target.value,
+                                    },
+
+                                    {}
+                                ).then((result) => {
+                                    console.log(result)
+                                    const cityData = []
+                                    result.data.data.surveys.map((item) => {
+                                        //console.log(item)
+                                        cityData.push(item)
+                                    })
+
+                                    setCityList(cityData);
+                                })
                                 //alert(countryOption)
                             }} required class="form-control" id="sel1">
                                 <option></option>
-                                {countryCitylist.map((country) => {
+                                {countryList.map((country, index) => {
                                     return (
-                                        <option value={country.id}>{country.countryName}</option>
+                                        <option value={country}>{country}</option>
                                     )
                                 })}
 
@@ -219,9 +253,9 @@ function SignUp() {
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
                             <select onInput={(e) => e.target.setCustomValidity("")} onInvalidCapture={(e) => e.target.setCustomValidity("Please Choose city")} value={city} onChange={(e) => setCity(e.target.value)} required class="form-control" id="sel1">
                                 <option></option>
-                                {countryCitylist[countryOption].city.map((item) => {
+                                {cityList.map((item) => {
                                     return (
-                                        <option>{item.cityName}</option>
+                                        <option>{item}</option>
                                     )
                                 })}
                             </select>
@@ -229,13 +263,13 @@ function SignUp() {
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-                            <input onInput={InvalidMsgPassword} onInvalidCapture={InvalidMsgPassword} value={password} onChange={(e) => setPassword(e.target.value)} required type={controlVisible ? "password" : "text"} class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="exampleInputPassword1" placeholder="Enter your password" />
+                            <input onChange={(e) => setPassword(e.target.value)} onInput={(e)=>InvalidMsgPassword(e)} onInvalidCapture={InvalidMsgPassword} value={password} required type={controlVisible ? "password" : "text"} class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="exampleInputPassword1" placeholder="Enter your password" />
                             <div className='eyeIcon' type='button' onClick={() => setControlVisible(!controlVisible)}>
                                 <img src={eyeIcon} alt="" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Confirm your Password</label>
+                            <label for="exampleInputPassword2">Confirm your Password</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
                             <input onInput={InvalidMsgConfirmPassword} onInvalidCapture={InvalidMsgConfirmPassword} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required type={controlVisibleConfirm ? "password" : "text"} class="form-control" id="exampleInputPassword2" placeholder="Confirm your password" />
                             <div className='eyeIcon' style={{ top: "595px" }} type='button' onClick={() => setControlVisibleConfirm(!controlVisibleConfirm)}>

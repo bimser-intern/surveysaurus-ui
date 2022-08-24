@@ -1,0 +1,128 @@
+%layout-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerFill {
+    @extend %layout-center;
+    height: 700px;
+
+    .fillSurvey {
+        width: 60%;
+        height: 500px;
+        margin-top: 100px;
+        background-color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        //justify-content: center;
+        border-radius: 10px;
+    }
+
+    .optionsStyle {
+        background-color: #F0B80D61;
+        margin-bottom: 10px;
+        width: 100%;
+        padding-top: 5px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        cursor: pointer;
+    }
+
+    .optionText {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        padding-left: 10px;
+        color: #000000;
+    }
+
+    .questionPart {
+        width: 80%;
+        margin-bottom: 40px;
+        margin-top: 30px;
+    }
+
+    .optionsPart {
+        width: 80%;
+    }
+
+    .fillSurveyFooter {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 50px;
+
+        .mapButton {
+            width: 250px;
+            height: 40px;
+            background-color: #1B58E7;
+            box-shadow: 0px 4px 50px #5380EA;
+            border: 1px solid #1B58E7;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .doneButton {
+            width: 100px;
+            height: 40px;
+            background-color: #F27E97;
+            border-radius: 20px;
+            border: 1px solid #F27E97;
+            box-shadow: 0px 4px 24px #E49192;
+            color: #000000;
+            font-weight: 700;
+            font-size: 12px;
+        }
+    }
+}
+
+.worldText {
+    font-family: 'Laila';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 31px;
+
+    color: #000000;
+    margin-left: 5px;
+    padding-top: 3px;
+}
+.CommentsContainer{
+    width: 60%;
+    margin-top: 50px;
+}
+.CommentsHeader{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    .CommentsTitle{
+        color: #E49192;
+        font-size: 35px;
+    }
+    .addCommentButton{
+        width: 150px;
+        background-color: #F0B80D;
+        padding-right: 20px;
+        padding-left: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border: 1px solid #FFD24B;
+        box-shadow: 0px 4px 24px rgba(240, 184, 13, 0.7);
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 700;
+    }
+}
