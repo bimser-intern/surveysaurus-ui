@@ -1,4 +1,4 @@
-name: Trigger auto deployment for survey-ui
+name: Trigger automated selenium tests 
 
 # When this action will be executed
 on:
@@ -34,7 +34,7 @@ jobs:
         run: apt list --installed
         
       - name: Install all necessary packages
-        run: pip install requests webdriver-manager selenium
+        run: pip install webdriver-manager selenium
         
       - name: Run the test script
         run: python SurveySaurusLogin.py
