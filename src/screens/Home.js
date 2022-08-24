@@ -49,7 +49,7 @@ function Home() {
       <Menu />
       <div className="borderMenuBottom"></div>
       <div className='create' id='create'>
-        <p className='appTitle'>Surveysaurus</p>
+        <p className='appTitle'>surveysaurus</p>
         <p className="createSurveysaurus">Create Your Surveysaurus</p>
         <Link to={"/createSurvey"} className='createButton'>Create A Survey</Link>
       </div>
