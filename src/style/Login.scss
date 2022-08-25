@@ -51,7 +51,7 @@
         &:hover{
             background-color: #b3c3e9;
         }
-        width: 280px;
+        width: 225px;
         height: 30px;
         border: 1px solid #5380EA;
         background-color: #F7F8FF;
@@ -124,6 +124,7 @@
         padding: 10px 70px 10px 70px;
         color: #FFFFFF;
         font-size: 15px;
+        margin-top: -30px;
     }
 }
 .eyeIconImg{
@@ -135,7 +136,9 @@
 }
 .haveAccount{
    @extend %layout-row;
-   margin-top: 10px;
+   margin-top: 5px;
+   font-size: 13px;
+   opacity: 0.8;
    a{
     position: relative;
     top: -5px;
@@ -159,4 +162,15 @@
     height: 100px;
     left: 45%;
     margin-top: -30px;
+}
+.forgetUsername{
+    @extend %layout-row;
+    margin-top: 15px;
+    font-size: 13px;
+    opacity: 0.8;
+    a{
+     position: relative;
+     margin-left: 5px;
+     text-decoration: underline;
+    }
 }
