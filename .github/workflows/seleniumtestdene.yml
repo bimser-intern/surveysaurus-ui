@@ -57,5 +57,8 @@ jobs:
       - name: Install selenium
         run: pip install selenium
         
+      - name: Run Chromedriver
+        run: chromedriver.exe
+        
       - name: Run the test script
         run: python SurveySaurusLogin.py
