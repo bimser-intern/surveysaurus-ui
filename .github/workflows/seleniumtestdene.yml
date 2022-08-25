@@ -30,19 +30,22 @@ jobs:
         with:
           python-version: '3.9'
           
+      - name: Install chromium 
+        run : sudo apt install chromium-browser
+        
       - name: Installed package list
         run: apt list --installed
         
       - name: Install all necessary packages
         run: pip install webdriver-manager selenium
         
-      - name: Install dependencies
-        run: |
-          set -ex
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install ./google-chrome-stable_current_amd64.deb
-          python -m pip install --upgrade pip
-          pip install msedge-selenium-tools
+      #- name: Install dependencies
+       # run: |
+       #   set -ex
+       #   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+       #   sudo apt install ./google-chrome-stable_current_amd64.deb
+       #   python -m pip install --upgrade pip
+       #   pip install msedge-selenium-tools
         
       - name: Run the test script
         run: python SurveySaurusLogin.py
