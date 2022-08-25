@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import time
 
+driver = webdriver.Chrome(service = service)
 driver.maximize_window()
 
 def login(username, password):
