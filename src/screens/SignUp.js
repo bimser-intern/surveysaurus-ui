@@ -285,7 +285,7 @@ function SignUp() {
                             <button className='submitButton' onClick={handleSubmit}>Sign Up</button>
                         </div>
                     </form>
-                    <div className='haveAccount'>
+                    <div className='haveAccount' style={{marginTop:"10px"}}>
                         <p>Have an account?</p>
                         <Link to={"/login"} href="">Login</Link>
                     </div>

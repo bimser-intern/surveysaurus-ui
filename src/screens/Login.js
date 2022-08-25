@@ -154,7 +154,7 @@ function Login() {
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
               <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-              <input title="Please fill in the marked fields" onInput={InvalidMsg} onInvalidCapture={InvalidMsg} value={email} onChange={(e) => setEmail(e.target.value)} required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email" />
+              <input title="Please fill in the marked fields" onInput={InvalidMsg} onInvalidCapture={InvalidMsg} value={email} onChange={(e) => setEmail(e.target.value)} required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your e-mail address" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
@@ -172,6 +172,9 @@ function Login() {
               <button className='submitButton' type="submit">Login</button>
             </div>
           </form>
+          <div className='forgetUsername'>
+          <p>Forget your <Link to={""}>username</Link> or <Link to={""}>password?</Link></p>
+          </div>
           <div className='haveAccount'>
             <p>Don't have an account?</p>
             <Link to={"/signup"} href="">Sign Up</Link>

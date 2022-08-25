@@ -201,6 +201,7 @@ ul {
         font-size: 50px;
         line-height: 78px;
         text-align: center;
+        color: #000000;
 
         .surveySampleTitle>p {
             color: #000000;
@@ -230,18 +231,20 @@ ul {
     .createSurveyButton {
         transition: padding 0.5s;
         width: 300px;
+        height: 40px;
 
 
 
         &:hover {
-            padding: 15px 55px 15px 55px;
+            padding: 7px 55px 7px 55px;
         }
 
-        background-color: #1B58E7;
+        background-color :#5380EA
+        8E7;
         color: #FFFFFF;
         padding-left: 50px;
         padding-right: 50px;
-        padding-top: 10px;
+        padding-top: 7px;
         padding-bottom: 10px;
         border-radius: 20px;
         font-size: 15px;
