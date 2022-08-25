@@ -113,7 +113,7 @@ function Login() {
           <li>
             <div onClick={() => setControl(!control)} className='UserIcon'>
               <a href=""></a>
-              <div style={{ display: control ? "none" : "block", top: "65px", zIndex: "100" }} className='openMenu'>
+              <div style={{ display: control ? "none" : "block", top: "75px", zIndex: "100" }} className='openMenu'>
                 <div onClick={() => navigate("/login")} className='menuItem' style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}>
                   <Link className='menuLink' style={{fontSize:"12px"}} to={"/login"}>User Info</Link>
                 </div>
@@ -169,7 +169,7 @@ function Login() {
               <p style={{marginLeft:"5px"}}>Incorrect email or password</p>
             </div>
             <div className='buttonLayout'>
-              <button className='submitButton' type="submit">Log in</button>
+              <button className='submitButton' type="submit">Login</button>
             </div>
           </form>
           <div className='haveAccount'>

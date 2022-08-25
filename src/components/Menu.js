@@ -17,7 +17,7 @@ function Menu({ isLogin ,test=null}) {
   return (
     <div className='Menu' id='#menu'>
       <ul className='navInfo'>
-        <li><Link to={"/"} className='navItem'>Home</Link>
+        <li><a href="/#create"  className='navItem'>Home</a>
         </li>
         <li style={{display:test !== null ? "none":"block"}}><a href="/#about" className='navItem'>About</a></li>
         <li style={{display:test !== null ? "none":"block"}}><a href="/#survey" className='navItem'>Surveys</a></li>
