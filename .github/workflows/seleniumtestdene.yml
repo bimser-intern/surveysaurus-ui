@@ -33,22 +33,18 @@ jobs:
       - name: Install chromium 
         run : sudo apt install chromium-browser
         
-      - name: Install Google Chrome # Using shell script to install Google Chrome
-        run: chmod +x ./InstallChrome.sh ./InstallChrome.sh
+      #- name: Install Google Chrome # Using shell script to install Google Chrome
+       # run: chmod +x ./InstallChrome.sh ./InstallChrome.sh
         
       - name: Installed package list
         run: apt list --installed
+    
+      - name: Install webdriver-manager
+        run: pip install webdriver-manager 
         
-      - name: Install all necessary packages
-        run: pip install webdriver-manager selenium
+      - name: Install selenium
+        run: pip install selenium
         
-      #- name: Install dependencies
-       # run: |
-       #   set -ex
-       #   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-       #   sudo apt install ./google-chrome-stable_current_amd64.deb
-       #   python -m pip install --upgrade pip
-       #   pip install msedge-selenium-tools
         
       - name: Run the test script
         run: python SurveySaurusLogin.py
