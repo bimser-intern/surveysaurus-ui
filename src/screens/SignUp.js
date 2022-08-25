@@ -118,7 +118,7 @@ function SignUp() {
         axios.post('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/register', {
             "userName": name,
             "email": email,
-            "password": password,
+            "password": password.trim(),
             "gender": gender,
             "city": city,
             "country": country
@@ -138,7 +138,7 @@ function SignUp() {
     }
     return (
         <div className='App'>
-            <div className='Menu' style={{ height: "60px" }}>
+            <div className='Menu' style={{ height: "80px"}}>
                 <ul className='navInfo'>
                     <li><Link to={"/"} className='navItem'>Home</Link>
                     </li>
@@ -157,7 +157,7 @@ function SignUp() {
                     <li>
                         <div onClick={() => setControl(!control)} className='UserIcon'>
                             <a href=""></a>
-                            <div style={{ display: control ? "none" : "block", top: "45px", zIndex: "100" }} className='openMenu'>
+                            <div style={{ display: control ? "none" : "block", top: "65px", zIndex: "100" }} className='openMenu'>
                                 <div onClick={() => navigate("/login")} className='menuItem' style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}>
                                     <Link className='menuLink' style={{ fontSize: "12px" }} to={"/login"}>User Info</Link>
                                 </div>
@@ -264,7 +264,7 @@ function SignUp() {
                             <label for="exampleInputPassword1">Password</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
                             <input onChange={(e) => setPassword(e.target.value)} onInput={(e) => InvalidMsgPassword(e)} onInvalidCapture={InvalidMsgPassword} value={password} required type={controlVisible ? "password" : "text"} class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="exampleInputPassword1" placeholder="Enter your password" />
-                            <div className='eyeIcon' type='button' onClick={() => setControlVisible(!controlVisible)}>
+                            <div className='eyeIcon' style={{left:"90%", position:'relative', top:"-25px"}} type='button' onClick={() => setControlVisible(!controlVisible)}>
                                 <img src={eyeIcon} alt="" />
                             </div>
                         </div>
@@ -272,7 +272,7 @@ function SignUp() {
                             <label for="exampleInputPassword2">Confirm your Password</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
                             <input onInput={InvalidMsgConfirmPassword} onInvalidCapture={InvalidMsgConfirmPassword} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required type={controlVisibleConfirm ? "password" : "text"} class="form-control" id="exampleInputPassword2" placeholder="Confirm your password" />
-                            <div className='eyeIcon' style={{ top: "595px" }} type='button' onClick={() => setControlVisibleConfirm(!controlVisibleConfirm)}>
+                            <div className='eyeIcon' style={{left:"90%", position:'relative', top:"-25px"}} type='button' onClick={() => setControlVisibleConfirm(!controlVisibleConfirm)}>
                                 <img src={eyeIcon} alt="" />
                             </div>
                         </div>
@@ -281,7 +281,8 @@ function SignUp() {
                             <p style={{ marginLeft: "7px" }}>User name or email existing</p>
                         </div>
                         <div className='buttonLayout'>
-                            <button className='submitButton' type="submit">Sign Up</button>
+                            {/* <button className='submitButton' type="submit">Sign Up</button> */}
+                            <button className='submitButton' onClick={handleSubmit}>Sign Up</button>
                         </div>
                     </form>
                     <div className='haveAccount'>

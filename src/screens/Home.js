@@ -49,7 +49,6 @@ function Home() {
     <div className='Home' id='Home'>
       <Menu />
       <img id="side" src={Side}/>
-      <div className="borderMenuBottom"></div>
       <div className='create' id='create'>
         <p className='appTitle' id="appTitle">Surveysaurus</p>
         <p className="createSurveysaurus">Create Your Surveysaurus</p>
