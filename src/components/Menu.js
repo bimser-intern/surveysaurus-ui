@@ -19,8 +19,8 @@ function Menu({ isLogin ,test=null}) {
       <ul className='navInfo'>
         <li><Link to={"/"} className='navItem'>Home</Link>
         </li>
-        <li style={{display:test !== null ? "none":"block"}}><a href="#about" className='navItem'>About</a></li>
-        <li style={{display:test !== null ? "none":"block"}}><a href="#survey" className='navItem'>Surveys</a></li>
+        <li style={{display:test !== null ? "none":"block"}}><a href="/#about" className='navItem'>About</a></li>
+        <li style={{display:test !== null ? "none":"block"}}><a href="/#survey" className='navItem'>Surveys</a></li>
         <li to={"/userPage"} style={{display:test === null ? "none":"block"}}><Link to={"/userPage"} className='navItem'>My Survey</Link></li>
         <li>
           <img className='logoImg' src={Logo} alt="" />
@@ -102,7 +102,7 @@ function Menu({ isLogin ,test=null}) {
         </li>
 
       </ul>
-      <div style={{marginTop:"15px"}} className="borderMenuBottomLogin"></div>
+      <div className="borderMenuBottomLogin"></div>
     </div>
 
   )

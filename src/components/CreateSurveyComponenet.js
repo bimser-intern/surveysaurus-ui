@@ -122,7 +122,7 @@ function CreateSurveyComponenet() {
                 <label for="exampleInputEmail1" style={{fontSize:"16px"}}>Options</label>
                 {formFields.map((form, index) => {
                   return (
-                    <div className='optionStyle'>
+                    <div className='optionStyle' style={{marginTop:"0"}}>
                       <div className='circleStyle'>
                         <img src={Circle} alt="" />
                       </div>
@@ -130,7 +130,7 @@ function CreateSurveyComponenet() {
                         <img src={Delete} alt="" />
                       </div>
                       <div key={index}>
-                      <input name="option" value={form.option} onInput={InvalidMsg} onInvalidCapture={InvalidMsg} required onChange={(event) => handleFormChange(event, index)}  class="form-control optionInputStyle" placeholder="Add your option" />
+                      <input name="option" value={form.option} onInput={InvalidMsg} onInvalidCapture={InvalidMsg} required onChange={(event) => handleFormChange(event, index)} id="exampleInputEmail1" class="form-control optionInputStyle" placeholder="Add your option" />
                       </div>
                     </div>
                   )

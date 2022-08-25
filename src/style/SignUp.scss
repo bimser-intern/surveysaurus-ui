@@ -19,7 +19,7 @@
 }
 .SignUp {
     width: 500px;
-    height: 800px;
+    height: auto;
     background-color: red;
     position: absolute;
     left: 650px;
@@ -80,7 +80,7 @@
     }
 
     .textfield {
-        width: 100%px;
+        width: 100%;
         height: 30px;
         margin: 30px 10px 10px 10px;
     }
@@ -129,16 +129,16 @@
     width: 100%;
     border-bottom: 2px solid #D3D8FF;
     position: fixed;
-    top: 60px;
+    top: 75px;
 }
 .wrongSignUp{
    display: flex;
    flex-direction: row;
 }
 .logoImg3{
-    position: relative;
+       position: absolute;
     width: 100px;
-    height: 80px;
-    margin-left: 375px;
-    margin-top:15px;
+    height: 100px;
+    left: 50%;
+    margin-top: -40px;
 }

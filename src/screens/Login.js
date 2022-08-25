@@ -52,7 +52,7 @@ function Login() {
     console.log(password)
     axios.post('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/login', {
       "email": email,
-      "password": password,
+      "password": password.trim(),
     })
       .then((result) => {
         console.log(result)
@@ -94,7 +94,7 @@ function Login() {
 
   return (
     <div>
-      <div className='Menu' style={{ height: "60px" }}>
+      <div className='Menu' style={{ height: "80px" }}>
         <ul className='navInfo'>
           <li><Link to={"/"} className='navItem'>Home</Link>
           </li>
@@ -113,7 +113,7 @@ function Login() {
           <li>
             <div onClick={() => setControl(!control)} className='UserIcon'>
               <a href=""></a>
-              <div style={{ display: control ? "none" : "block", top: "45px", zIndex: "100" }} className='openMenu'>
+              <div style={{ display: control ? "none" : "block", top: "65px", zIndex: "100" }} className='openMenu'>
                 <div onClick={() => navigate("/login")} className='menuItem' style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}>
                   <Link className='menuLink' style={{fontSize:"12px"}} to={"/login"}>User Info</Link>
                 </div>
@@ -160,7 +160,7 @@ function Login() {
               <label for="exampleInputPassword1">Password</label>
               <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
               <input title='Please fill in the marked fields' onInput={InvalidMsgPassword} onInvalidCapture={InvalidMsgPassword} value={password} onChange={(e) => setPassword(e.target.value)} required type={controlVisible ? "password" : "text"} class="form-control" id="exampleInputPassword1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter your password" />
-              <div style={{top:islogin? '225px':null}} className='eyeIconImg' type='button' onClick={() => setControlVisible(!controlVisible)}>
+              <div style={{top:islogin? '225px':null, left:"90%", position:'relative'}} className='eyeIconImg' type='button' onClick={() => setControlVisible(!controlVisible)}>
                 <img src={eyeIcon} alt="" />
               </div>
             </div>

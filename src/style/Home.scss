@@ -260,12 +260,15 @@ ul {
     margin-top: 100px;
     border-top: 2px solid #D3D8FF;
 
+
     ul {
         list-style-type: none;
-        margin-top: 25px;
+        margin-top: 10px;
 
 
         a {
+            position: relative;
+            top: 40px;
             cursor: pointer;
             font-family: 'Inter';
             font-style: normal;
@@ -275,12 +278,15 @@ ul {
             text-align: center;
             margin-right: 80px;
             text-decoration: none;
+            
         }
 
         .logoImage {
+            position: absolute;
+            left: 50%;
             width: 100px;
             height: 100px;
-            margin-left: 210px;
+           
         }
 
     }
@@ -292,11 +298,10 @@ ul {
     position: fixed;
     top: 80px;
 }
-
 .createSurveysaurus {
     position: absolute;
     top: 250px;
-    right: 210px;
+    left: 60%;
     color: rgba(242, 126, 151, 0.8);
     font-family: 'Laila';
     font-style: normal;
