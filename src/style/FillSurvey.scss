@@ -1,13 +1,33 @@
 %layout-center {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    //justify-content: center;
     align-items: center;
+}
+
+%button-layout {
+    width: 120px;
+    background-color: #FFD24B;
+    border-radius: 10px;
+    @extend %layout-center;
+    justify-content: center;
+    cursor: pointer;
+
+    .addCommentTextStyle {
+        color: #000000;
+        font-weight: bold;
+        font-size: 12px;
+    }
 }
 
 .containerFill {
     @extend %layout-center;
-    height: 700px;
+    height: 2000px;
+
+    .Container {
+        width: 100%;
+        @extend %layout-center
+    }
 
     .fillSurvey {
         width: 60%;
@@ -99,20 +119,24 @@
     margin-left: 5px;
     padding-top: 3px;
 }
-.CommentsContainer{
+
+.CommentsContainer {
     width: 60%;
     margin-top: 50px;
 }
-.CommentsHeader{
+
+.CommentsHeader {
     display: flex;
     width: 100%;
     flex-direction: column;
     justify-content: flex-start;
-    .CommentsTitle{
+
+    .CommentsTitle {
         color: #E49192;
         font-size: 35px;
     }
-    .addCommentButton{
+
+    .addCommentButton {
         width: 150px;
         background-color: #F0B80D;
         padding-right: 20px;
@@ -124,5 +148,199 @@
         border-radius: 20px;
         font-size: 13px;
         font-weight: 700;
+    }
+}
+
+.ratesStyle {
+    background-color: rgba(97, 97, 97, 0.4);
+    ;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Comments {
+    width: 60%;
+    margin-top: 50px;
+    height: 700px;
+
+    .commentsTextStyle {
+        color: #E49192;
+        font-size: 30px;
+    }
+
+    .addButton {
+        width: 120px;
+        background-color: #FFD24B;
+        border-radius: 10px;
+        @extend %layout-center;
+        justify-content: center;
+        cursor: pointer;
+
+        .addCommentTextStyle {
+            color: #000000;
+            font-weight: bold;
+            font-size: 12px;
+        }
+    }
+}
+
+.addButtonContainer {
+    width: 60%;
+    margin-top: 130px;
+    height: 500px;
+    border-radius: 70px;
+    border: 3px solid #D3D8FF;
+    box-shadow: 0px 4px 24px #D3D8FF;
+    @extend %layout-center;
+    justify-content: center;
+
+    .addButtonContent {
+        width: 80%;
+        height: 80%;
+        //background-color: red;
+        //border: 3px solid #D3D8FF;
+    }
+
+    .textStyle {
+        box-shadow: 0px 4px 24px #D3D8FF;
+        border: 3px solid #D3D8FF;
+        font-size: 15px;
+    }
+
+    .commentButton {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        //width: 100px;
+        //background-color: red;
+        @extend %button-layout;
+        margin-bottom: 20px;
+        margin-right: 10px;
+    }
+
+    .commentFooter {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        position: relative;
+        top: -45px;
+        //background-color: red;
+    }
+
+    .changeTextStyle {
+        li {
+            list-style-type: none;
+            cursor: pointer;
+        }
+    }
+}
+
+.commentList {
+    margin: 0;
+    padding: 0;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    //background-color: red;
+    width: 100%;
+    justify-content: flex-start;
+    //align-items: flex-start;
+
+    li {
+        list-style-type: none;
+    }
+
+    .userIcon {
+        width: 50px;
+        height: 50px;
+        background-color: #ED7084;
+        border-radius: 100px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .surveyInfo {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .commentInfoContainer {
+        display: flex;
+        width: 95%;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-left: 10px;
+        //background-color: blue;
+    }
+
+    .commentIconContainer {
+
+        .commentIconList {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            li {
+                list-style-type: none;
+                cursor: pointer;
+            }
+        }
+
+        .commentListItem {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+.reportContainer{
+    width: 200px;
+    height: 200px;
+    background-color: #F5F5F5;
+    position: fixed;
+    top: 250px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.reportButtons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .reportYes{
+        width: 70px;
+        height: 40px;
+        background-color: green;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+        border-radius: 10px;
+    }
+    .reportNo{
+        width: 70px;
+        height: 40px;
+        background-color: rgba(226, 60, 49, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
     }
 }

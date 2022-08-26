@@ -46,7 +46,7 @@ function Home() {
 
   return (
     <div className='Home' id='Home'>
-      <Menu />
+      <Menu isLogin={localStorage.getItem("token")? true:false} />
       <div className="borderMenuBottom"></div>
       <div className='create' id='create'>
         <p className='appTitle'>Surveysaurus</p>
