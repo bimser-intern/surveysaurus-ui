@@ -2,8 +2,15 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-driver = webdriver.Chrome(ChromeDriverManager().install())
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
+driver = webdriver.Chrome('/usr/bin/google-chrome',chrome_options=chrome_options)
+#driver = webdriver.Chrome(ChromeDriverManager().install())
 import time
+
+
 
 service = Service("/usr/bin/google-chrome")
 
