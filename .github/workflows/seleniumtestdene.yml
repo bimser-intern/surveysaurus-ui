@@ -49,13 +49,13 @@ jobs:
         run: apt list --installed
     
       - name: Install webdriver-manager
-        run: pip3 install webdriver-manager 
+        run: pip install webdriver-manager 
         
       - name: Install selenium
-        run: pip3 install selenium
+        run: pip install selenium==4.4.0
         
       #- name: Run Chromedriver
        # run:  /usr/local/bin/chromedriver
         
       - name: Run the test script
-        run: python3 SurveySaurusLogin.py
+        run: python SurveySaurusLogin.py
