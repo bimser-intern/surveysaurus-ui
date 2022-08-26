@@ -47,8 +47,12 @@ function Home() {
 
   return (
     <div className='Home' id='Home'>
-      <Menu />
+
+      <Menu isLogin={localStorage.getItem("token")? true:false} />
+      <div className="borderMenuBottom"></div>
+
       <img id="side" src={Side} />
+
       <div className='create' id='create'>
         <p className='appTitle' id="appTitle">Surveysaurus</p>
         <p className="createSurveysaurus">Create Your Surveysaurus</p>

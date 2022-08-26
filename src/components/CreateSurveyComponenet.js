@@ -109,7 +109,7 @@ function CreateSurveyComponenet() {
       <div className='createSurveyContainer'>
         <div className='createSurvey'>
           <div className='questionInput'>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div class="form-group">
                 <label for="exampleInputEmail1" style={{fontSize:"16px"}}>Title</label>
                 <input value={title} onChange={(e) => setTitle(e.target.value)} onInput={InvalidMsg} onInvalidCapture={InvalidMsg} required style={{marginBottom:"0px"}} type="text" class="form-control questionInputStyle" id="exampleInputEmail1" placeholder="Add your title" />
@@ -143,7 +143,7 @@ function CreateSurveyComponenet() {
               </div>
 
               <div className='createButtonContainer'>
-                <button onClick={handleSubmit} type="submit" className='createButton'>Create</button>
+                <button type="submit" className='createButton'>Create</button>
               </div>
             </form>
 
