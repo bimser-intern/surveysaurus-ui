@@ -4,8 +4,10 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(ChromeDriverManager().install())
 import time
-service = Service("./chromedriver")
 
+service = Service(".\\chromedriver.exe")
+
+driver = webdriver.Chrome(service = service)
 driver.maximize_window()
 
 def login(username, password):
@@ -37,4 +39,4 @@ if "userPage" in driver.current_url:
 else:
     print("HATA: Kullanıcı adı ve şifre doğru yazıldığında başarılı bir şekilde giriş yapılamamıştır. ")
 
-driver.quit()*
+driver.quit()
