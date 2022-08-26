@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(ChromeDriverManager().install())
 import time
-service = Service("/usr/local/bin/chromedriver")
+service = Service("./chromedriver")
 
 driver.maximize_window()
 
