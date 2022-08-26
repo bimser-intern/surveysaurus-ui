@@ -113,14 +113,7 @@ function Login() {
           <li>
             <div onClick={() => setControl(!control)} className='UserIcon'>
               <a href=""></a>
-              <div style={{ display: control ? "none" : "block", top: "75px", zIndex: "100" }} className='openMenu'>
-                <div onClick={() => navigate("/login")} className='menuItem' style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}>
-                  <Link className='menuLink' style={{fontSize:"12px"}} to={"/login"}>User Info</Link>
-                </div>
-                <div onClick={() => navigate("/login")} className='menuItem'>
-                  <Link className='menuLink'style={{fontSize:"12px"}} to={"/login"}>My Survey</Link>
-                </div>
-              </div>
+              
             </div>
           </li>
 

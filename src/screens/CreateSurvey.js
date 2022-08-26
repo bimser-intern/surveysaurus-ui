@@ -6,7 +6,7 @@ function CreateSurvey() {
 
   return (
     <div>
-      <Menu isLogin={false}/>
+      <Menu isLogin={localStorage.getItem("token")? true:false} />
       <CreateSurveyComponenet/>
     </div>
   )
