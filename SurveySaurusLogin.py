@@ -12,11 +12,9 @@ driver = webdriver.Chrome(options=options)
 #driver = webdriver.Chrome(ChromeDriverManager().install())
 import time
 
+#service = Service("/usr/bin/google-chrome")
+#driver = webdriver.Chrome(service = service)
 
-
-service = Service("/usr/bin/google-chrome")
-
-driver = webdriver.Chrome(service = service)
 driver.maximize_window()
 
 def login(username, password):
