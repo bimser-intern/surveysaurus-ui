@@ -22,7 +22,7 @@ def login(username, password):
     driver.find_element(By.CLASS_NAME, "loginButton").click()
     driver.find_element(By.XPATH, "/html/body/div/div/div[4]/div[3]/form/div[1]/input").send_keys(username)
     driver.find_element(By.XPATH, "/html/body/div/div/div[4]/div[3]/form/div[2]/input").send_keys(password)
-    driver.find_element(By.XPATH, "/html/body/div[1]/div/div[4]/div[3]/form/div[4]/button").click()
+    driver.find_element(By.CLASS_NAME, "submitButton").click()
     time.sleep(3)
     return 0
 
