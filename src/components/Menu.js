@@ -17,7 +17,7 @@ function Menu({ isLogin ,test=null}) {
   return (
     <div className='Menu' id='#menu'>
       <ul className='navInfo'>
-        <li><a href="/#create"  className='navItem'>Home</a>
+        <li><a href="/#create"  className='navItem '>Home</a>
         </li>
         <li style={{display:test !== null ? "none":"block"}}><a href="/#about" className='navItem'>About</a></li>
         <li style={{display:test !== null ? "none":"block"}}><a href="/#survey" className='navItem'>Surveys</a></li>
@@ -34,7 +34,7 @@ function Menu({ isLogin ,test=null}) {
           </Link>
         </li>
         <li>
-          <Link to={"/login"} className='loginButton'>
+        <Link to={localStorage.getItem("token") ? "/":"/login"} className='loginButton'>
             <p className='buttonTextLayout'>{isLogin ? JSON.parse(localStorage.getItem("auth")).name : "Login"}</p>
           </Link>
         </li>
@@ -42,13 +42,7 @@ function Menu({ isLogin ,test=null}) {
           <div onClick={() => setControl(!control)} className='UserIcon'>
             <a href=""></a>
             {!isLogin ?
-              <div style={{ display: control ? "none" : "block"}} className='openMenu'>
-                <div onClick={() => navigate("/login")} className='menuItem'>
-                  <Link className='menuLink' style={{fontSize:"12px"}} to={"/login"}>User Info</Link>
-                </div>
-                <div onClick={() => navigate("/login")} className='menuItem'>
-                  <Link className='menuLink' style={{fontSize:"12px"}} to={"/login"}>My Survey</Link>
-                </div>
+              <div>
               </div> : <div onClick={() => setControl(!control)} className='UserIcon'>
                 <a href=""></a>
                 <div style={{
