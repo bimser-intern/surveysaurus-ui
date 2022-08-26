@@ -29,6 +29,15 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
+          
+      - name: Install selenium
+        run: pip install selenium==4.4.0
+        
+      - name: Upgrade selenium
+        run: pip3 install -U selenium
+        
+      - name: Install webdriver-manager
+        run: pip install webdriver-manager
          
       - name: Install ChromeDriver
         run: |
@@ -48,11 +57,9 @@ jobs:
       - name: Installed package list
         run: apt list --installed
     
-      - name: Install webdriver-manager
-        run: pip install webdriver-manager 
+      #- name: Install webdriver-manager
+      #  run: pip install webdriver-manager 
         
-      - name: Install selenium
-        run: pip install selenium==4.4.0
         
       #- name: Run Chromedriver
        # run:  /usr/local/bin/chromedriver
