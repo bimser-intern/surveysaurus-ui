@@ -2,10 +2,19 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import time
-#aaaaaaaa
-service = Service(".\\chromedriver.exe")
 
-driver = webdriver.Chrome(service = service)
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
+options.add_argument('--disable-infobars')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--no-sandbox')
+options.add_argument('--remote-debugging-port=9222')
+driver = webdriver.Chrome(options=options)
+
+
+
+#service = Service(".\\chromedriver.exe")
+#driver = webdriver.Chrome(service = service)
 driver.maximize_window()
 
 def login(username, password):
