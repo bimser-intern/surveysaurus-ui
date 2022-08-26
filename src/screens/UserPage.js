@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import SignOut from "../image/signOut.png"
 import PlusIcon from "../image/plusIcon.png"
+import Logo from "../image/logo.png"
 import ListIcon from "../image/list.png"
 import "../style/UserPage.scss"
 import Menu from '../components/Menu';
@@ -25,20 +26,20 @@ function UserPage() {
                 authorization: localStorage.getItem("token"),
             }
         }).then((result) => {
-            
-            if (result.data.data.surveys && result.data.data.surveys.length>0) {
+
+            if (result.data.data.surveys && result.data.data.surveys.length > 0) {
                 const userSurveyData = []
-                result.data.data.surveys.map((item)=>{
+                result.data.data.surveys.map((item) => {
                     console.log(item)
                     userSurveyData.push(item)
                 })
-            
+
                 setUserSurvey(userSurveyData);
                 console.log("eeeeeeeeeeeeeee");
                 console.log(userSurvey)
-                
+
             }
-            
+
         })
         if (!localStorage.getItem("token")) {
             navigate("/login")
@@ -46,14 +47,14 @@ function UserPage() {
         else {
             const todos = [...userInfo]
             todos.push(JSON.parse(localStorage.getItem("auth")))
-        
+
             setUserInfo(todos)
-            
+
         }
     }, [])
     return (
         <div>
-            <Menu isLogin={true} test="true"/>
+            <Menu isLogin={true} test="true" />
 
             <div class="container" style={{ marginTop: "100px" }}>
                 <div class="row">
@@ -62,8 +63,8 @@ function UserPage() {
                             console.log("----------------")
                             console.log(userSurvey)
                             return (
-                                <div class="col-sm-4">
-                                    <div onClick={()=>navigate("/fillSurvey",{state:{"surveyInfo":result}})} className='SurveyCard' style={{marginBottom:"10px"}}>
+                                <div class="col-sm-3">
+                                    <div onClick={() => navigate("/fillSurvey", { state: { "surveyInfo": result } })} className='SurveyCard' style={{ marginBottom: "10px" }}>
                                         <h3>{result.title}</h3>
                                         <p className='questionHeaderStyle'>{result.question}</p>
                                         <ul className='choicesStyle'>
@@ -81,14 +82,35 @@ function UserPage() {
                             )
                         })
                     }
-                    <div class="col-sm">
-                        <div onClick={()=>navigate("/createSurveyWithLogin",{state:{
-                            auth:JSON.parse(localStorage.getItem("auth"))
-                        }})} className='SurveyCard'>
+                    <div class="col-sm-3">
+                        <div onClick={() => navigate("/createSurveyWithLogin", {
+                            state: {
+                                auth: JSON.parse(localStorage.getItem("auth"))
+                            }
+                        })} className='SurveyCard'>
                             <img src={PlusIcon} alt="" />
                             <h1>Create Survey</h1>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className='footer'>
+                <div className='footerBorder'></div>
+                <div className='footerItem'>
+                    <ul>
+                        <li>
+                            <Link to={"/"} className='navItem'>Home</Link>
+                        </li>
+                        <li>
+                            <Link to={"/"} href="" className='navItem'>About</Link>
+                        </li>
+                        <li>
+                            <a href=''>Contact Us</a>
+                        </li>
+                        <li>
+                            <img className='logoImage' src={Logo} alt="" />
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -11,17 +11,23 @@
     //justify-content: center;
     align-items: center;
 }
-
+.OrText{
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    
+}
 .SignUp {
     width: 500px;
-    height: 800px;
+    height: auto;
     background-color: red;
     position: absolute;
     left: 650px;
     top: 150px;
     border-radius: 20px;
-    background-color: aliceblue;
+    background-color: #FFFFFF;
     @extend %layout;
+    font-size:12px;
 
     .withGoogle {
 
@@ -29,7 +35,7 @@
             background-color: #b3c3e9;
         }
 
-        width: 200px;
+        width: 225px;
         //height: 50px;
         padding-top: 5px;
         padding-bottom: 5px;
@@ -74,7 +80,7 @@
     }
 
     .textfield {
-        width: 100%px;
+        width: 100%;
         height: 30px;
         margin: 30px 10px 10px 10px;
     }
@@ -82,6 +88,7 @@
     .formControl {
         @extend %layout-shared;
         flex-direction: column;
+        background-color: #FFFFFF;
 
     }
 }
@@ -122,9 +129,16 @@
     width: 100%;
     border-bottom: 2px solid #D3D8FF;
     position: fixed;
-    top: 60px;
+    top: 75px;
 }
 .wrongSignUp{
    display: flex;
    flex-direction: row;
+}
+.logoImg3{
+       position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 45%;
+    margin-top: -30px;
 }

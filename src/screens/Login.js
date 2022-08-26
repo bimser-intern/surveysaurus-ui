@@ -5,6 +5,7 @@ import CasualLife from "../image/CasualLife.png"
 import googleIcon from "../image/google.png"
 import eyeIcon from "../image/eye.png"
 import Warning from "../image/warning.png"
+import Logo from "../image/logo.png"
 import "../style/Login.scss"
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -51,7 +52,7 @@ function Login() {
     console.log(password)
     axios.post('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/login', {
       "email": email,
-      "password": password,
+      "password": password.trim(),
     })
       .then((result) => {
         console.log(result)
@@ -93,11 +94,14 @@ function Login() {
 
   return (
     <div>
-      <div className='Menu'>
+      <div className='Menu' style={{ height: "80px" }}>
         <ul className='navInfo'>
           <li><Link to={"/"} className='navItem'>Home</Link>
           </li>
-          <li><a href="#about" className='navItem'>About</a></li>
+          <li><a href="/#about" className='navItem'>About</a></li>
+          <li>
+          <img className='logoImg2' src={Logo} alt="" />
+          </li>
         </ul>
 
         <ul>
@@ -109,15 +113,12 @@ function Login() {
           <li>
             <div onClick={() => setControl(!control)} className='UserIcon'>
               <a href=""></a>
-              <div style={{ display: control ? "none" : "block", top: "45px", zIndex: "100" }} className='openMenu'>
+              <div style={{ display: control ? "none" : "block", top: "75px", zIndex: "100" }} className='openMenu'>
                 <div onClick={() => navigate("/login")} className='menuItem' style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}>
-                  <Link className='menuLink' to={"/login"}>User Info</Link>
+                  <Link className='menuLink' style={{fontSize:"12px"}} to={"/login"}>User Info</Link>
                 </div>
                 <div onClick={() => navigate("/login")} className='menuItem'>
-                  <Link className='menuLink' to={"/login"}>My Survey</Link>
-                </div>
-                <div onClick={() => navigate("/login")} className='backColor' style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-                  <Link style={{ color: "#FFFFFF", marginLeft: "5px" }} className='menuLink' to={"/login"}>Log Out</Link>
+                  <Link className='menuLink'style={{fontSize:"12px"}} to={"/login"}>My Survey</Link>
                 </div>
               </div>
             </div>
@@ -144,7 +145,7 @@ function Login() {
 
         <div className='Or'>
           <div className='borderOr'></div>
-          <p className='OrText'>Or</p>
+          <h3><p className='OrText'>Or</p></h3>
           <div className='borderOr'></div>
         </div>
 
@@ -153,13 +154,13 @@ function Login() {
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
               <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-              <input title="Please fill in the marked fields" onInput={InvalidMsg} onInvalidCapture={InvalidMsg} value={email} onChange={(e) => setEmail(e.target.value)} required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email" />
+              <input title="Please fill in the marked fields" onInput={InvalidMsg} onInvalidCapture={InvalidMsg} value={email} onChange={(e) => setEmail(e.target.value)} required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your e-mail address" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
               <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
               <input title='Please fill in the marked fields' onInput={InvalidMsgPassword} onInvalidCapture={InvalidMsgPassword} value={password} onChange={(e) => setPassword(e.target.value)} required type={controlVisible ? "password" : "text"} class="form-control" id="exampleInputPassword1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter your password" />
-              <div style={{top:islogin? '225px':null}} className='eyeIconImg' type='button' onClick={() => setControlVisible(!controlVisible)}>
+              <div style={{top:islogin? '225px':null, left:"90%", position:'relative'}} className='eyeIconImg' type='button' onClick={() => setControlVisible(!controlVisible)}>
                 <img src={eyeIcon} alt="" />
               </div>
             </div>
@@ -168,11 +169,14 @@ function Login() {
               <p style={{marginLeft:"5px"}}>Incorrect email or password</p>
             </div>
             <div className='buttonLayout'>
-              <button className='submitButton' type="submit">Log in</button>
+              <button className='submitButton' type="submit">Login</button>
             </div>
           </form>
+          <div className='forgetUsername'>
+          <p>Forget your <Link to={""}>username</Link> or <Link to={""}>password?</Link></p>
+          </div>
           <div className='haveAccount'>
-            <p>Dont't have an account?</p>
+            <p>Don't have an account?</p>
             <Link to={"/signup"} href="">Sign Up</Link>
           </div>
         </div>

@@ -6,7 +6,7 @@ import CasualLife from "../image/CasualLife.png"
 import googleIcon from "../image/google.png"
 import eyeIcon from "../image/eye.png"
 import Warning from "../image/warning.png"
-
+import Logo from "../image/logo.png"
 import "../style/Login.scss"
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
@@ -118,7 +118,7 @@ function SignUp() {
         axios.post('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/register', {
             "userName": name,
             "email": email,
-            "password": password,
+            "password": password.trim(),
             "gender": gender,
             "city": city,
             "country": country
@@ -126,7 +126,7 @@ function SignUp() {
             .then((result) => {
                 if (result.status) {
                     alert("User successfully registered")
-                    navigate("/login");
+                    navigate("/");
                 }
             })
             .catch((result) => {
@@ -138,11 +138,14 @@ function SignUp() {
     }
     return (
         <div className='App'>
-            <div className='Menu'>
+            <div className='Menu' style={{ height: "80px"}}>
                 <ul className='navInfo'>
                     <li><Link to={"/"} className='navItem'>Home</Link>
                     </li>
-                    <li><a href="#about" className='navItem'>About</a></li>
+                    <li><a href="/#about" className='navItem'>About</a></li>
+                    <li>
+                        <img className='logoImg3' src={Logo} alt="" />
+                    </li>
                 </ul>
 
                 <ul>
@@ -154,15 +157,12 @@ function SignUp() {
                     <li>
                         <div onClick={() => setControl(!control)} className='UserIcon'>
                             <a href=""></a>
-                            <div style={{ display: control ? "none" : "block", top: "45px", zIndex: "100" }} className='openMenu'>
+                            <div style={{ display: control ? "none" : "block", top: "75px", zIndex: "100" }} className='openMenu'>
                                 <div onClick={() => navigate("/login")} className='menuItem' style={{ borderTopLeftRadius: "10px", borderTopRightRadius: "10px" }}>
-                                    <Link className='menuLink' to={"/login"}>User Info</Link>
+                                    <Link className='menuLink' style={{ fontSize: "12px" }} to={"/login"}>User Info</Link>
                                 </div>
                                 <div onClick={() => navigate("/login")} className='menuItem'>
-                                    <Link className='menuLink' to={"/login"}>My Survey</Link>
-                                </div>
-                                <div onClick={() => navigate("/login")} className='backColor' style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-                                    <Link style={{ color: "#FFFFFF", marginLeft: "5px" }} className='menuLink' to={"/login"}>Log Out</Link>
+                                    <Link className='menuLink' style={{ fontSize: "12px" }} to={"/login"}>My Survey</Link>
                                 </div>
                             </div>
                         </div>
@@ -189,7 +189,7 @@ function SignUp() {
 
                 <div className='Or'>
                     <div className='borderOr'></div>
-                    <p className='OrText'>Or</p>
+                    <h3><p className='OrText'>Or</p></h3>
                     <div className='borderOr'></div>
                 </div>
 
@@ -223,7 +223,7 @@ function SignUp() {
                                 axios.post(
                                     'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/cities',
                                     {
-                                        "country":event.target.value,
+                                        "country": event.target.value,
                                     },
 
                                     {}
@@ -263,8 +263,8 @@ function SignUp() {
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-                            <input onChange={(e) => setPassword(e.target.value)} onInput={(e)=>InvalidMsgPassword(e)} onInvalidCapture={InvalidMsgPassword} value={password} required type={controlVisible ? "password" : "text"} class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="exampleInputPassword1" placeholder="Enter your password" />
-                            <div className='eyeIcon' type='button' onClick={() => setControlVisible(!controlVisible)}>
+                            <input onChange={(e) => setPassword(e.target.value)} onInput={(e) => InvalidMsgPassword(e)} onInvalidCapture={InvalidMsgPassword} value={password} required type={controlVisible ? "password" : "text"} class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="exampleInputPassword1" placeholder="Enter your password" />
+                            <div className='eyeIcon' style={{left:"90%", position:'relative', top:"-25px"}} type='button' onClick={() => setControlVisible(!controlVisible)}>
                                 <img src={eyeIcon} alt="" />
                             </div>
                         </div>
@@ -272,7 +272,7 @@ function SignUp() {
                             <label for="exampleInputPassword2">Confirm your Password</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
                             <input onInput={InvalidMsgConfirmPassword} onInvalidCapture={InvalidMsgConfirmPassword} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required type={controlVisibleConfirm ? "password" : "text"} class="form-control" id="exampleInputPassword2" placeholder="Confirm your password" />
-                            <div className='eyeIcon' style={{ top: "595px" }} type='button' onClick={() => setControlVisibleConfirm(!controlVisibleConfirm)}>
+                            <div className='eyeIcon' style={{left:"90%", position:'relative', top:"-25px"}} type='button' onClick={() => setControlVisibleConfirm(!controlVisibleConfirm)}>
                                 <img src={eyeIcon} alt="" />
                             </div>
                         </div>
@@ -280,21 +280,13 @@ function SignUp() {
                             <img style={{ height: "20px" }} src={Warning} alt="" />
                             <p style={{ marginLeft: "7px" }}>User name or email existing</p>
                         </div>
-                        <div className='policy'>
-                            <div onClick={() => setvectorControl(!vectorControl)} className='checkBox'>
-                                <img src={vectorControl ? Vector : null} alt="" />
-                            </div>
-                            <p className='textPolicy'>I agree to Surveysaurus</p>
-                            <a style={{ marginRight: "5px", marginLeft: "5px", textDecoration: "underline" }} href="">Terms of Use</a>
-                            <p>and</p>
-                            <a style={{ marginLeft: "5px", textDecoration: "underline" }}>Policy</a>
-                        </div>
                         <div className='buttonLayout'>
-                            <button className='submitButton' type="submit">Sign Up</button>
+                            {/* <button className='submitButton' type="submit">Sign Up</button> */}
+                            <button className='submitButton' onClick={handleSubmit}>Sign Up</button>
                         </div>
                     </form>
-                    <div className='haveAccount'>
-                        <p>Dont't have an account?</p>
+                    <div className='haveAccount' style={{marginTop:"10px"}}>
+                        <p>Have an account?</p>
                         <Link to={"/login"} href="">Login</Link>
                     </div>
                 </div>

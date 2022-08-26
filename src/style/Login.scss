@@ -37,20 +37,21 @@
 
 .login {
     width: 500px;
-    height: 400px;
+    height: auto;
     background-color: red;
     position: absolute;
     left: 650px;
     top: 150px;
     border-radius: 20px;
-    background-color: aliceblue;
+    background-color: #FFFFFF;
     @extend %layout;
+    font-size: 12px;
 
     .withGoogle {
         &:hover{
             background-color: #b3c3e9;
         }
-        width: 200px;
+        width: 225px;
         height: 30px;
         border: 1px solid #5380EA;
         background-color: #F7F8FF;
@@ -60,6 +61,7 @@
         @extend %layout-center;
         padding-right: 10px;
         cursor: pointer;
+
 
         .googleIcon {
             width: 10px;
@@ -100,6 +102,7 @@
     .OrText {
         margin-right: 10px;
         margin-left: 10px;
+        margin-top: 10px;
     }
 }
 
@@ -121,18 +124,21 @@
         padding: 10px 70px 10px 70px;
         color: #FFFFFF;
         font-size: 15px;
+        margin-top: -30px;
     }
 }
 .eyeIconImg{
     position: absolute;
     right: 65px;
-    top:225px;
+    top:-25px;
     width: 20px;
     height: 20px;
 }
 .haveAccount{
    @extend %layout-row;
-   margin-top: 10px;
+   margin-top: 5px;
+   font-size: 13px;
+   opacity: 0.8;
    a{
     position: relative;
     top: -5px;
@@ -144,9 +150,27 @@
     width: 100%;
     border-bottom: 2px solid #D3D8FF;
     position: fixed;
-    top: 60px;
+    top: 75px;
 }
 .wrongLogIn{
     display: none;
     flex-direction: row;
+}
+.logoImg2{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 45%;
+    margin-top: -30px;
+}
+.forgetUsername{
+    @extend %layout-row;
+    margin-top: 15px;
+    font-size: 13px;
+    opacity: 0.8;
+    a{
+     position: relative;
+     margin-left: 5px;
+     text-decoration: underline;
+    }
 }

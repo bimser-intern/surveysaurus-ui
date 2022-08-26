@@ -4,6 +4,7 @@ import "../style/Home.scss"
 import SurveyCard from "../components/SurveyCard"
 import "../style/surveyCard.scss"
 import Logo from "../image/logo.png"
+import Side from "../image/side.png"
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Slider from "react-slick";
@@ -46,63 +47,70 @@ function Home() {
 
   return (
     <div className='Home' id='Home'>
+
       <Menu isLogin={localStorage.getItem("token")? true:false} />
       <div className="borderMenuBottom"></div>
+
+      <img id="side" src={Side} />
+
       <div className='create' id='create'>
-        <p className='appTitle'>Surveysaurus</p>
+        <p className='appTitle' id="appTitle">Surveysaurus</p>
         <p className="createSurveysaurus">Create Your Surveysaurus</p>
         <Link to={"/createSurvey"} className='createButton'>Create A Survey</Link>
       </div>
-      <div className="about" id='about'>
+      <div className="about" id='about' style={{paddingTop:"70px"}}>
         <div className='imageAbout'></div>
         <div className='aboutTextContainer'>
           <h3 className='aboutTitle'>About Us</h3>
           <div className='aboutText'></div>
         </div>
       </div>
+      <div id='survey' style={{paddingTop:"1px"}}>
 
-      <div className="surveySample">
-        <div className='surveySampleTitle'>
-          <p>Our Sample Surveys</p>
-        </div>
-        <div className="surveyCardItems" id='survey'>
-          <Slider {...settings} style={{ width: "80%", marginLeft: "50px"}}>
-            {sampleSurvey && sampleSurvey.length > 0 &&
-              sampleSurvey.map((item) => {
-                return (
-                  <SurveyCard item={item}/>
-                )
-              })
-            }
-          </Slider>
-        </div>
+        <div className="surveySample">
+          <div className='surveySampleTitle'>
+            <p>Our Sample Surveys</p>
+          </div>
+          <div className="surveyCardItems">
+            <Slider {...settings} style={{ width: "80%", marginLeft: "50px" }}>
+              {sampleSurvey && sampleSurvey.length > 0 &&
+                sampleSurvey.map((item) => {
+                  return (
+                    <SurveyCard item={item} />
+                  )
+                })
+              }
+            </Slider>
+          </div>
 
-        <div className="createSurvey">
-          <p className='createSurveyTitle'>Create A Survey</p>
-          <Link className=' btn btn-primary createSurveyButton' to={'./createsurvey'}>Click to create</Link>
-        </div>
+          <div className="createSurvey">
+            <p className='createSurveyTitle'>Create A Survey</p>
+            <Link className=' btn btn-primary createSurveyButton' to={'./createsurvey'}>Click to create</Link>
+          </div>
 
-        <div className='footer'>
-          <div className='footerBorder'></div>
-          <div className='footerItem'>
-            <ul>
-              <li>
-                <a href='#create' className='linkStyle' to={"/"}>Home</a>
-              </li>
-              <li>
-                <a href='#about'>About</a>
+          <div className='footer'>
+            <div className='footerBorder'></div>
+            <div className='footerItem'>
+              <ul>
+                <li>
+                  <a href='#create' className='linkStyle' to={"/"}>Home</a>
+                </li>
+                <li>
+                  <a href='#about'>About</a>
 
-              </li>
-              <li>
-                <a href=''>Contact Us</a>
-              </li>
-              <li>
-                <img className='logoImage' src={Logo} alt="" />
-              </li>
-            </ul>
+                </li>
+                <li>
+                  <a href=''>Contact Us</a>
+                </li>
+                <li>
+                  <img className='logoImage' src={Logo} alt="" />
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   )
 }
