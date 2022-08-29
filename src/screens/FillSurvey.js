@@ -35,6 +35,7 @@ function FillSurvey() {
   const [controlReport, setControlReport] = useState(false)
   const [controlReportChild, setControlReportChild] = useState(false)
   useEffect(() => {
+    window.scrollTo(0,0)
     axios.post('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/getSurvey', {
       "title": location.state.surveyInfo.title,
     })

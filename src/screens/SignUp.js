@@ -138,7 +138,7 @@ function SignUp() {
     }
     return (
         <div className='App'>
-            <div className='Menu' style={{ height: "80px"}}>
+            <div className='Menu' style={{ height: "75px"}}>
                 <ul className='navInfo'>
                     <li><Link to={"/"} className='navItem'>Home</Link>
                     </li>
