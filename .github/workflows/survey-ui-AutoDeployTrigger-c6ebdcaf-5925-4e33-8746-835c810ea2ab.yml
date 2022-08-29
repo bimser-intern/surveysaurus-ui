@@ -39,7 +39,9 @@ jobs:
           file: ./Dockerfile
           context: ./
 
-
+  test:
+    uses: bimser-intern/surveysaurus-qa/.github/workflows/TestTheUI.yml@main
+    
   deploy:
     runs-on: ubuntu-latest
     needs: build
