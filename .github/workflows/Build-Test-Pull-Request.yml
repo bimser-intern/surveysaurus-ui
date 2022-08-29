@@ -40,7 +40,7 @@ jobs:
           context: ./
           
   test:
-    uses: bimser-intern/surveysaurus-qa/.github/workflows/TestTheUI.yml@main
+    uses: bimser-intern/surveysaurus-qa/.github/workflows/TestTheUI.yml@master
     
 
 
