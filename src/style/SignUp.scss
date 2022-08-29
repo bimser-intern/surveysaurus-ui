@@ -23,11 +23,12 @@
     background-color: red;
     position: absolute;
     left: 650px;
-    top: 150px;
+    top: 100px;
     border-radius: 20px;
     background-color: #FFFFFF;
     @extend %layout;
     font-size:12px;
+    padding-bottom: 50px;
 
     .withGoogle {
 

@@ -126,7 +126,7 @@ function SignUp() {
             .then((result) => {
                 if (result.status) {
                     alert("User successfully registered")
-                    navigate("/");
+                    navigate("/login");
                 }
             })
             .catch((result) => {

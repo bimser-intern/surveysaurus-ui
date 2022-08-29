@@ -166,7 +166,7 @@ function Login() {
             </div>
           </form>
           <div className='forgetUsername'>
-          <p>Forget your <Link to={""}>username</Link> or <Link to={""}>password?</Link></p>
+          <p>Forget your<Link to={""}>username</Link> or<Link to={""}>password?</Link></p>
           </div>
           <div className='haveAccount'>
             <p>Don't have an account?</p>
