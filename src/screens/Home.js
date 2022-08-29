@@ -26,7 +26,7 @@ function Home() {
     infinite: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 3
+    slidesToScroll: 3,
   };
   useEffect(() => {
     axios.get('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/sample', {

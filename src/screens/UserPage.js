@@ -87,7 +87,7 @@ function UserPage() {
                             state: {
                                 auth: JSON.parse(localStorage.getItem("auth"))
                             }
-                        })} className='SurveyCard'>
+                        })} className='SurveyCard' id="pluscreatesurvey">
                             <img src={PlusIcon} alt="" />
                             <h1>Create Survey</h1>
                         </div>

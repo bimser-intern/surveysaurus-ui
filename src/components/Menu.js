@@ -53,13 +53,13 @@ function Menu({ isLogin ,test=null}) {
                 backgroundColor: "#E491924D",
                 marginTop: "10px"
               }} className='openMenuLogIn' >
-                  <div className='profileContainer' onClick={() => navigate("/login")} style={{
+                  <div className='profileContainer' onClick={() => navigate("/UserInfo")} style={{
                   width: "80%", height: "30px", backgroundColor: "#F5F5F5CC", marginBottom: "10px", display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   borderRadius: "10px"
                 }}>
-                    <Link className='menuLinkContain' to={"/userInfo"} style={{
+                    <Link className='menuLinkContain' to={"/UserInfo"} style={{
                     fontFamily: 'Inter',
                     fontStyle: "normal",
                     fontWeight: "700",
@@ -68,6 +68,22 @@ function Menu({ isLogin ,test=null}) {
                     textAlign: "center",
                     color: "#000000",
                   }}>Profile</Link>
+                  </div>
+                  <div className='profileContainer' onClick={() => navigate("/UserPage")} style={{
+                  width: "80%", height: "30px", backgroundColor: "#F5F5F5CC", marginBottom: "10px", display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "10px"
+                }}>
+                    <Link className='menuLinkContain' to={"/UserPage"} style={{
+                    fontFamily: 'Inter',
+                    fontStyle: "normal",
+                    fontWeight: "700",
+                    fontSize: "13px",
+                    lineHeight: "21px",
+                    textAlign: "center",
+                    color: "#000000",
+                  }}>My Surveys</Link>
                   </div>
                   <div className='logOutContainer' onClick={logOut} style={{
                   width: "80%", height: "30px", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "#F5F5F5CC",

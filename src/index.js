@@ -16,6 +16,7 @@ import CarouselComponent from './components/CarouselComponent';
 import CreateSurveyWithLogin from './screens/CreateSurveyWithLogin';
 import FillSurvey from './screens/FillSurvey';
 import Home from './screens/Home';
+import UserInfo from './screens/UserInfo';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -30,6 +31,7 @@ root.render(
       <Route path='/userPage' element={<UserPage/>}/>
       <Route path='/createSurveyWithLogin' element={<CreateSurveyWithLogin/>}/>
       <Route path='/fillSurvey' element={<FillSurvey/>}/>
+      <Route path='/userInfo' element={<UserInfo/>}/>
     </Routes>
   </BrowserRouter>
 );
