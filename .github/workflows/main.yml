@@ -38,4 +38,9 @@ jobs:
           tags: surveyacr.azurecr.io/survey-ui:${{ github.sha }}
           file: ./Dockerfile
           context: ./
+          
+  test:
+    uses: bimser-intern/surveysaurus-qa/.github/workflows/TestTheUI.yml@main
+    
+
 
