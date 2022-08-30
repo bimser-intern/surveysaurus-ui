@@ -13,9 +13,11 @@ import '../style/Menu.scss'
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 function Login() {
 
   const navigate = useNavigate();
+  const location=useLocation();
   const [control, setControl] = useState(true);
   const [controlVisible, setControlVisible] = useState(true);
   const [islogin, setIsLogin] = useState(false);
@@ -60,6 +62,7 @@ function Login() {
           localStorage.setItem('token',result.data.accessToken)
           localStorage.setItem('auth',JSON.stringify(result.data.data))
           console.log(result.data.data)
+          navigate("/userPage")
 
           if(localStorage.getItem('userSurvey')){
             let object=JSON.parse(localStorage.getItem('userSurvey'))
@@ -79,10 +82,26 @@ function Login() {
                  localStorage.removeItem("userSurvey")
              })
           }
-          setTimeout(() => {
-            console.log("lşmşlmşlmşlmşlm")
-            navigate("/userPage");
-          }, 200);
+          if(localStorage.getItem("selectedOption")){
+            axios.post(
+              'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/fillSurvey',
+              {
+                "title": location.state.title,
+                "answer": localStorage.getItem("selectedOption"),
+              },
+              {
+                headers: {
+                  authorization: localStorage.getItem("token"),
+                },
+              }
+            ).then((result) => {
+              console.log(result)
+              localStorage.removeItem("selectedOption")
+            }).catch((result) => {
+              console.log(result)
+            })
+          }
+        
         }
         else {
           alert("username or password is wrong");
