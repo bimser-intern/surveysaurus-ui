@@ -90,19 +90,22 @@ function SignUp() {
         else if (e.target.validity.patternMismatch) {
             e.target.setCustomValidity('Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters');
         }
-        else {
+        else if(password===confirmPassword){
             e.target.setCustomValidity('');
         }
         return true;
     }
     function InvalidMsgConfirmPassword(e) {
+        console.log("password confrim passwrod")
+        console.log(password)
+        console.log(confirmPassword)
         if (e.target.value == '') {
             e.target.setCustomValidity('Please fill in the marked fields');
         }
-        else if (!(password === confirmPassword)) {
+        else if(password!=confirmPassword){
             e.target.setCustomValidity('Passwords do not match.');
         }
-        else {
+        else{
             e.target.setCustomValidity('');
         }
         return true;
@@ -256,15 +259,15 @@ function SignUp() {
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-                            <input onChange={(e) => setPassword(e.target.value)} onInput={(e) => InvalidMsgPassword(e)} onInvalidCapture={InvalidMsgPassword} value={password} required type={controlVisible ? "password" : "text"} class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="exampleInputPassword1" placeholder="Enter your password" />
+                            <input onChange={(e) => setPassword(e.target.value)} onInput={InvalidMsgPassword} onInvalidCapture={InvalidMsgPassword} value={password} required type={controlVisible ? "password" : "text"} class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="exampleInputPassword1" placeholder="Enter your password" />
                             <div className='eyeIcon' style={{left:"90%", position:'relative', top:"-25px"}} type='button' onClick={() => setControlVisible(!controlVisible)}>
                                 <img src={eyeIcon} alt="" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword2">Confirm your Password</label>
+                            <label for="exampleInputPassword1">Confirm your Password</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
-                            <input onInput={InvalidMsgConfirmPassword} onInvalidCapture={InvalidMsgConfirmPassword} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required type={controlVisibleConfirm ? "password" : "text"} class="form-control" id="exampleInputPassword2" placeholder="Confirm your password" />
+                            <input value={confirmPassword} onInput={InvalidMsgConfirmPassword} onInvalidCapture={InvalidMsgConfirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required type={controlVisibleConfirm ? "password" : "text"} class="form-control" id="exampleInputPassword1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm your password" />
                             <div className='eyeIcon' style={{left:"90%", position:'relative', top:"-25px"}} type='button' onClick={() => setControlVisibleConfirm(!controlVisibleConfirm)}>
                                 <img src={eyeIcon} alt="" />
                             </div>
@@ -275,7 +278,7 @@ function SignUp() {
                         </div>
                         <div className='buttonLayout'>
                             {/* <button className='submitButton' type="submit">Sign Up</button> */}
-                            <button className='submitButton' onClick={handleSubmit}>Sign Up</button>
+                            <button type='submit' className='submitButton'>Sign Up</button>
                         </div>
                     </form>
                     <div className='haveAccount' style={{marginTop:"10px"}}>

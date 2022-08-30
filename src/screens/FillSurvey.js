@@ -19,6 +19,7 @@ import bulletList from "../image/bulletList.png"
 import Arrow from "../image/arrow.png"
 import Reply from "../image/reply.png"
 import Report from "../image/report.png"
+import DeleteIcon from "../image/delete-icon.png"
 
 function FillSurvey() {
   const location = useLocation()
@@ -33,14 +34,35 @@ function FillSurvey() {
   const [reportItem, setReportItem] = useState({})
   const [commentID, setCommentID] = useState(0)
   const [controlReport, setControlReport] = useState(false)
+  const [selectedReport, setSelectedReport] = useState(0)
   const [controlReportChild, setControlReportChild] = useState(false)
+  let now = new Date()
   useEffect(() => {
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
+    if (localStorage.getItem("token")) {
+      axios.post(
+        'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/isfilled',
+        {
+          "title": location.state.surveyInfo.title,
+        },
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+        .then((result) => {
+          setSelected(result.data.data.choice)
+          console.log("filled")
+          console.log(result)
+        })
+    }
     axios.post('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/getSurvey', {
       "title": location.state.surveyInfo.title,
     })
       .then((result) => {
         let percentData = []
+        console.log(result)
         result.data.data.percent.map((item) => {
           percentData.push(item)
         })
@@ -69,27 +91,37 @@ function FillSurvey() {
   }, [])
   const handleDone = () => {
     console.log("dsadsa")
-    if (!localStorage.getItem("token")) {
-      alert("Please login to fill out the survey.")
-      navigate("/login")
+    if (selected === null) {
+      alert("please choose an option")
     }
-    axios.post(
-      'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/fillSurvey',
-      {
-        "title": location.state.surveyInfo.title,
-        "answer": selected,
-      },
-      {
-        headers: {
-          authorization: localStorage.getItem("token"),
+    else if (!localStorage.getItem("token")) {
+      alert("Please login to fill out the survey.")
+      localStorage.setItem("selectedOption", selected)
+      navigate("/login", {
+        state: {
+          title: location.state.surveyInfo.title
+        }
+      })
+    }
+    else {
+      axios.post(
+        'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/fillSurvey',
+        {
+          "title": location.state.surveyInfo.title,
+          "answer": selected,
         },
-      }
-    ).then((result) => {
-      console.log(result)
-      setControl(true)
-    }).catch((result) => {
-      console.log(result)
-    })
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      ).then((result) => {
+        console.log(result)
+        setControl(true)
+      }).catch((result) => {
+        console.log(result)
+      })
+    }
   }
   const handleAddComment = () => {
     if (commentText === '') {
@@ -191,6 +223,7 @@ function FillSurvey() {
   }
   const addCommentWithId = (item) => {
     setCommentID(item.commentID)
+    window.scrollTo(0, 0)
     setAddButtonControl(true)
   }
   const handleReport = (item) => {
@@ -199,8 +232,11 @@ function FillSurvey() {
     setControlReport(!controlReport)
   }
   const handleYesButton = (item) => {
-    console.log(item)
-    if (localStorage.getItem("token")) {
+    console.log(item.author)
+    if(localStorage.getItem("token") && JSON.parse(localStorage.getItem("auth")).name===item.author){
+      alert("You cannot report your own comment.")
+    }
+    else if (localStorage.getItem("token")) {
       axios.post(
         'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/report',
         {
@@ -213,14 +249,207 @@ function FillSurvey() {
         }
       )
         .then((result) => {
-          console.log(result)
-          alert("Report Succesfully")
+          axios.post(
+            'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/comments',
+            {
+              "title": location.state.surveyInfo.title,
+            },
+            {
+              headers: {
+                authorization: localStorage.getItem("token"),
+              },
+            }
+          )
+            .then((result) => {
+              setSurveyCommentData([])
+              console.log("comments")
+              console.log(result)
+              let commentData = []
+              result.data.data.comments.map((item) => {
+                commentData.push(item)
+              })
+              setSurveyCommentData(commentData)
+              return
+            })
         })
     }
-    else{
+    else {
       alert("You must be logged in to add a report")
       navigate("/login")
     }
+  }
+  const handleUpVote = (item) => {
+    if (!localStorage.getItem("token")) {
+      alert("You must be logged in to add a upvote")
+      navigate("/login")
+    } else {
+      axios.post(
+        'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/upVote',
+        {
+          "commentID": item.commentID,
+        },
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+        .then((result) => {
+          axios.post(
+            'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/comments',
+            {
+              "title": location.state.surveyInfo.title,
+            },
+            {
+              headers: {
+                authorization: localStorage.getItem("token"),
+              },
+            }
+          )
+            .then((result) => {
+              setSurveyCommentData([])
+              console.log("comments")
+              console.log(result)
+              let commentData = []
+              result.data.data.comments.map((item) => {
+                commentData.push(item)
+              })
+              setSurveyCommentData(commentData)
+              return
+            })
+        })
+        .catch((result) => {
+          console.log(result)
+        })
+    }
+  }
+  const handleDeleteComment=(item)=>{
+    axios.post(
+      'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/delete',
+      {
+          "commentID":item.commentID,
+      },
+      {
+          headers: {
+              authorization: localStorage.getItem("token"),
+          },
+      }
+  )
+  .then((result)=>{
+    console.log(result)
+    axios.post(
+      'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/comments',
+      {
+        "title": location.state.surveyInfo.title,
+      },
+      {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      }
+    )
+      .then((result) => {
+        setSurveyCommentData([])
+        console.log("comments")
+        console.log(result)
+        let commentData = []
+        result.data.data.comments.map((item) => {
+          commentData.push(item)
+        })
+        setSurveyCommentData(commentData)
+        return
+      })
+  })
+  }
+  const recursive = (item) => {
+    console.log(item)
+    return (
+      <ul style={{ width: "80%", display: "flex", flexDirection: "column" }}>
+        {surveyCommentData.map((test) => {
+          const testAuthor = (test.author.split(" "))
+          if (test.path.length > 1) {
+            if (test.path[(test.path.length) - 2] === item.commentID) {
+              return (
+                <>
+                  <div className='commentList'>
+                    <div className='userIcon'>
+                      {testAuthor.map((letter) => {
+                        return (
+                          <p style={{ fontSize: "15px", color: "white" }}>{letter[0]}</p>
+                        )
+                      })}
+                    </div>
+                    <div className='commentInfoContainer'>
+                      <div className='surveyInfo'>
+                        <p style={{ marginRight: "10px", fontSize: "15px", fontWeight: "bold" }}>{test.author}</p>
+                        <p>{
+                          now.getMonth() === test.time.month && now.getDate() - test.time.day > 7 ? (now.getDate() - test.time.day) / 7 :
+                            now.getDate() - test.time.day < 7 && now.getDate() - test.time.day > 0 ? (now.getDate() - test.time.day) + " gün önce" :
+                              now.getHours() - test.time.hour < 24 && now.getHours() - test.time.hour > 1 ? (now.getHours() - test.time.hour) + " saat önce" : now.getMinutes() - test.time.minute > 1 ? now.getMinutes() - test.time.minute + " dakika önce" :
+                                "bir kaç saniye önce"
+
+                        }</p>
+                      </div>
+                      <p style={{ fontSize: "15px", fontWeight: "bold" }}>{test.comment}</p>
+
+                      <div className='commentIconContainer'>
+                        <ul className='commentIconList'>
+                          <li onClick={() => handleUpVote(test)} className='commentListItem'>
+                            <img src={Arrow}>
+                            </img>
+                            <p style={{ marginLeft: "5px" }}>{test.upvote === 0 ? "UpVote" : test.upvote}</p>
+                          </li>
+                          <li onClick={() => addCommentWithId(test)} className='commentListItem'>
+                            <img src={Reply}>
+
+                            </img>
+                            <p style={{ marginLeft: "5px" }}>Reply</p>
+                          </li>
+                          <li onClick={() => {
+                            setReportItem({})
+                            setReportItem(test)
+                            setSelectedReport(test.commentID)
+                            setControlReportChild(!controlReportChild)
+                          }} className='commentListItem'>
+                            <img src={Report}>
+
+                            </img>
+                            <p style={{ marginLeft: "5px" }}>{test.report === 0 ? "Report" : test.report}</p>
+
+                            <div style={{ display: selectedReport=== test.commentID && controlReportChild ? "flex" : "none"}} className='reportContainer'>
+                              <div>
+                                <p>Are you sure?</p>
+                              </div>
+                              <div className='reportButtons'>
+                                <div onClick={() => handleYesButton(reportItem)} className='reportYes'>
+                                  <p>Yes</p>
+                                </div>
+                                <div className='reportNo'>
+                                  <p>No</p>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                          <li style={{display:localStorage.getItem("auth") && JSON.parse(localStorage.getItem("auth")).name===test.author? "flex":"none"}} onClick={() => handleDeleteComment(test)} className='commentListItem'>
+            
+                            <img width="15px" src={DeleteIcon}>
+                            </img>
+                            <p style={{ marginLeft: "5px" }}>Delete</p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  {recursive(test)}
+                </>
+              )
+            }
+          }
+        })
+        }
+
+      </ul>
+    )
   }
   return (
     <div className='containerFill'>
@@ -281,12 +510,11 @@ function FillSurvey() {
             <div className=''>
               <h1 className='commentsTextStyle'>Comments</h1>
               <div onClick={addButtonHandleClick} className='addButton'>
-                <p style={{marginTop:"5px"}} className='addCommentTextStyle'>Add Comment</p>
+                <p style={{ marginTop: "5px" }} className='addCommentTextStyle'>Add Comment</p>
               </div>
 
               {surveyCommentData.map((item, index) => {
                 //console.log(item)
-                
                 const test = (item.author.split(" "))
                 return (
                   <ul style={{ display: "flex", flexDirection: "column" }}>
@@ -302,16 +530,19 @@ function FillSurvey() {
                         <div className='commentInfoContainer'>
                           <div className='surveyInfo'>
                             <p style={{ marginRight: "10px", fontSize: "15px", fontWeight: "bold" }}>{item.author}</p>
-                            <p>8 hours ago</p>
+                            <p>{now.getMonth() === item.time.month && now.getDate() - item.time.day > 7 ? (now.getDate() - item.time.day) / 7 :
+                              now.getDate() - item.time.day < 7 && now.getDate() - item.time.day > 0 ? (now.getDate() - item.time.day) + " gün önce" :
+                                now.getHours() - item.time.hour < 24 && now.getHours() - item.time.hour > 1 ? (now.getHours() - item.time.hour) + " saat önce" : now.getMinutes() - item.time.minute >= 1 ? now.getMinutes() - item.time.minute + " dakika önce" :
+                                  "bir kaç saniye önce"}</p>
                           </div>
                           <p style={{ fontSize: "15px", fontWeight: "bold" }}>{item.comment}</p>
 
                           <div className='commentIconContainer'>
                             <ul className='commentIconList'>
-                              <li className='commentListItem'>
+                              <li onClick={() => handleUpVote(item)} className='commentListItem'>
                                 <img src={Arrow}>
                                 </img>
-                                <p style={{ marginLeft: "5px" }}>Arrow</p>
+                                <p style={{ marginLeft: "5px" }}>{item.upvote === 0 ? "UpVote" : item.upvote}</p>
                               </li>
                               <li onClick={() => addCommentWithId(item)} className='commentListItem'>
                                 <img src={Reply}>
@@ -319,11 +550,11 @@ function FillSurvey() {
                                 </img>
                                 <p style={{ marginLeft: "5px" }}>Reply</p>
                               </li>
-                              <li onClick={()=>handleReport(item)} className='commentListItem'>
+                              <li onClick={() => handleReport(item)} className='commentListItem'>
                                 <img src={Report}>
 
                                 </img>
-                                <p style={{ marginLeft: "5px" }}>Report</p>
+                                <p style={{ marginLeft: "5px" }}>{item.report === 0 ? "Report" : item.report}</p>
                                 <div style={{ display: controlReport ? "flex" : "none" }} className='reportContainer'>
                                   <div>
                                     <p style={{ fontWeight: "bold", fontSize: "15px" }}>Are you sure?</p>
@@ -338,81 +569,18 @@ function FillSurvey() {
                                   </div>
                                 </div>
                               </li>
+                              <li style={{display:localStorage.getItem("auth") && JSON.parse(localStorage.getItem("auth")).name===item.author? "flex":"none"}} onClick={() => handleDeleteComment(item)} className='commentListItem'>
+                                <img width="15px" src={DeleteIcon}>
+                                </img>
+                                <p style={{ marginLeft: "5px" }}>Delete</p>
+                              </li>
                             </ul>
                           </div>
                         </div>
                       </div>
+
                     }
-                    <ul style={{ width: "80%", display: "flex", flexDirection: "column" }}>
-                      {surveyCommentData.map((test) => {
-                        const testAuthor = (test.author.split(" "))
-                        if (test.path.length > 1) {
-                          if (test.path[0] === item.commentID) {
-                            return (
-
-                              <div className='commentList'>
-                                <div className='userIcon'>
-                                  {testAuthor.map((letter) => {
-                                    return (
-                                      <p style={{ fontSize: "15px", color: "white" }}>{letter[0]}</p>
-                                    )
-                                  })}
-                                </div>
-                                <div className='commentInfoContainer'>
-                                  <div className='surveyInfo'>
-                                    <p style={{ marginRight: "10px", fontSize: "15px", fontWeight: "bold" }}>{test.author}</p>
-                                    <p>8 hours ago</p>
-                                  </div>
-                                  <p style={{ fontSize: "15px", fontWeight: "bold" }}>{test.comment}</p>
-
-                                  <div className='commentIconContainer'>
-                                    <ul className='commentIconList'>
-                                      <li className='commentListItem'>
-                                        <img src={Arrow}>
-                                        </img>
-                                        <p style={{ marginLeft: "5px" }}>Arrow</p>
-                                      </li>
-                                      <li onClick={() => addCommentWithId(test)} className='commentListItem'>
-                                        <img src={Reply}>
-
-                                        </img>
-                                        <p style={{ marginLeft: "5px" }}>Reply</p>
-                                      </li>
-                                      <li onClick={() => {
-                                        setReportItem({})
-                                        setReportItem(test)
-                                        setControlReportChild(!controlReportChild)
-                                      }} className='commentListItem'>
-                                        <img src={Report}>
-
-                                        </img>
-                                        <p style={{ marginLeft: "5px" }}>Report</p>
-                                        <div style={{ display: controlReportChild ? "flex" : "none" }} className='reportContainer'>
-                                          <div>
-                                            <p>Are you sure?</p>
-                                          </div>
-                                          <div className='reportButtons'>
-                                            <div onClick={()=> handleYesButton(reportItem)} className='reportYes'>
-                                              <p>Yes</p>
-                                            </div>
-                                            <div className='reportNo'>
-                                              <p>No</p>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-
-
-                            )
-                          }
-                        }
-
-                      })}
-                    </ul>
+                    {item.path.length <= 1 ? recursive(item) : null}
                   </ul>
                 )
               })}

@@ -20,6 +20,7 @@ function Home() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  
 
   const settings = {
     dots: true,
