@@ -82,6 +82,43 @@ function Login() {
                  localStorage.removeItem("userSurvey")
              })
           }
+          if(localStorage.getItem("commentText")){
+            if(!(localStorage.getItem("commentID"))){
+              axios.post(
+                'http://40.113.137.113/api/comment/addcomment',
+                {
+                  "title": JSON.parse(localStorage.getItem("item")).title,
+                  "comment": localStorage.getItem("commentText"),
+                },
+                {
+                  headers: {
+                    authorization: localStorage.getItem("token"),
+                  },
+                }
+              )
+              .then((result)=>{
+                navigate("/fillSurvey", { state: { "surveyInfo": JSON.parse(localStorage.getItem("item")) } })
+              })
+            }
+            else{
+              axios.post(
+                'http://40.113.137.113/api/comment/addcomment',
+                {
+                  "title": JSON.parse(localStorage.getItem("item")).title,
+                  "comment": localStorage.getItem("commentText"),
+                  "parentID": localStorage.getItem("commentID")
+                },
+                {
+                  headers: {
+                    authorization: localStorage.getItem("token"),
+                  },
+                }
+              )
+              .then((result)=>{
+                navigate("/fillSurvey", { state: { "surveyInfo": JSON.parse(localStorage.getItem("item")) } })
+              })
+            }
+          }
           if(localStorage.getItem("selectedOption")){
             axios.post(
               'http://40.113.137.113/api/survey/fillSurvey',
