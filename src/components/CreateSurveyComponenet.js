@@ -76,7 +76,7 @@ function CreateSurveyComponenet() {
     //console.log(question)
     if(localStorage.getItem("token")){
             axios.post(
-              'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/createSurvey',
+              'http://40.113.137.113/api/survey/createSurvey',
               {
                   "title":title,
                   "question":question,

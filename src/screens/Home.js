@@ -30,7 +30,7 @@ function Home() {
     slidesToScroll: 3,
   };
   useEffect(() => {
-    axios.get('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/sample', {
+    axios.get('http://40.113.137.113/api/survey/sample', {
       params: {
         "count": 6
       }
