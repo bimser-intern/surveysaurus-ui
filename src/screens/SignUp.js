@@ -56,7 +56,7 @@ function SignUp() {
 
     useEffect(() => {
         axios.get(
-            'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/countries',
+            'http://40.113.137.113/api/user/countries',
 
             {}
         ).then((result) => {
@@ -118,10 +118,10 @@ function SignUp() {
         console.log(gender);
         console.log(city);
         console.log(country);
-        axios.post('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/register', {
+        axios.post('http://40.113.137.113/api/user/register', {
             "userName": name,
             "email": email,
-            "password": password.trim(),
+            "password": password,
             "gender": gender,
             "city": city,
             "country": country
@@ -145,7 +145,6 @@ function SignUp() {
                 <ul className='navInfo'>
                     <li><Link to={"/"} className='navItem'>Home</Link>
                     </li>
-                    <li><a href="/#about" className='navItem'>About</a></li>
                     <li>
                         <img className='logoImg3' src={Logo} alt="" />
                     </li>
@@ -217,7 +216,7 @@ function SignUp() {
                             <select value={country} onInput={(e) => e.target.setCustomValidity("")} onInvalidCapture={(e) => e.target.setCustomValidity("Please Choose Country")} onChange={(event) => {
                                 setCountry(event.target.value)
                                 axios.post(
-                                    'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/cities',
+                                    'http://40.113.137.113/api/user/cities',
                                     {
                                         "country": event.target.value,
                                     },

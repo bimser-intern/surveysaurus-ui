@@ -41,7 +41,7 @@ function FillSurvey() {
     window.scrollTo(0, 0)
     if (localStorage.getItem("token")) {
       axios.post(
-        'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/isfilled',
+        'http://40.113.137.113/api/survey/isfilled',
         {
           "title": location.state.surveyInfo.title,
         },
@@ -57,7 +57,7 @@ function FillSurvey() {
           console.log(result)
         })
     }
-    axios.post('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/getSurvey', {
+    axios.post('http://40.113.137.113/api/survey/getSurvey', {
       "title": location.state.surveyInfo.title,
     })
       .then((result) => {
@@ -71,7 +71,7 @@ function FillSurvey() {
 
     setTimeout(() => {
       axios.post(
-        'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/comments',
+        'http://40.113.137.113/api/comment/comments',
         {
           "title": location.state.surveyInfo.title,
         },
@@ -105,7 +105,7 @@ function FillSurvey() {
     }
     else {
       axios.post(
-        'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/fillSurvey',
+        'http://40.113.137.113/api/survey/fillSurvey',
         {
           "title": location.state.surveyInfo.title,
           "answer": selected,
@@ -117,11 +117,23 @@ function FillSurvey() {
         }
       ).then((result) => {
         console.log(result)
+        axios.post('http://40.113.137.113/api/survey/getSurvey', {
+          "title": location.state.surveyInfo.title,
+        })
+          .then((result) => {
+            let percentData = []
+            console.log(result)
+            result.data.data.percent.map((item) => {
+              percentData.push(item)
+            })
+            setSurveyPercentData(percentData)
+          })
         setControl(true)
       }).catch((result) => {
         console.log(result)
       })
     }
+   
   }
   const handleAddComment = () => {
     if (commentText === '') {
@@ -132,7 +144,7 @@ function FillSurvey() {
     }
     else if (commentID === 0) {
       axios.post(
-        'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/addcomment',
+        'http://40.113.137.113/api/comment/addcomment',
         {
           "title": location.state.surveyInfo.title,
           "comment": commentText,
@@ -145,7 +157,7 @@ function FillSurvey() {
       )
       setTimeout(() => {
         axios.post(
-          'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/comments',
+          'http://40.113.137.113/api/comment/comments',
           {
             "title": location.state.surveyInfo.title,
           },
@@ -171,7 +183,7 @@ function FillSurvey() {
     }
     else if (commentID !== 0) {
       axios.post(
-        'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/addcomment',
+        'http://40.113.137.113/api/comment/addcomment',
         {
           "title": location.state.surveyInfo.title,
           "comment": commentText,
@@ -191,7 +203,7 @@ function FillSurvey() {
 
       setTimeout(() => {
         axios.post(
-          'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/comments',
+          'http://40.113.137.113/api/comment/comments',
           {
             "title": location.state.surveyInfo.title,
           },
@@ -238,7 +250,7 @@ function FillSurvey() {
     }
     else if (localStorage.getItem("token")) {
       axios.post(
-        'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/report',
+        'http://40.113.137.113/api/comment/report',
         {
           "commentID": item.commentID,
         },
@@ -250,7 +262,7 @@ function FillSurvey() {
       )
         .then((result) => {
           axios.post(
-            'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/comments',
+            'http://40.113.137.113/api/comment/comments',
             {
               "title": location.state.surveyInfo.title,
             },
@@ -284,7 +296,7 @@ function FillSurvey() {
       navigate("/login")
     } else {
       axios.post(
-        'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/upVote',
+        'http://40.113.137.113/api/comment/upVote',
         {
           "commentID": item.commentID,
         },
@@ -296,7 +308,7 @@ function FillSurvey() {
       )
         .then((result) => {
           axios.post(
-            'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/comments',
+            'http://40.113.137.113/api/comment/comments',
             {
               "title": location.state.surveyInfo.title,
             },
@@ -325,7 +337,7 @@ function FillSurvey() {
   }
   const handleDeleteComment=(item)=>{
     axios.post(
-      'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/delete',
+      'http://40.113.137.113/api/comment/delete',
       {
           "commentID":item.commentID,
       },
@@ -338,7 +350,7 @@ function FillSurvey() {
   .then((result)=>{
     console.log(result)
     axios.post(
-      'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/comment/comments',
+      'http://40.113.137.113/api/comment/comments',
       {
         "title": location.state.surveyInfo.title,
       },
@@ -458,7 +470,7 @@ function FillSurvey() {
         <div className='Container'>
           <div className='fillSurvey'>
             <div className='questionPart'>
-              <label style={{ marginLeft: "5px" }} htmlFor="">Question</label>
+              <label style={{ marginLeft: "5px", fontSize:"16px" }} htmlFor="">Question</label>
               <div className='optionsStyle'>
                 <p className="optionText">{location.state.surveyInfo.question}</p>
               </div>
@@ -466,7 +478,7 @@ function FillSurvey() {
             <div className='optionsPart'>
               {!control &&
                 <div>
-                  <label style={{ marginLeft: "5px" }} htmlFor="">Options</label>
+                  <label style={{ marginLeft: "5px", fontSize:"16px"}} htmlFor="">Options</label>
                   {location.state.surveyInfo.choices && location.state.surveyInfo.choices.map((item, index) => {
                     return (
                       <div onClick={() => setSelected(index)} className='optionsStyle'>

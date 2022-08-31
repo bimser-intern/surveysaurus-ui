@@ -52,9 +52,9 @@ function Login() {
     e.preventDefault();
     console.log(email)
     console.log(password)
-    axios.post('https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/login', {
+    axios.post('http://40.113.137.113/api/user/login', {
       "email": email,
-      "password": password.trim(),
+      "password": password,
     })
       .then((result) => {
         console.log(result)
@@ -67,7 +67,7 @@ function Login() {
           if(localStorage.getItem('userSurvey')){
             let object=JSON.parse(localStorage.getItem('userSurvey'))
             axios.post(
-              'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/createSurvey',
+              'http://40.113.137.113/api/survey/createSurvey',
               {
                   "title":object.title,
                   "question":object.question,
@@ -84,7 +84,7 @@ function Login() {
           }
           if(localStorage.getItem("selectedOption")){
             axios.post(
-              'https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/survey/fillSurvey',
+              'http://40.113.137.113/api/survey/fillSurvey',
               {
                 "title": location.state.title,
                 "answer": localStorage.getItem("selectedOption"),
@@ -117,7 +117,6 @@ function Login() {
         <ul className='navInfo'>
           <li><Link to={"/"} className='navItem'>Home</Link>
           </li>
-          <li><a href="/#about" className='navItem'>About</a></li>
           <li>
           <img className='logoImg2' src={Logo} alt="" />
           </li>

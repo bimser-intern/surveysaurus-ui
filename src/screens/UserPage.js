@@ -21,7 +21,7 @@ function UserPage() {
         navigate("/login")
     }
     useEffect(() => {
-        axios.get("https://survey-api.orangeground-88d990d8.westeurope.azurecontainerapps.io/api/user/mysurveys", {
+        axios.get("http://40.113.137.113/api/user/mysurveys", {
             headers: {
                 authorization: localStorage.getItem("token"),
             }
