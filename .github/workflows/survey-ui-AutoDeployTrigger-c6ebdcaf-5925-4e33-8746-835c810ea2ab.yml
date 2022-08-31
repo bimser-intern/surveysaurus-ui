@@ -39,34 +39,6 @@ jobs:
           file: ./Dockerfile
           context: ./
 
-
-
-
-  copy-file:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Pushes test file
-      uses: dmnemec/copy_file_to_another_repo_action@main
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-      with:
-        source_file: 'SurveySaurusLogin1.py'
-        destination_repo: 'bimser-intern/surveysaurus-ui'
-        destination_folder: '.'
-        destination_branch: 'master'
-        user_email: 'duzenli.muhammet97@gmail.com'
-        user_name: 'muhammetduzenli'
-        commit_message: 'Test file added to ui repository'
-
-
-
-
-
-
-
   test:
     uses: bimser-intern/surveysaurus-qa/.github/workflows/TestTheUI.yml@master
     
