@@ -8,7 +8,7 @@
     
     /* identical to box height */
    
-    color: #6B6C6F;
+    color: #6B6C6F !important;
     margin-right: 80px;
     margin-left: 30px;
     &:hover{
@@ -23,7 +23,7 @@
     height: 75px;
     top: -10px;
     left: 0px;
-    background-color: #EBF0FF;
+    background-color: #EBF0FF !important;
     ul {
         list-style-type: none;
 
@@ -116,7 +116,7 @@
 
 .backColor {
     &:hover {
-        background-color: #244dbd;
+        background-color: #244dbd !important;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }
@@ -129,4 +129,36 @@
     height: 100px;
     left: 45%;
     margin-top: -30px;
+}
+.nav-item {
+    padding: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+    margin: 0 6px;
+    z-index: 1;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    position: relative;
+}
+.nav-item:not(.is-active):hover:before {
+    opacity: 1;
+    bottom: 0;
+}
+.nav-item:not(.is-active):hover {
+    color: #333;
+}
+.nav-indicator {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: 0.4s;
+    height: 1px;
+    z-index: 1;
+    border-radius: 8px 8px 0 0;
+}
+@media (max-width: 580px) {
+    .nav {
+        overflow: auto;
+   }
 }

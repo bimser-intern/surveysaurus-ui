@@ -208,7 +208,7 @@ function Login() {
               <label for="exampleInputPassword1">Password</label>
               <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
               <input title='Please fill in the marked fields' onInput={InvalidMsgPassword} onInvalidCapture={InvalidMsgPassword} value={password} onChange={(e) => setPassword(e.target.value)} required type={controlVisible ? "password" : "text"} class="form-control" id="exampleInputPassword1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter your password" />
-              <div style={{top:islogin? '225px':null, left:"90%", position:'relative'}} className='eyeIconImg' type='button' onClick={() => setControlVisible(!controlVisible)}>
+              <div style={{top:islogin? '-25px':null, left:"90%", position:'relative'}} className='eyeIconImg' type='button' onClick={() => setControlVisible(!controlVisible)}>
                 <img src={eyeIcon} alt="" />
               </div>
             </div>

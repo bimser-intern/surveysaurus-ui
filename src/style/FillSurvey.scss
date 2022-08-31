@@ -82,9 +82,9 @@
         margin-top: 50px;
 
         .mapButton {
-            width: 250px;
+            width: 300px;
             height: 40px;
-            background-color: #1B58E7;
+            background-color: #5380EA;
             box-shadow: 0px 4px 50px #5380EA;
             border: 1px solid #1B58E7;
             border-radius: 20px;
@@ -114,6 +114,7 @@
     font-weight: 700;
     font-size: 14px;
     line-height: 31px;
+    margin-top: auto;
 
     color: #000000;
     margin-left: 5px;
@@ -164,8 +165,8 @@
 
 .Comments {
     width: 60%;
-    margin-top: 50px;
-    height: 700px;
+    margin-top: 30px;
+    height: 600px;
 
     .commentsTextStyle {
         color: #E49192;
@@ -173,9 +174,11 @@
     }
 
     .addButton {
-        width: 120px;
-        background-color: #FFD24B;
-        border-radius: 10px;
+        margin-top: 30px;
+        height: 25px;
+        width: 130px;
+        background-color: #F0B80D;
+        border-radius: 40px;
         @extend %layout-center;
         justify-content: center;
         cursor: pointer;
@@ -184,6 +187,7 @@
             color: #000000;
             font-weight: bold;
             font-size: 12px;
+            padding-top: 3px;
         }
     }
 }
