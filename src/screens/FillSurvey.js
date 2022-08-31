@@ -515,7 +515,7 @@ function FillSurvey() {
             </div>
             <div style={control ? { justifyContent: "center" } : null} className='fillSurveyFooter'>
               <button className='mapButton'>
-                <img width="60px" height="80px" src={World} alt="" />
+                <img width="60px" height="80px" style={{marginBottom:"15px"}} src={World} alt="" />
                 <p className='worldText'>See what the world said</p>
               </button>
               <button style={control ? { display: "none" } : null} onClick={handleDone} className='doneButton'>Done</button>

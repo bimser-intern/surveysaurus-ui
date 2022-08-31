@@ -1,3 +1,111 @@
+# Surveysaurus-ui
+
+## HomePage Kısım 1 
+
+![resim](./ReadmeImage/HomePageKisim1.png)
+
+- HomePage menü ve create a survey görünümü.
+- Create a survey butonuna tıklayarak anket oluşturma sayfasına ulaşabilirsiniz.
+- Sign Up butonuna tıklayarak kayıt oluşturma sayfasına ulaşıp kayıt olabilirsiniz.
+- Login butonuna tıklayarak giriş sayfasına ulaşıp giriş yapabilirsiniz.
+
+## HomePage Kısım 2 
+
+![resim](./ReadmeImage/HomePageKisim2.png)
+
+- HomePage about görünümü.
+- Menü kısmından about'a tıklayarak about kısmına ulaşabilirsiniz.
+
+## HomePage Kısım 3 
+
+![resim](./ReadmeImage/HomePageKisim3.png)
+
+- HomePage our sample surveys görünümü.
+- Menü kısmından surveys'e tıklayarak surveys kısmına ulaşabilirsiniz.
+- Slider kısmından anketlere ulaşarak tıkladığınız ankete oy verebilirsiniz ve yorum yapabilirsiniz.
+- Slider kısmındaki sağdaki ve soldaki okları kullanarak ve alttaki noktalara tıklayarak aynı işlemleri yapabilirsiniz.
+- Click to create butonuna tıklayarak anket oluşturma sayfasına ulaşabilirsiniz.
+
+## HomePage Kısım 4
+
+![resim](./ReadmeImage/HomePageKisim4.png)
+
+- HomePage footer görünümü.
+- Footer kısmından da menüdeki aynı işlemleri yapabilirsiniz.
+- Footer'dan contact us kısmına gidebilirsiniz.
+
+## Sign Up
+
+![resim](./ReadmeImage/SignUpKisim1.png)
+
+- Sign Up sayfa görünümü
+- Name, email adress, choose gender, select country, select city, password, confirm your password kısımlarını doldurarak siteye kayıt olabilirsiniz.
+
+## Login
+
+![resim](./ReadmeImage/LoginKisim1.png)
+
+- Login sayfa görünümü
+- Email adress, password kısımlarını doldurarak siteye giriş yapabilirsiniz.
+
+## Giriş Yapıldıktan Sonra Açılan Pencere(UserPage)
+
+![resim](./ReadmeImage/UserPageKisim1.png)
+
+- UserPage sayfa görünümü
+- İstediğiniz anket kartına tıklayarak o anketin oy verme sayfasına ulaşıp yorum verebilir ve oy kullanabilirsiniz.
+
+## UserPage Açılır Menü
+
+![resim](./ReadmeImage/UserPageKisim2.png)
+
+- UserPage açılır menü görünümü
+- Profile kısmına tıklayarak UserInfo sayfasına ulaşabilirsiniz.
+- My Surveys kısmına tıklayarak bulunduğunuz UserPage sayfasına geri dönebilirsiniz
+- Sign Out kısmına tıklayarak siteden çıkış yapıp login ekranına ulaşabilirsiniz.
+
+## UserPage Create Survey Kartı
+
+![resim](./ReadmeImage/UserPageKisim3.png)
+
+- Create Survey kart görünümü
+- Create Survey kartına tıklayıp createsurvey sayfasına ulaşıp yeni anket oluşturabilirsiniz.
+
+## CreateSurvey 
+
+![resim](./ReadmeImage/CreateSurveyKisim1.png)
+
+- CreateSurvey sayfa görünümü
+- Title, question, options(seçenekleri add option butonu ile arttırabilirsiniz) bilgilerini girip create butonu tıklayarak anketinizi oluşturabilirsiniz.
+
+## FillSurvey
+
+![resim](./ReadmeImage/FillSurveyKisim1.png)
+
+- FillSurvey sayfa görünümü
+- Ankete oy kullanabilirsiniz ve done butonu tıklayarak anketin oy yüzdelerini görebilirsiniz.
+- Kullanıcı isterse sayfayı yenileyip oyunu değiştirebilir.
+- See what the World said butonuna tıklayarak diğer kullanıcıların Dünya haritası üzerindeki tercihlerini görüntüleyebilirsiniz.
+
+## FillSurvey Kısım 2
+
+![resim](./ReadmeImage/FillSurveyKisim2.png)
+
+- FillSurvey done butonu sonrası sayfa görünümü
+- Oy kullandığınız anketin oy kullanım yüzdelerini görebilirsiniz.
+
+## FillSurvey Kısım 3
+
+![resim](./ReadmeImage/FillSurveyKisim3.png)
+
+- FillSurvey comment kısmı sayfa görünümü
+- Burada yorum ekleyebilir, diğer kullanıcıların yorumlarına cevap verebilirsiniz.
+- Kullanıcı istediği yorumu upVote edebilir, yanıtlayabilir ve Report edebilir.
+- Kullanıcı eklediği yorumunu istediği zaman Delete butonuna tıklayarak kaldırabilir.
+
+## Siteye Aşağıdaki linkten ulabilirsiniz
+
+- [Sayfa Linki](http://40.113.137.113/)
 
 # Getting Started with Create React App
 
