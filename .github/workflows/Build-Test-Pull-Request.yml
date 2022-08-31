@@ -39,8 +39,8 @@ jobs:
           file: ./Dockerfile
           context: ./
           
-  #test:
-    #uses: bimser-intern/surveysaurus-qa/.github/workflows/TestTheUI.yml@master
+  test:
+    uses: bimser-intern/surveysaurus-qa/.github/workflows/TestTheUI.yml@master
     
 
 
