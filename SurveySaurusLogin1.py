@@ -30,7 +30,7 @@ if sys.argv[1] == "development":
 driver.maximize_window()
 
 def login(username, password):
-    driver.get("http://40.113.137.113)
+    driver.get("http://40.113.137.113")
     driver.find_element(By.CLASS_NAME, "loginButton").click()
     driver.find_element(By.XPATH, "/html/body/div/div/div[4]/div[3]/form/div[1]/input").send_keys(username)
     driver.find_element(By.XPATH, "/html/body/div/div/div[4]/div[3]/form/div[2]/input").send_keys(password)
