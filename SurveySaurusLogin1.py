@@ -30,7 +30,7 @@ if sys.argv[1] == "development":
 driver.maximize_window()
 
 def login(username, password):
-    driver.get("http://40.113.137.113")
+    driver.get("https://survey-ui.orangeground-88d990d8.westeurope.azurecontainerapps.io/")
     driver.find_element(By.CLASS_NAME, "loginButton").click()
     driver.find_element(By.XPATH, "/html/body/div/div/div[4]/div[3]/form/div[1]/input").send_keys(username)
     driver.find_element(By.XPATH, "/html/body/div/div/div[4]/div[3]/form/div[2]/input").send_keys(password)
@@ -54,7 +54,7 @@ else:
 
 login("123@gmail.com", "Ue123456")
 time.sleep(5)
-if "http://40.113.137.113/userPage" == driver.current_url:
+if "https://survey-ui.orangeground-88d990d8.westeurope.azurecontainerapps.io/userPage" == driver.current_url:
     print("Kullanıcı adı ve şifre doğru yazıldığında başarılı bir şekilde giriş yapılmıştır. ")
 else:
     print("HATA: Kullanıcı adı ve şifre doğru yazıldığında başarılı bir şekilde giriş yapılamamıştır. ")
