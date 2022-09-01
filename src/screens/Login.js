@@ -97,6 +97,7 @@ function Login() {
                 }
               )
               .then((result)=>{
+                localStorage.removeItem("commentText")
                 navigate("/fillSurvey", { state: { "surveyInfo": JSON.parse(localStorage.getItem("item")) } })
               })
             }
@@ -115,6 +116,8 @@ function Login() {
                 }
               )
               .then((result)=>{
+                localStorage.removeItem("commentText")
+                localStorage.removeItem("commentID")
                 navigate("/fillSurvey", { state: { "surveyInfo": JSON.parse(localStorage.getItem("item")) } })
               })
             }

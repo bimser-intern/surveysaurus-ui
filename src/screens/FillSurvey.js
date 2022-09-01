@@ -35,8 +35,8 @@ function FillSurvey() {
   const [controlReport, setControlReport] = useState(false)
   const [selectedReport, setSelectedReport] = useState(0)
   const [controlReportChild, setControlReportChild] = useState(false)
-  const [visible, setVisible] = useState(false)
-  const [selectedItem, setSelectedItem] = useState(0)
+  const [limit, setLimit] = useState(600)
+  const [limitItem, setLimitItem] = useState(0)
   let now = new Date()
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -137,6 +137,7 @@ function FillSurvey() {
 
   }
   const handleAddComment = () => {
+    console.log(commentText)
     setCommentText("")
     if (commentText === '') {
       alert("please add a comment")
@@ -386,6 +387,7 @@ function FillSurvey() {
       <ul style={{ width: "80%", display: "flex", flexDirection: "column" }}>
         {surveyCommentData.map((test) => {
           const testAuthor = (test.author.split(" "))
+          //console.log(seconds)
           if (test.path.length > 1) {
             if (test.path[(test.path.length) - 2] === item.commentID) {
               return (
@@ -402,14 +404,23 @@ function FillSurvey() {
                       <div className='surveyInfo'>
                         <p style={{ marginRight: "10px", fontSize: "15px", fontWeight: "bold" }}>{test.author}</p>
                         <p>{
+                          
                           now.getMonth() === test.time.month && now.getDate() - test.time.day > 7 ? (now.getDate() - test.time.day) / 7 :
                             now.getDate() - test.time.day < 7 && now.getDate() - test.time.day > 0 ? (now.getDate() - test.time.day) + " days ago" :
                               now.getHours() - test.time.hour < 24 && now.getHours() - test.time.hour > 1 ? (now.getHours() - test.time.hour) + " hours ago" : now.getMinutes() - test.time.minute > 1 ? now.getMinutes() - test.time.minute + " minute ago" :
                                 "a few seconds ago"
-
+                           
                         }</p>
                       </div>
-                      <p style={{ fontSize: "15px", fontWeight: "bold" }}>{test.comment}</p>
+                      <div style={{ display: "flex", flexDirection: "row" }}>
+                        <p style={{ fontSize: "15px", fontWeight: "bold" }}>{test.comment.substr(0, limitItem === test.commentID ? limit : 600)}
+                          <div onClick={() => {
+                            setLimitItem(test.commentID)
+                            setLimit(test.comment.lenght)
+                          }} style={{ display: test.comment.length > 600 && test.comment ? "block" : "none", cursor: "pointer", marginTop: "4px", fontWeight: "bold" }}>...Read More</div>
+                        </p>
+
+                      </div>
 
                       <div className='commentIconContainer'>
                         <ul className='commentIconList'>
@@ -497,14 +508,14 @@ function FillSurvey() {
               }
               {control &&
                 <div>
-                  <label style={{ marginLeft: "5px" }} htmlFor="">Rates</label>
+                  <label style={{ marginLeft: "5px",fontSize:"16px"}} htmlFor="">Rates</label>
                   {surveyPercentData && surveyPercentData.length > 0 &&
                     surveyPercentData.map((item) => {
                       if (item > topNumber) {
                         setTopNumber(item)
                       }//item !== 0 ? {width:item*5}:{width:"50px"},item === topNumber ? {backgroundColor:"#E49192"}:null
                       return (
-                        <div className='ratesStyle' style={{ width: item !== 0 ? item * 5 : "50px", backgroundColor: item === topNumber ? "#E49192" : null }}>
+                        <div className='ratesStyle' style={{ width: item !== 0 ? item < 10 ? item * 10 : item * 7 : "50px", backgroundColor: item === topNumber ? "#E49192" : null }}>
                           <h3 style={{ marginRight: "5px" }}>{item} %</h3>
                         </div>
                       )
@@ -553,7 +564,15 @@ function FillSurvey() {
                                 now.getHours() - item.time.hour < 24 && now.getHours() - item.time.hour > 1 ? (now.getHours() - item.time.hour) + " hours ago" : now.getMinutes() - item.time.minute >= 1 ? now.getMinutes() - item.time.minute + " minute ago" :
                                   "a few seconds ago"}</p>
                           </div>
-                          <p style={{ fontSize: "15px", fontWeight: "bold" }}>{item.comment}</p>
+                          <div style={{ display: "flex", flexDirection: "row" }}>
+                            <p style={{ fontSize: "15px", fontWeight: "bold" }}>{item.comment.substr(0, item.commentID === limitItem ? limit : 600)}
+                              <div onClick={() => {
+                                setLimitItem(item.commentID)
+                                setLimit(item.comment.lenght)
+                              }} style={{ display: item.comment.length > 600 ? "block" : "none", cursor: "pointer", marginTop: "4px", fontWeight: "bold" }}>...Read More</div>
+                            </p>
+
+                          </div>
 
                           <div className='commentIconContainer'>
                             <ul className='commentIconList'>
@@ -594,7 +613,7 @@ function FillSurvey() {
                               </li>
                             </ul>
                           </div>
-                      
+
                         </div>
                       </div>
 
