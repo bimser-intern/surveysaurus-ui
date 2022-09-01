@@ -35,12 +35,14 @@ function Home() {
         "count": 6
       }
     }).then((result) => {
+      console.log(result.data)
       const sampleSurveyData = []
       if (result.data.data.surveys && result.data.data.surveys.length > 0) {
         result.data.data.surveys.map((item) => {
           sampleSurveyData.push(item)
         })
       }
+    
       setSampleSurvey(sampleSurveyData)
       console.log(sampleSurvey)
     })
@@ -73,11 +75,12 @@ function Home() {
             <p>Our Sample Surveys</p>
           </div>
           <div className="surveyCardItems">
+
             <Slider {...settings} style={{ width: "80%", marginLeft: "50px" }}>
               {sampleSurvey && sampleSurvey.length > 0 &&
-                sampleSurvey.map((item) => {
+                sampleSurvey.map((item,index) => {
                   return (
-                    <SurveyCard item={item} />
+                    <SurveyCard  item={item} />
                   )
                 })
               }
