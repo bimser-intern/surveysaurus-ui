@@ -100,7 +100,8 @@ function FillSurvey() {
       localStorage.setItem("selectedOption", selected)
       navigate("/login", {
         state: {
-          title: location.state.surveyInfo.title
+          title: location.state.surveyInfo.title,
+          item: location.state.surveyInfo
         }
       })
     }
@@ -387,7 +388,12 @@ function FillSurvey() {
       <ul style={{ width: "80%", display: "flex", flexDirection: "column" }}>
         {surveyCommentData.map((test) => {
           const testAuthor = (test.author.split(" "))
-          //console.log(seconds)
+          const itemDate = new Date(`${test.time.year}-${test.time.month}-${test.time.day} ${test.time.hour}:${test.time.minute}:${test.time.second}`)
+          var distance = now.getTime() - itemDate.getTime();
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24))
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000)
           if (test.path.length > 1) {
             if (test.path[(test.path.length) - 2] === item.commentID) {
               return (
@@ -404,12 +410,9 @@ function FillSurvey() {
                       <div className='surveyInfo'>
                         <p style={{ marginRight: "10px", fontSize: "15px", fontWeight: "bold" }}>{test.author}</p>
                         <p>{
-                          
-                          now.getMonth() === test.time.month && now.getDate() - test.time.day > 7 ? (now.getDate() - test.time.day) / 7 :
-                            now.getDate() - test.time.day < 7 && now.getDate() - test.time.day > 0 ? (now.getDate() - test.time.day) + " days ago" :
-                              now.getHours() - test.time.hour < 24 && now.getHours() - test.time.hour > 1 ? (now.getHours() - test.time.hour) + " hours ago" : now.getMinutes() - test.time.minute > 1 ? now.getMinutes() - test.time.minute + " minute ago" :
-                                "a few seconds ago"
-                           
+
+                          days >= 1 && days < 7 ? days + " days ago" : days >= 7 ? Math.floor(days / 7) + " week ago" : hours < 24 && hours >= 1 ? hours + " hours ago" : minutes < 60 && minutes >= 1 ? minutes + " minutes ago" : seconds < 60 ? "a few seconds ago" : null
+
                         }</p>
                       </div>
                       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -508,7 +511,7 @@ function FillSurvey() {
               }
               {control &&
                 <div>
-                  <label style={{ marginLeft: "5px",fontSize:"16px"}} htmlFor="">Rates</label>
+                  <label style={{ marginLeft: "5px", fontSize: "16px" }} htmlFor="">Rates</label>
                   {surveyPercentData && surveyPercentData.length > 0 &&
                     surveyPercentData.map((item) => {
                       if (item > topNumber) {
@@ -526,7 +529,7 @@ function FillSurvey() {
             </div>
             <div style={control ? { justifyContent: "center" } : null} className='fillSurveyFooter'>
               <button className='mapButton'>
-                <img width="60px" height="80px" style={{marginBottom:"15px"}} src={World} alt="" />
+                <img width="60px" height="80px" style={{ marginBottom: "15px" }} src={World} alt="" />
                 <p className='worldText'>See what the world said</p>
               </button>
               <button style={control ? { display: "none" } : null} onClick={handleDone} className='doneButton'>Done</button>
@@ -544,6 +547,12 @@ function FillSurvey() {
 
               {surveyCommentData.map((item, index) => {
                 //console.log(item)
+                const itemDate = new Date(`${item.time.year}-${item.time.month}-${item.time.day} ${item.time.hour}:${item.time.minute}:${item.time.second}`)
+                var distance = now.getTime() - itemDate.getTime();
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24))
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000)
                 const test = (item.author.split(" "))
                 return (
                   <ul style={{ display: "flex", flexDirection: "column" }}>
@@ -559,10 +568,10 @@ function FillSurvey() {
                         <div className='commentInfoContainer'>
                           <div className='surveyInfo'>
                             <p style={{ marginRight: "10px", fontSize: "15px", fontWeight: "bold" }}>{item.author}</p>
-                            <p>{now.getMonth() === item.time.month && now.getDate() - item.time.day > 7 ? (now.getDate() - item.time.day) / 7 :
-                              now.getDate() - item.time.day < 7 && now.getDate() - item.time.day > 0 ? (now.getDate() - item.time.day) + " days ago" :
-                                now.getHours() - item.time.hour < 24 && now.getHours() - item.time.hour > 1 ? (now.getHours() - item.time.hour) + " hours ago" : now.getMinutes() - item.time.minute >= 1 ? now.getMinutes() - item.time.minute + " minute ago" :
-                                  "a few seconds ago"}</p>
+                            <p>{
+                                days >= 1 && days < 7 ? days + " days ago" : days >= 7 ? Math.floor(days / 7) + " week ago" : hours < 24 && hours >= 1 ? hours + " hours ago" : minutes < 60 && minutes >= 1 ? minutes + " minutes ago" : seconds < 60 ? "a few seconds ago" : null
+                            }
+                            </p>
                           </div>
                           <div style={{ display: "flex", flexDirection: "row" }}>
                             <p style={{ fontSize: "15px", fontWeight: "bold" }}>{item.comment.substr(0, item.commentID === limitItem ? limit : 600)}
