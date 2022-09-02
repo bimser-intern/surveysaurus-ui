@@ -22,7 +22,7 @@ useEffect(()=>{
   const navigate = useNavigate();
   return (
     <div>
-      <Menu isLogin={true}/>
+      <Menu isLogin={true} test="true"/>
       <CreateSurveyComponenet/>
     </div>
   )

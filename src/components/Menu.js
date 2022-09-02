@@ -41,20 +41,20 @@ function Menu({ isLogin, test = null }) {
 
   return (
     <div className='Menu' id='#menu'>
-      <nav className='nav'>
+      
 
 
         <ul className='navInfo'>
-          <li><a href="/#create" className='navItem nav-item is-active ' active-color='#E49192'>Home</a>
+          <li><a href="/#create" className='navItem nav-item' active-color='#E49192'>Home</a>
           </li>
           <li style={{ display: test !== null ? "none" : "block" }}><a href="/#about" className='navItem nav-item' active-color='#E49192'>About</a></li>
           <li style={{ display: test !== null ? "none" : "block" }}><a href="/#survey" className='navItem nav-item' active-color='#E49192' >Surveys</a></li>
-          <li to={"/userPage"} style={{ display: test === null ? "none" : "block" }}><Link to={"/userPage"} className='navItem nav-item' active-color='#E49192'>My Survey</Link></li>
+          <li to={"/userPage"} style={{ display: test === null ? "none" : "block" }}><Link to={"/userPage"} className='navItem nav-item is-active' active-color='#E49192'>My Survey</Link></li>
           <li>
             <img className='logoImg' src={Logo} alt="" />
           </li>
         </ul>
-      </nav>
+      
 
       <ul>
         <li style={{ display: isLogin ? "none" : "block" }}>

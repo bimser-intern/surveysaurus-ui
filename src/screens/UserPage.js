@@ -11,6 +11,7 @@ import ListIcon from "../image/list.png"
 import "../style/UserPage.scss"
 import Menu from '../components/Menu';
 function UserPage() {
+    window.scrollTo(0, 0)
     const navigate = useNavigate()
     const [control, setControl] = useState(true);
     const [userInfo, setUserInfo] = useState([])
@@ -21,6 +22,7 @@ function UserPage() {
         navigate("/login")
     }
     useEffect(() => {
+        
         axios.get("http://40.113.137.113/api/user/mysurveys", {
             headers: {
                 authorization: localStorage.getItem("token"),

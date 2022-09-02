@@ -62,7 +62,7 @@ function Login() {
           localStorage.setItem('token',result.data.accessToken)
           localStorage.setItem('auth',JSON.stringify(result.data.data))
           console.log(result.data.data)
-          navigate("/userPage")
+          navigate("/")
 
           if(localStorage.getItem('userSurvey')){
             let object=JSON.parse(localStorage.getItem('userSurvey'))
@@ -80,6 +80,7 @@ function Login() {
               }
              ).then((result)=>{
                  localStorage.removeItem("userSurvey")
+                 navigate("/userPage")
              })
           }
           if(localStorage.getItem("commentText")){
@@ -137,6 +138,8 @@ function Login() {
             ).then((result) => {
               console.log(result)
               localStorage.removeItem("selectedOption")
+              navigate("/fillSurvey", { state: { "surveyInfo": location.state.item } })
+
             }).catch((result) => {
               console.log(result)
             })
