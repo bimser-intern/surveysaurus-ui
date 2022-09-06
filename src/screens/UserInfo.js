@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 import Menu from '../components/Menu'
-import "../style/SignUp.scss"
+import "../style/UserInfo.scss"
+import "../style/UserPage.scss"
 import TableImg from "../image/table.png"
 import CasualLife from "../image/CasualLife.png"
-import googleIcon from "../image/google.png"
 import eyeIcon from "../image/eye.png"
-import Warning from "../image/warning.png"
 import Logo from "../image/logo.png"
 import "../style/Login.scss"
 import { useState } from 'react';
@@ -35,9 +34,9 @@ function UserInfo() {
     const [genderUpdate, setgenderUpdate] = useState(localStorage.getItem("auth") ? JSON.parse(localStorage.getItem("auth")).gender : null);
     const [countryUpdate, setcountryUpdate] = useState(localStorage.getItem("auth") ? JSON.parse(localStorage.getItem("auth")).country : null);
     const [cityUpdate, setcityUpdate] = useState(localStorage.getItem("auth") ? JSON.parse(localStorage.getItem("auth")).city : null);
-
+    const [controlCity, setcontrolCity] = useState(true)
     useEffect(() => {
-        console.log()
+        console.log(cityUpdate)
         axios.get(
             'http://40.113.137.113/api/user/countries',
 
@@ -52,6 +51,7 @@ function UserInfo() {
             setCountryList(countryData);
         })
     }, [])
+
 
     function InvalidMsg(e) {
         if (e.target.value == '') {
@@ -70,7 +70,7 @@ function UserInfo() {
         if (e.target.value == '') {
             e.target.setCustomValidity('Please fill in the marked fields');
         }
-      
+
         else if (password === confirmPassword) {
 
             e.target.setCustomValidity('');
@@ -100,21 +100,35 @@ function UserInfo() {
         console.log(cityUpdate)
         console.log(countryUpdate)
         e.preventDefault();
-        axios.put('http://40.113.137.113/api/profile/updatepassword',
+        if (localStorage.getItem("token")) {
+            axios.put('http://40.113.137.113/api/profile/updatepassword',
 
-            {
-                "oldPassword":document.getElementById("exampleInputPassword1").value,
-                "newPassword":document.getElementById("exampleInputPassword2").value
-               
-            },
-            {
-                headers: {
-                    authorization: localStorage.getItem("token"),
-                    
+                {
+                    "oldPassword": document.getElementById("exampleInputPassword1").value,
+                    "newPassword": document.getElementById("exampleInputPassword2").value
+
                 },
-            },
-            console.log("geçti")
-        )
+                {
+                    headers: {
+                        authorization: localStorage.getItem("token"),
+
+                    },
+                },
+                console.log("geçti")
+            )
+                .then((result) => {
+                    if (result.status) {
+                        console.log(result.status)
+                        alert("Update successfully")
+                        navigate("/userInfo");
+                    }
+                })
+                .catch((result) => {
+                    
+                    console.log(result);
+                    setIsLogin(true)
+                })
+        }
         if (localStorage.getItem("token")) {
 
             axios.post('http://40.113.137.113/api/profile/update',
@@ -145,10 +159,18 @@ function UserInfo() {
                         }
                         localStorage.setItem("auth", JSON.stringify(object))
 
+
+
                     }
-                    console.log(result)
+                    if (result.status) {
+                        console.log(result.status)
+                        alert("Update successfully")
+                        navigate("/userInfo");
+                    }
+
                 })
                 .catch((result) => {
+                    alert("name and email information can only be used once, please enter a name or email that has not been used before.")
                     console.log(result);
                     setIsLogin(true)
                 })
@@ -158,7 +180,7 @@ function UserInfo() {
     }
     return (
         <div className='App'>
-            <Menu isLogin={true} test="true" />
+            <Menu isLogin={true} test="false" to="/userInfo" />
 
 
             <div className='tableImg'>
@@ -192,6 +214,8 @@ function UserInfo() {
                             <label for="sel1">Select Country</label>
                             <select value={countryUpdate} onInput={(e) => e.target.setCustomValidity("")} onInvalidCapture={(e) => e.target.setCustomValidity("Please Choose Country")} onChange={(event) => {
                                 setcountryUpdate(event.target.value)
+
+                                setcontrolCity(false)
                                 axios.post(
                                     'http://40.113.137.113/api/user/cities',
                                     {
@@ -208,7 +232,11 @@ function UserInfo() {
                                     })
 
                                     setCityList(cityData);
+
                                 })
+
+
+
                                 //alert(countryOption)
                             }} required class="form-control" id="sel1">
                                 <option></option>
@@ -223,9 +251,10 @@ function UserInfo() {
                         <div class="form-group">
                             <label for="sel1">Select City</label>
                             <select onInput={(e) => e.target.setCustomValidity("")} onInvalidCapture={(e) => e.target.setCustomValidity("Please Choose city")} value={cityUpdate} onChange={(e) => setcityUpdate(e.target.value)} required class="form-control" id="sel1">
-                                <option>{cityUpdate}</option>
+                                <option style={{ display: controlCity ? "block" : "none" }} >{cityUpdate}</option>
 
                                 {cityList.map((item) => {
+
                                     return (
                                         <option>{item}</option>
                                     )
@@ -234,14 +263,14 @@ function UserInfo() {
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Old Password</label>
-                            <input onChange={(e) => setPassword(e.target.value)} onInput={InvalidMsgPassword} onInvalidCapture={InvalidMsgPassword} value={password} required type={controlVisible ? "password" : "text"} class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="exampleInputPassword1" placeholder="Enter your password" />
+                            <input onChange={(e) => setPassword(e.target.value)} onInput={nameUpdate.length > 0 ? null : InvalidMsgPassword} onInvalidCapture={InvalidMsgPassword} value={password} type={controlVisible ? "password" : "text"} class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="exampleInputPassword1" placeholder="Enter your password" />
                             <div className='eyeIcon' style={{ left: "90%", position: 'relative', top: "-25px" }} type='button' onClick={() => setControlVisible(!controlVisible)}>
                                 <img src={eyeIcon} alt="" />
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style={{position:"relative", top:"-20px"}}>
                             <label for="exampleInputPassword2">New Password</label>
-                            <input value={confirmPassword} onInput={InvalidMsgConfirmPassword} onInvalidCapture={InvalidMsgConfirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required type={controlVisibleConfirm ? "password" : "text"} class="form-control" id="exampleInputPassword2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm your password" />
+                            <input value={confirmPassword} onInput={nameUpdate.length > 0 ? null : InvalidMsgConfirmPassword} onInvalidCapture={InvalidMsgConfirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type={controlVisibleConfirm ? "password" : "text"} class="form-control" id="exampleInputPassword2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm your password" />
                             <div className='eyeIcon' style={{ left: "90%", position: 'relative', top: "-25px" }} type='button' onClick={() => setControlVisibleConfirm(!controlVisibleConfirm)}>
                                 <img src={eyeIcon} alt="" />
                             </div>
@@ -255,7 +284,29 @@ function UserInfo() {
                         </div>
                     </form>
                 </div>
+                
             </div>
+            <div className='footer'>
+            <div className='footerBorder'></div>
+            <div className='footerItem'>
+              <ul>
+                <li>
+                  <a href='#create' className='linkStyle' to={"/"}>Home</a>
+                </li>
+                <li>
+                  <a href='#about'>About</a>
+
+                </li>
+                <li>
+                  <a href=''>Contact Us</a>
+                </li>
+                <li>
+                  <img className='logoImage' src={Logo} alt="" />
+                </li>
+              </ul>
+            </div>
+          </div>
+
         </div>
     )
 }
