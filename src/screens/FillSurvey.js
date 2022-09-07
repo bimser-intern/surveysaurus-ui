@@ -18,6 +18,8 @@ import bulletList from "../image/bulletList.png"
 import Arrow from "../image/arrow.png"
 import Reply from "../image/reply.png"
 import Report from "../image/report.png"
+import FullReport from "../image/reportfull.png"
+import FullUpvote from "../image/upvotefull.png"
 import DeleteIcon from "../image/delete-icon.png"
 
 function FillSurvey() {
@@ -37,6 +39,8 @@ function FillSurvey() {
   const [controlReportChild, setControlReportChild] = useState(false)
   const [limit, setLimit] = useState(600)
   const [limitItem, setLimitItem] = useState(0)
+  const [controlfullReport,setcontrolfullReport]= useState(false)
+  let upvoteCount= 0
   let now = new Date()
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -248,6 +252,7 @@ function FillSurvey() {
     setAddButtonControl(true)
   }
   const handleReport = (item) => {
+    setcontrolfullReport(controlfullReport)
     setSelectedReport(item.commentID)
     setReportItem({})
     setReportItem(item)
@@ -329,6 +334,7 @@ function FillSurvey() {
             }
           )
             .then((result) => {
+              let first = surveyCommentData.reduce((partialSum, a) => partialSum + a, 0);
               setSurveyCommentData([])
               console.log("comments")
               console.log(result)
@@ -337,6 +343,14 @@ function FillSurvey() {
                 commentData.push(item)
               })
               setSurveyCommentData(commentData)
+              let second =surveyCommentData.reduce((partialSum, a) => partialSum + a, 0);
+              console.log("açıklama"+JSON.stringify(surveyCommentData))
+              if(second-first==1){
+                console.log("second-first1 çalıştı")
+              }
+              else if(second-first==-1){
+                console.log("second-first-1 çalıştı")
+              }
               return
             })
         })
@@ -443,10 +457,11 @@ function FillSurvey() {
                             setReportItem(test)
                             setSelectedReport(test.commentID)
                             setControlReportChild(!controlReportChild)
+                            setcontrolfullReport(!controlfullReport)
                           }} className='commentListItem'>
-                            <img src={Report}>
+                            <img src={controlfullReport?Report:FullReport}/>
 
-                            </img>
+                            
                             <p style={{ marginLeft: "5px" }}>{test.report === 0 ? "Report" : test.report}</p>
 
                             <div style={{ display: selectedReport === test.commentID && controlReportChild ? "flex" : "none" }} className='reportContainer'>
@@ -546,7 +561,8 @@ function FillSurvey() {
               </div>
 
               {surveyCommentData.map((item, index) => {
-                //console.log(item)
+                console.log("yazdi"+item.upvote)
+                
                 const itemDate = new Date(`${item.time.year}-${item.time.month}-${item.time.day} ${item.time.hour}:${item.time.minute}:${item.time.second}`)
                 var distance = now.getTime() - itemDate.getTime();
                 var days = Math.floor(distance / (1000 * 60 * 60 * 24))
@@ -586,8 +602,11 @@ function FillSurvey() {
                           <div className='commentIconContainer'>
                             <ul className='commentIconList'>
                               <li onClick={() => handleUpVote(item)} className='commentListItem'>
+
+                            
                                 <img src={Arrow}>
                                 </img>
+                                  
                                 <p style={{ marginLeft: "5px" }}>{item.upvote === 0 ? "UpVote" : item.upvote}</p>
                               </li>
                               <li onClick={() => addCommentWithId(item)} className='commentListItem'>
