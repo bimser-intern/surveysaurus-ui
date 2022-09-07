@@ -6,7 +6,7 @@ import "../style/Menu.scss"
 import Logo from "../image/logo.png"
 import SignOut from "../image/signOut.png"
 import { useNavigate } from "react-router-dom";
-function Menu({ isLogin, test = null }) {
+function Menu({ isLogin, test = null,to="/" }) {
   const [control, setControl] = useState(true);
   const navigate = useNavigate();
   const logOut = () => {
@@ -49,7 +49,8 @@ function Menu({ isLogin, test = null }) {
           </li>
           <li style={{ display: test !== null ? "none" : "block" }}><a href="/#about" className='navItem nav-item' active-color='#E49192'>About</a></li>
           <li style={{ display: test !== null ? "none" : "block" }}><a href="/#survey" className='navItem nav-item' active-color='#E49192' >Surveys</a></li>
-          <li to={"/userPage"} style={{ display: test === null ? "none" : "block" }}><Link to={"/userPage"} className='navItem nav-item is-active' active-color='#E49192'>My Survey</Link></li>
+          <li style={{ display: to !== "/userPage" ? "none" : "block" }}><Link to={"/userPage"} className='navItem nav-item' active-color='#E49192'>My Survey</Link></li>
+          <li style={{ display: to === "/userInfo" ? "block" : "none" }}><Link to={"/userInfo"}  className='navItem nav-item ' active-color='#E49192'>Account Info</Link></li>
           <li>
             <img className='logoImg' src={Logo} alt="" />
           </li>
@@ -82,13 +83,13 @@ function Menu({ isLogin, test = null }) {
                   backgroundColor: "#E491924D",
                   marginTop: "10px"
                 }} className='openMenuLogIn' >
-                  <div className='profileContainer' onClick={() => navigate("/UserInfo")} style={{
+                  <div className='profileContainer' onClick={() => navigate("/")} style={{
                     width: "80%", height: "30px", backgroundColor: "#F5F5F5CC", marginBottom: "10px", display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: "10px"
                   }}>
-                    <Link className='menuLinkContain' to={"/UserInfo"} style={{
+                    <Link className='menuLinkContain' to={"/"} style={{
                       fontFamily: 'Inter',
                       fontStyle: "normal",
                       fontWeight: "700",
@@ -113,6 +114,22 @@ function Menu({ isLogin, test = null }) {
                       textAlign: "center",
                       color: "#000000",
                     }}>My Surveys</Link>
+                  </div>
+                  <div className='profileContainer' onClick={() => navigate("/UserInfo")} style={{
+                    width: "80%", height: "30px", backgroundColor: "#F5F5F5CC", marginBottom: "10px", display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "10px"
+                  }}>
+                    <Link className='menuLinkContain' to={"/userInfo"} style={{
+                      fontFamily: 'Inter',
+                      fontStyle: "normal",
+                      fontWeight: "700",
+                      fontSize: "13px",
+                      lineHeight: "21px",
+                      textAlign: "center",
+                      color: "#000000",
+                    }}>Account Info</Link>
                   </div>
                   <div className='logOutContainer' onClick={logOut} style={{
                     width: "80%", height: "30px", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "#F5F5F5CC",

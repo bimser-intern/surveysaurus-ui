@@ -263,7 +263,7 @@ function SignUp() {
                                 <img src={eyeIcon} alt="" />
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style={{position:"relative", top:"-20px"}}>
                             <label for="exampleInputPassword1">Confirm your Password</label>
                             <span style={{ color: "red", marginLeft: "3px" }} className='form-required'>*</span>
                             <input value={confirmPassword} onInput={InvalidMsgConfirmPassword} onInvalidCapture={InvalidMsgConfirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required type={controlVisibleConfirm ? "password" : "text"} class="form-control" id="exampleInputPassword1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm your password" />

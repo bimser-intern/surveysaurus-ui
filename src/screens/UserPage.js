@@ -56,7 +56,7 @@ function UserPage() {
     }, [])
     return (
         <div>
-            <Menu isLogin={true} test="true" />
+            <Menu isLogin={true} test="true" to='/userPage' />
 
             <div class="container" style={{ marginTop: "100px" }}>
                 <div class="row">
