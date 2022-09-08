@@ -39,11 +39,25 @@ jobs:
           file: ./Dockerfile
           context: ./
 
-      - name: Trigger QA Test Automation
-        run: |
-          curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/bimser-intern/surveysaurus-qa/dispatches --data '{"event_type": "build_application"}'
-      
-    
+      - name: Dispatch an action and get the run ID
+        uses: codex-/return-dispatch@v1
+        id: return_dispatch
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          repo: surveysaurus-qa
+          owner: bimser-intern
+          workflow: TestTheUI.yml
+          
+      - name: Await Run ID ${{ steps.return_dispatch.outputs.run_id }}
+        uses: Codex-/await-remote-run@v1.0.0
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          repo: return-dispatch
+          owner: codex-
+          run_id: ${{ steps.return_dispatch.outputs.run_id }}
+          run_timeout_seconds: 300 # Optional
+          poll_interval_ms: 5000 # Optional
+          
   deploy:
     runs-on: ubuntu-latest
     needs: build
