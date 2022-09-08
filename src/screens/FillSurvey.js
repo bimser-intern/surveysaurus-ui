@@ -42,10 +42,10 @@ function FillSurvey() {
   const [controlfullReport, setcontrolfullReport] = useState(false);
   const [upvotedcomments, setUpvotedCommentsArray] = useState([]);
   const [upvotedcommentslist, setUpvotedCommentsArrayList] = useState([]);
-  const [reportedComments,setReportedCommnetsArray]=useState([]);
-  const [reportedCommentsList,setReportedCommnetsList]=useState([]);
-  let reported=false;
-  let reportedcount=0;
+  const [reportedComments, setReportedCommnetsArray] = useState([]);
+  const [reportedCommentsList, setReportedCommnetsList] = useState([]);
+  let reported = false;
+  let reportedcount = 0;
   let upvoted = false;
   let upvoteCount = 0;
   let now = new Date();
@@ -96,13 +96,13 @@ function FillSurvey() {
           }
         )
         .then((result) => {
-          let strupvoteds=""
+          let strupvoteds = ""
           let upvotedsArr = [];
           result.data.data.upvoteds.map((item) => {
-            strupvoteds += item+","
+            strupvoteds += item + ","
             upvotedsArr.push(item);
           });
-          console.log("strupvoteds: "+strupvoteds)
+          console.log("strupvoteds: " + strupvoteds)
           setUpvotedCommentsArray(upvotedsArr);
           //upvotedcomments = result.data.data.comments.filter(_comment=>_comment.upvoted).map(_comment=>_comment.commentID)
           let commentData = [];
@@ -113,14 +113,39 @@ function FillSurvey() {
           });
           setSurveyCommentData(commentData);
           let upvotedList = [];
-          for(let i = 0; i<counter;i++){
+          for (let i = 0; i < counter; i++) {
             upvotedList.push(strupvoteds)
           }
-          console.log("1-------------: "+upvotedList)
+          console.log("1-------------: " + upvotedList)
           setUpvotedCommentsArrayList(upvotedList)
+
+          let strReporteds = ""
+          let ReportedsArr = [];
+          result.data.data.reporteds.map((item) => {
+            strReporteds += item + ","
+            ReportedsArr.push(item);
+          });
+          console.log("strReporteds: " + strReporteds)
+          setReportedCommnetsArray(ReportedsArr);
+          //upvotedcomments = result.data.data.comments.filter(_comment=>_comment.upvoted).map(_comment=>_comment.commentID)
+          // let commentData = [];
+          // let counter = 0
+          // result.data.data.comments.map((item) => {
+          //   counter++
+          //   commentData.push(item);
+          // });
+          // setSurveyCommentData(commentData);
+          let reportedList = [];
+          for (let i = 0; i < counter; i++) {
+            reportedList.push(strReporteds)
+          }
+          console.log("1-------------: " + reportedList)
+          setReportedCommnetsList(reportedList)
           return;
-        });
-    }, 300);
+        })
+        
+
+    }, 200);
   }, []);
   const handleDone = () => {
     console.log("dsadsa");
@@ -332,7 +357,7 @@ function FillSurvey() {
               setReportedCommnetsArray(reportedsArr);
               setSurveyCommentData([]);
               console.log("comments");
-              console.log(result+"******************************************");
+              console.log(result + "******************************************");
               let commentData = [];
               result.data.data.comments.map((item) => {
                 commentData.push(item);
@@ -344,10 +369,10 @@ function FillSurvey() {
               );
               console.log("açıklama" + JSON.stringify(surveyCommentData));
               let reportedList = [];
-          for(let i = 0; i<surveyCommentData.length;i++){
-            reportedList.push(reportedComments)
-          }
-          setReportedCommnetsList(reportedList)
+              for (let i = 0; i < surveyCommentData.length; i++) {
+                reportedList.push(reportedComments)
+              }
+              setReportedCommnetsList(reportedList)
               return;
             });
         })
@@ -465,10 +490,10 @@ function FillSurvey() {
               );
               console.log("açıklama" + JSON.stringify(surveyCommentData));
               let upvotedList = [];
-          for(let i = 0; i<surveyCommentData.length;i++){
-            upvotedList.push(upvotedcomments)
-          }
-          setUpvotedCommentsArrayList(upvotedList)
+              for (let i = 0; i < surveyCommentData.length; i++) {
+                upvotedList.push(upvotedcomments)
+              }
+              setUpvotedCommentsArrayList(upvotedList)
               return;
             });
         })
@@ -519,8 +544,8 @@ function FillSurvey() {
   };
   //child comment
   const recursive = (item) => {
-    console.log("recursive yazdı: ",upvotedcomments)
-    console.log("item.commentID: "+item.commentID)
+    console.log("recursive yazdı: ", upvotedcomments)
+    console.log("item.commentID: " + item.commentID)
     return (
       <ul style={{ width: "80%", display: "flex", flexDirection: "column" }}>
         {surveyCommentData.map((test) => {
@@ -564,14 +589,14 @@ function FillSurvey() {
                           {days >= 1 && days < 7
                             ? days + " days ago"
                             : days >= 7
-                            ? Math.floor(days / 7) + " week ago"
-                            : hours < 24 && hours >= 1
-                            ? hours + " hours ago"
-                            : minutes < 60 && minutes >= 1
-                            ? minutes + " minutes ago"
-                            : seconds < 60
-                            ? "a few seconds ago"
-                            : null}
+                              ? Math.floor(days / 7) + " week ago"
+                              : hours < 24 && hours >= 1
+                                ? hours + " hours ago"
+                                : minutes < 60 && minutes >= 1
+                                  ? minutes + " minutes ago"
+                                  : seconds < 60
+                                    ? "a few seconds ago"
+                                    : null}
                         </p>
                       </div>
                       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -611,10 +636,10 @@ function FillSurvey() {
                                   ) : (
                                     <img src={UpVote}></img>
                                   )} */}
-                            {/* {upvotedcomments.includes(item.path[Object.keys(item.path).length-1]) ? 
+                            {upvotedcomments.includes(item.path[Object.keys(item.path).length-1]) ? 
                             <img src={FullUpvote}></img> : 
-                            <img src={UpVote}></img>} */}
-                            <img src={UpVote}></img>
+                            <img src={UpVote}></img>}
+                            {/* <img src={UpVote}></img> */}
                             <p style={{ marginLeft: "5px" }}>
                               {test.upvote === 0 ? "UpVote" : test.upvote}
                             </p>
@@ -635,12 +660,12 @@ function FillSurvey() {
                             }}
                             className="commentListItem"
                           >
-                             {/* {upvotedcomments.includes(item.commentID) ? (
+                            {/* {upvotedcomments.includes(item.commentID) ? (
                                     <img src={FullUpvote}></img>
                                   ) : (
                                     <img src={UpVote}></img>
                                   )} */}
-                            <img src={Report}/>
+                            <img src={Report} />
 
                             <p style={{ marginLeft: "5px" }}>
                               {test.report === 0 ? "Report" : test.report}
@@ -650,7 +675,7 @@ function FillSurvey() {
                               style={{
                                 display:
                                   selectedReport === test.commentID &&
-                                  controlReportChild
+                                    controlReportChild
                                     ? "flex"
                                     : "none",
                               }}
@@ -683,8 +708,8 @@ function FillSurvey() {
                             style={{
                               display:
                                 localStorage.getItem("auth") &&
-                                JSON.parse(localStorage.getItem("auth"))
-                                  .name === test.author
+                                  JSON.parse(localStorage.getItem("auth"))
+                                    .name === test.author
                                   ? "flex"
                                   : "none",
                             }}
@@ -875,14 +900,14 @@ function FillSurvey() {
                                 {days >= 1 && days < 7
                                   ? days + " days ago"
                                   : days >= 7
-                                  ? Math.floor(days / 7) + " week ago"
-                                  : hours < 24 && hours >= 1
-                                  ? hours + " hours ago"
-                                  : minutes < 60 && minutes >= 1
-                                  ? minutes + " minutes ago"
-                                  : seconds < 60
-                                  ? "a few seconds ago"
-                                  : null}
+                                    ? Math.floor(days / 7) + " week ago"
+                                    : hours < 24 && hours >= 1
+                                      ? hours + " hours ago"
+                                      : minutes < 60 && minutes >= 1
+                                        ? minutes + " minutes ago"
+                                        : seconds < 60
+                                          ? "a few seconds ago"
+                                          : null}
                               </p>
                             </div>
                             <div
@@ -937,15 +962,16 @@ function FillSurvey() {
                                   <img src={Reply}></img>
                                   <p style={{ marginLeft: "5px" }}>Reply</p>
                                 </li>
-   {/* report*/}                  <li
+                                {/* report*/}                  
+                                <li
                                   onClick={() => handleReport(item)}
                                   className="commentListItem"
                                 >
-                                   {reportedComments.includes(item.commentID) ? (
+                                  {reportedComments.includes(item.commentID) ? 
                                     <img src={FullReport}></img>
-                                  ) : (
+                                   : 
                                     <img src={Report}></img>
-                                  )}
+                                  }
                                   <p style={{ marginLeft: "5px" }}>
                                     {item.report === 0 ? "Report" : item.report}
                                   </p>
@@ -953,7 +979,7 @@ function FillSurvey() {
                                     style={{
                                       display:
                                         selectedReport === item.commentID &&
-                                        controlReport
+                                          controlReport
                                           ? "flex"
                                           : "none",
                                     }}
@@ -990,8 +1016,8 @@ function FillSurvey() {
                                   style={{
                                     display:
                                       localStorage.getItem("auth") &&
-                                      JSON.parse(localStorage.getItem("auth"))
-                                        .name === item.author
+                                        JSON.parse(localStorage.getItem("auth"))
+                                          .name === item.author
                                         ? "flex"
                                         : "none",
                                   }}
@@ -1006,7 +1032,8 @@ function FillSurvey() {
                           </div>
                         </div>
                       )}
-                      {item.path.length <= 1 ? recursive(item,upvotedcommentslist) : null}
+                      {item.path.length <= 1 ? recursive(item, upvotedcommentslist) : null}
+                      {item.path.length <= 1 ? recursive(item, reportedCommentsList) : null}
 
                     </ul>
                   );
