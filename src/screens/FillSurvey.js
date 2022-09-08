@@ -15,7 +15,7 @@ import Link from "../image/link.png";
 import NumberedList from "../image/numberedList.png";
 import bold from "../image/bold.png";
 import bulletList from "../image/bulletList.png";
-import Arrow from "../image/arrow.png";
+import UpVote from "../image/arrow.png";
 import Reply from "../image/reply.png";
 import Report from "../image/report.png";
 import FullReport from "../image/reportfull.png";
@@ -42,6 +42,10 @@ function FillSurvey() {
   const [controlfullReport, setcontrolfullReport] = useState(false);
   const [upvotedcomments, setUpvotedCommentsArray] = useState([]);
   const [upvotedcommentslist, setUpvotedCommentsArrayList] = useState([]);
+  const [reportedComments,setReportedCommnetsArray]=useState([]);
+  const [reportedCommentsList,setReportedCommnetsList]=useState([]);
+  let reported=false;
+  let reportedcount=0;
   let upvoted = false;
   let upvoteCount = 0;
   let now = new Date();
@@ -276,11 +280,81 @@ function FillSurvey() {
     setAddButtonControl(true);
   };
   const handleReport = (item) => {
-    setcontrolfullReport(controlfullReport);
-    setSelectedReport(item.commentID);
-    setReportItem({});
-    setReportItem(item);
-    setControlReport(!controlReport);
+    // setcontrolfullReport(controlfullReport);
+    // setSelectedReport(item.commentID);
+    // setReportItem({});
+    // setReportItem(item);
+    // setControlReport(!controlReport)
+    // setControlReportChild(!controlReportChild)
+    if (!localStorage.getItem("token")) {
+      alert("You must be logged in to add a report");
+      navigate("/login");
+    } else {
+      axios
+        .post(
+          "http://40.113.137.113/api/comment/report",
+          {
+            commentID: item.commentID,
+          },
+          {
+            headers: {
+              authorization: localStorage.getItem("token"),
+            },
+          }
+        )
+
+        .then((result) => {
+          if (
+            JSON.stringify(result.data.message) ==
+            '"Report deleted successfully"'
+          ) {
+            reported = false;
+          } else {
+            reported = true;
+          }
+          axios
+            .post(
+              "http://40.113.137.113/api/comment/comments",
+              {
+                title: location.state.surveyInfo.title,
+              },
+              {
+                headers: {
+                  authorization: localStorage.getItem("token"),
+                },
+              }
+            )
+            .then((result) => {
+              let reportedsArr = [];
+              result.data.data.reporteds.map((item) => {
+                reportedsArr.push(item);
+              });
+              setReportedCommnetsArray(reportedsArr);
+              setSurveyCommentData([]);
+              console.log("comments");
+              console.log(result+"******************************************");
+              let commentData = [];
+              result.data.data.comments.map((item) => {
+                commentData.push(item);
+              });
+              setSurveyCommentData(commentData);
+              let second = surveyCommentData.reduce(
+                (partialSum, a) => partialSum + a,
+                0
+              );
+              console.log("açıklama" + JSON.stringify(surveyCommentData));
+              let reportedList = [];
+          for(let i = 0; i<surveyCommentData.length;i++){
+            reportedList.push(reportedComments)
+          }
+          setReportedCommnetsList(reportedList)
+              return;
+            });
+        })
+        .catch((result) => {
+          console.log(result);
+        });
+    }
   };
   const handleYesButton = (item) => {
     console.log(item.report);
@@ -443,6 +517,7 @@ function FillSurvey() {
           });
       });
   };
+  //child comment
   const recursive = (item) => {
     console.log("recursive yazdı: ",upvotedcomments)
     console.log("item.commentID: "+item.commentID)
@@ -531,7 +606,15 @@ function FillSurvey() {
                             onClick={() => handleUpVote(test)}
                             className="commentListItem"
                           >
-                            {upvotedcomments.includes(item.path[Object.keys(item.path).length-1]) ? <img src={FullUpvote}></img> : <img src={Arrow}></img>}
+                            {/* {upvotedcomments.includes(item.commentID) ? (
+                                    <img src={FullUpvote}></img>
+                                  ) : (
+                                    <img src={UpVote}></img>
+                                  )} */}
+                            {/* {upvotedcomments.includes(item.path[Object.keys(item.path).length-1]) ? 
+                            <img src={FullUpvote}></img> : 
+                            <img src={UpVote}></img>} */}
+                            <img src={UpVote}></img>
                             <p style={{ marginLeft: "5px" }}>
                               {test.upvote === 0 ? "UpVote" : test.upvote}
                             </p>
@@ -549,13 +632,15 @@ function FillSurvey() {
                               setReportItem(test);
                               setSelectedReport(test.commentID);
                               setControlReportChild(!controlReportChild);
-                              setcontrolfullReport(!controlfullReport);
                             }}
                             className="commentListItem"
                           >
-                            <img
-                              src={controlfullReport ? Report : FullReport}
-                            />
+                             {/* {upvotedcomments.includes(item.commentID) ? (
+                                    <img src={FullUpvote}></img>
+                                  ) : (
+                                    <img src={UpVote}></img>
+                                  )} */}
+                            <img src={Report}/>
 
                             <p style={{ marginLeft: "5px" }}>
                               {test.report === 0 ? "Report" : test.report}
@@ -622,6 +707,7 @@ function FillSurvey() {
       </ul>
     );
   };
+  //parent comment
   return (
     <div className="containerFill">
       <Menu isLogin={localStorage.getItem("auth") ? true : false} />
@@ -838,7 +924,7 @@ function FillSurvey() {
                                   {upvotedcomments.includes(item.commentID) ? (
                                     <img src={FullUpvote}></img>
                                   ) : (
-                                    <img src={Arrow}></img>
+                                    <img src={UpVote}></img>
                                   )}
                                   <p style={{ marginLeft: "5px" }}>
                                     {item.upvote === 0 ? "UpVote" : item.upvote}
@@ -851,11 +937,15 @@ function FillSurvey() {
                                   <img src={Reply}></img>
                                   <p style={{ marginLeft: "5px" }}>Reply</p>
                                 </li>
-                                <li
+   {/* report*/}                  <li
                                   onClick={() => handleReport(item)}
                                   className="commentListItem"
                                 >
-                                  <img src={Report}></img>
+                                   {reportedComments.includes(item.commentID) ? (
+                                    <img src={FullReport}></img>
+                                  ) : (
+                                    <img src={Report}></img>
+                                  )}
                                   <p style={{ marginLeft: "5px" }}>
                                     {item.report === 0 ? "Report" : item.report}
                                   </p>
@@ -917,6 +1007,7 @@ function FillSurvey() {
                         </div>
                       )}
                       {item.path.length <= 1 ? recursive(item,upvotedcommentslist) : null}
+
                     </ul>
                   );
                 })}
