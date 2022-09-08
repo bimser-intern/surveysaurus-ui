@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import Menu from "../components/Menu";
 import "../style/UserInfo.scss";
-import "../style/UserPage.scss";
 import TableImg from "../image/table.png";
 import CasualLife from "../image/CasualLife.png";
 import eyeIcon from "../image/eye.png";
 import Logo from "../image/logo.png";
-import "../style/Login.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -220,7 +218,7 @@ function UserInfo() {
       <div className="casualImg">
         <img src={CasualLife} alt="" />
       </div>
-      <div className="SignUp">
+      <div className="UserInfo">
         <div className="form">
           <form onSubmit={handleSubmit}>
             <div class="form-group">
@@ -401,7 +399,7 @@ function UserInfo() {
           </form>
         </div>
       </div>
-      <div className="footer">
+      <div className="footerUserInfo">
         <div className="footerBorder"></div>
         <div className="footerItem">
           <ul>
