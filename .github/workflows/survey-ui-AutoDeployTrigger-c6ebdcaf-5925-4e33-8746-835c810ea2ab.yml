@@ -41,7 +41,7 @@ jobs:
 
       - name: Dispatch and return Run ID
         uses: codex-/return-dispatch@v1.5.0
-        id: return-dispatch
+        id: return_dispatch
         with:
           token: ${{ secrets.PAT_TOKEN }} # Note this is NOT GITHUB_TOKEN but a PAT
           ref: master
