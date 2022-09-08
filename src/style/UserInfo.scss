@@ -17,15 +17,13 @@
     margin-top: 10px;
     
 }
-.SignUp {
+.UserInfo {
     width: 500px;
     height: auto;
-    background-color: red;
     position: absolute;
     left: 650px;
     top: 100px;
     border-radius: 20px;
-    background-color: #FFFFFF;
     @extend %layout;
     font-size:12px;
     padding-bottom: 50px;
@@ -143,7 +141,7 @@
     left: 45%;
     margin-top: -30px;
 }
-.footer {
+.footerUserInfo{
     position: relative;
     top:700px;
     width: 100%;
