@@ -34,12 +34,10 @@ function FillSurvey() {
   const [surveyCommentData, setSurveyCommentData] = useState([]);
   const [reportItem, setReportItem] = useState({});
   const [commentID, setCommentID] = useState(0);
-  const [controlReport, setControlReport] = useState(false);
   const [selectedReport, setSelectedReport] = useState(0);
   const [controlReportChild, setControlReportChild] = useState(false);
   const [limit, setLimit] = useState(600);
   const [limitItem, setLimitItem] = useState(0);
-  const [controlfullReport, setcontrolfullReport] = useState(false);
   const [upvotedcomments, setUpvotedCommentsArray] = useState([]);
   const [upvotedcommentslist, setUpvotedCommentsArrayList] = useState([]);
   const [reportedComments, setReportedCommnetsArray] = useState([]);
@@ -305,84 +303,17 @@ function FillSurvey() {
     setAddButtonControl(true);
   };
   const handleReport = (item) => {
-    // setcontrolfullReport(controlfullReport);
-    // setSelectedReport(item.commentID);
-    // setReportItem({});
-    // setReportItem(item);
-    // setControlReport(!controlReport)
-    // setControlReportChild(!controlReportChild)
-    if (!localStorage.getItem("token")) {
-      alert("You must be logged in to add a report");
-      navigate("/login");
-    } else {
-      axios
-        .post(
-          "http://40.113.137.113/api/comment/report",
-          {
-            commentID: item.commentID,
-          },
-          {
-            headers: {
-              authorization: localStorage.getItem("token"),
-            },
-          }
-        )
-
-        .then((result) => {
-          if (
-            JSON.stringify(result.data.message) ==
-            '"Report deleted successfully"'
-          ) {
-            reported = false;
-          } else {
-            reported = true;
-          }
-          axios
-            .post(
-              "http://40.113.137.113/api/comment/comments",
-              {
-                title: location.state.surveyInfo.title,
-              },
-              {
-                headers: {
-                  authorization: localStorage.getItem("token"),
-                },
-              }
-            )
-            .then((result) => {
-              let reportedsArr = [];
-              result.data.data.reporteds.map((item) => {
-                reportedsArr.push(item);
-              });
-              setReportedCommnetsArray(reportedsArr);
-              setSurveyCommentData([]);
-              console.log("comments");
-              console.log(result + "******************************************");
-              let commentData = [];
-              result.data.data.comments.map((item) => {
-                commentData.push(item);
-              });
-              setSurveyCommentData(commentData);
-              let second = surveyCommentData.reduce(
-                (partialSum, a) => partialSum + a,
-                0
-              );
-              console.log("açıklama" + JSON.stringify(surveyCommentData));
-              let reportedList = [];
-              for (let i = 0; i < surveyCommentData.length; i++) {
-                reportedList.push(reportedComments)
-              }
-              setReportedCommnetsList(reportedList)
-              return;
-            });
-        })
-        .catch((result) => {
-          console.log(result);
-        });
-    }
+      console.log(item)
+      
+      setSelectedReport(item.commentID);
+      setReportItem({});
+      setReportItem(item);
+      setControlReportChild(!controlReportChild)
+      
+     
   };
   const handleYesButton = (item) => {
-    console.log(item.report);
+    console.log(item);
     if (
       localStorage.getItem("token") &&
       JSON.parse(localStorage.getItem("auth")).name === item.author
@@ -415,6 +346,11 @@ function FillSurvey() {
               }
             )
             .then((result) => {
+              let reportedsArr = [];
+              result.data.data.reporteds.map((item) => {
+                reportedsArr.push(item);
+              });
+              setReportedCommnetsArray(reportedsArr);
               setSurveyCommentData([]);
               console.log("comments");
               console.log(result);
@@ -423,6 +359,16 @@ function FillSurvey() {
                 commentData.push(item);
               });
               setSurveyCommentData(commentData);
+              let second = surveyCommentData.reduce(
+                (partialSum, a) => partialSum + a,
+                0
+              );
+              console.log("açıklama" + JSON.stringify(surveyCommentData));
+              let reportedList = [];
+              for (let i = 0; i < surveyCommentData.length; i++) {
+                reportedList.push(reportedComments)
+              }
+              setReportedCommnetsList(reportedList)
               return;
             });
         });
@@ -432,6 +378,7 @@ function FillSurvey() {
     }
   };
   const handleUpVote = (item) => {
+    console.log(item)
     if (!localStorage.getItem("token")) {
       alert("You must be logged in to add a upvote");
       navigate("/login");
@@ -544,7 +491,8 @@ function FillSurvey() {
   };
   //child comment
   const recursive = (item) => {
-    console.log("recursive yazdı: ", upvotedcomments)
+    console.log("recursive yazdı-upvoted: ", upvotedcomments)
+    console.log("recursive yazdı-reported: ", reportedComments)
     console.log("item.commentID: " + item.commentID)
     return (
       <ul style={{ width: "80%", display: "flex", flexDirection: "column" }}>
@@ -631,15 +579,11 @@ function FillSurvey() {
                             onClick={() => handleUpVote(test)}
                             className="commentListItem"
                           >
-                            {/* {upvotedcomments.includes(item.commentID) ? (
+                            {upvotedcomments.includes(test.commentID) ? (
                                     <img src={FullUpvote}></img>
                                   ) : (
                                     <img src={UpVote}></img>
-                                  )} */}
-                            {upvotedcomments.includes(item.path[Object.keys(item.path).length-1]) ? 
-                            <img src={FullUpvote}></img> : 
-                            <img src={UpVote}></img>}
-                            {/* <img src={UpVote}></img> */}
+                                  )}
                             <p style={{ marginLeft: "5px" }}>
                               {test.upvote === 0 ? "UpVote" : test.upvote}
                             </p>
@@ -656,19 +600,18 @@ function FillSurvey() {
                               setReportItem({});
                               setReportItem(test);
                               setSelectedReport(test.commentID);
-                              setControlReportChild(!controlReportChild);
+                              setControlReportChild(!controlReportChild)
                             }}
                             className="commentListItem"
                           >
-                            {/* {upvotedcomments.includes(item.commentID) ? (
-                                    <img src={FullUpvote}></img>
+                            {reportedComments.includes(test.commentID) ? (
+                                    <img src={FullReport}></img>
                                   ) : (
-                                    <img src={UpVote}></img>
-                                  )} */}
-                            <img src={Report} />
+                                    <img src={Report}></img>
+                                  )}
 
                             <p style={{ marginLeft: "5px" }}>
-                              {test.report === 0 ? "Report" : test.report}
+                              {test.report === 0 ? "Report" : ""}
                             </p>
 
                             <div
@@ -973,18 +916,18 @@ function FillSurvey() {
                                     <img src={Report}></img>
                                   }
                                   <p style={{ marginLeft: "5px" }}>
-                                    {item.report === 0 ? "Report" : item.report}
+                                    {item.report === 0 ? "Report" : ""}
                                   </p>
                                   <div
                                     style={{
                                       display:
                                         selectedReport === item.commentID &&
-                                          controlReport
+                                          controlReportChild
                                           ? "flex"
-                                          : "none",
+                                          : "none"
                                     }}
                                     className="reportContainer"
-                                  >
+                                   >
                                     <div>
                                       <p
                                         style={{
@@ -1033,7 +976,7 @@ function FillSurvey() {
                         </div>
                       )}
                       {item.path.length <= 1 ? recursive(item, upvotedcommentslist) : null}
-                      {item.path.length <= 1 ? recursive(item, reportedCommentsList) : null}
+                      {/* {item.path.length <= 1 ? recursive(item, reportedCommentsList) : null} */}
 
                     </ul>
                   );
