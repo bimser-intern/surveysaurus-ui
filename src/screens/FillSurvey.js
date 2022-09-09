@@ -15,7 +15,7 @@ import Link from "../image/link.png";
 import NumberedList from "../image/numberedList.png";
 import bold from "../image/bold.png";
 import bulletList from "../image/bulletList.png";
-import Arrow from "../image/arrow.png";
+import UpVote from "../image/arrow.png";
 import Reply from "../image/reply.png";
 import Report from "../image/report.png";
 import FullReport from "../image/reportfull.png";
@@ -34,14 +34,16 @@ function FillSurvey() {
   const [surveyCommentData, setSurveyCommentData] = useState([]);
   const [reportItem, setReportItem] = useState({});
   const [commentID, setCommentID] = useState(0);
-  const [controlReport, setControlReport] = useState(false);
   const [selectedReport, setSelectedReport] = useState(0);
   const [controlReportChild, setControlReportChild] = useState(false);
   const [limit, setLimit] = useState(600);
   const [limitItem, setLimitItem] = useState(0);
-  const [controlfullReport, setcontrolfullReport] = useState(false);
   const [upvotedcomments, setUpvotedCommentsArray] = useState([]);
   const [upvotedcommentslist, setUpvotedCommentsArrayList] = useState([]);
+  const [reportedComments, setReportedCommnetsArray] = useState([]);
+  const [reportedCommentsList, setReportedCommnetsList] = useState([]);
+  let reported = false;
+  let reportedcount = 0;
   let upvoted = false;
   let upvoteCount = 0;
   let now = new Date();
@@ -92,13 +94,13 @@ function FillSurvey() {
           }
         )
         .then((result) => {
-          let strupvoteds=""
+          let strupvoteds = ""
           let upvotedsArr = [];
           result.data.data.upvoteds.map((item) => {
-            strupvoteds += item+","
+            strupvoteds += item + ","
             upvotedsArr.push(item);
           });
-          console.log("strupvoteds: "+strupvoteds)
+          console.log("strupvoteds: " + strupvoteds)
           setUpvotedCommentsArray(upvotedsArr);
           //upvotedcomments = result.data.data.comments.filter(_comment=>_comment.upvoted).map(_comment=>_comment.commentID)
           let commentData = [];
@@ -109,14 +111,39 @@ function FillSurvey() {
           });
           setSurveyCommentData(commentData);
           let upvotedList = [];
-          for(let i = 0; i<counter;i++){
+          for (let i = 0; i < counter; i++) {
             upvotedList.push(strupvoteds)
           }
-          console.log("1-------------: "+upvotedList)
+          console.log("1-------------: " + upvotedList)
           setUpvotedCommentsArrayList(upvotedList)
+
+          let strReporteds = ""
+          let ReportedsArr = [];
+          result.data.data.reporteds.map((item) => {
+            strReporteds += item + ","
+            ReportedsArr.push(item);
+          });
+          console.log("strReporteds: " + strReporteds)
+          setReportedCommnetsArray(ReportedsArr);
+          //upvotedcomments = result.data.data.comments.filter(_comment=>_comment.upvoted).map(_comment=>_comment.commentID)
+          // let commentData = [];
+          // let counter = 0
+          // result.data.data.comments.map((item) => {
+          //   counter++
+          //   commentData.push(item);
+          // });
+          // setSurveyCommentData(commentData);
+          let reportedList = [];
+          for (let i = 0; i < counter; i++) {
+            reportedList.push(strReporteds)
+          }
+          console.log("1-------------: " + reportedList)
+          setReportedCommnetsList(reportedList)
           return;
-        });
-    }, 300);
+        })
+        
+
+    }, 200);
   }, []);
   const handleDone = () => {
     console.log("dsadsa");
@@ -276,14 +303,33 @@ function FillSurvey() {
     setAddButtonControl(true);
   };
   const handleReport = (item) => {
-    setcontrolfullReport(controlfullReport);
-    setSelectedReport(item.commentID);
-    setReportItem({});
-    setReportItem(item);
-    setControlReport(!controlReport);
+    if(!reportedComments.includes(item.commentID)){
+      console.log(item)
+      
+      setSelectedReport(item.commentID);
+      setReportItem({});
+      setReportItem(item);
+      setControlReportChild(!controlReportChild)
+    }
+    else{
+      alert("You had reported this comment recently")
+    }
+    if(!reportedComments.includes(test.commentID)){
+      console.log(test)
+      
+      setSelectedReport(test.commentID);
+      setReportItem({});
+      setReportItem(test);
+      setControlReportChild(!controlReportChild)
+    }
+    else{
+      alert("You had reported this comment recently")
+    }
+      
   };
   const handleYesButton = (item) => {
-    console.log(item.report);
+    if(!reportedComments.includes(item.commentID)){
+      console.log(item);
     if (
       localStorage.getItem("token") &&
       JSON.parse(localStorage.getItem("auth")).name === item.author
@@ -316,6 +362,11 @@ function FillSurvey() {
               }
             )
             .then((result) => {
+              let reportedsArr = [];
+              result.data.data.reporteds.map((item) => {
+                reportedsArr.push(item);
+              });
+              setReportedCommnetsArray(reportedsArr);
               setSurveyCommentData([]);
               console.log("comments");
               console.log(result);
@@ -324,6 +375,16 @@ function FillSurvey() {
                 commentData.push(item);
               });
               setSurveyCommentData(commentData);
+              let second = surveyCommentData.reduce(
+                (partialSum, a) => partialSum + a,
+                0
+              );
+              console.log("açıklama" + JSON.stringify(surveyCommentData));
+              let reportedList = [];
+              for (let i = 0; i < surveyCommentData.length; i++) {
+                reportedList.push(reportedComments)
+              }
+              setReportedCommnetsList(reportedList)
               return;
             });
         });
@@ -331,8 +392,10 @@ function FillSurvey() {
       alert("You must be logged in to add a report");
       navigate("/login");
     }
+    }    
   };
   const handleUpVote = (item) => {
+    console.log(item)
     if (!localStorage.getItem("token")) {
       alert("You must be logged in to add a upvote");
       navigate("/login");
@@ -391,10 +454,10 @@ function FillSurvey() {
               );
               console.log("açıklama" + JSON.stringify(surveyCommentData));
               let upvotedList = [];
-          for(let i = 0; i<surveyCommentData.length;i++){
-            upvotedList.push(upvotedcomments)
-          }
-          setUpvotedCommentsArrayList(upvotedList)
+              for (let i = 0; i < surveyCommentData.length; i++) {
+                upvotedList.push(upvotedcomments)
+              }
+              setUpvotedCommentsArrayList(upvotedList)
               return;
             });
         })
@@ -443,9 +506,11 @@ function FillSurvey() {
           });
       });
   };
+  //child comment
   const recursive = (item) => {
-    console.log("recursive yazdı: ",upvotedcomments)
-    console.log("item.commentID: "+item.commentID)
+    console.log("recursive yazdı-upvoted: ", upvotedcomments)
+    console.log("recursive yazdı-reported: ", reportedComments)
+    console.log("item.commentID: " + item.commentID)
     return (
       <ul style={{ width: "80%", display: "flex", flexDirection: "column" }}>
         {surveyCommentData.map((test) => {
@@ -489,14 +554,14 @@ function FillSurvey() {
                           {days >= 1 && days < 7
                             ? days + " days ago"
                             : days >= 7
-                            ? Math.floor(days / 7) + " week ago"
-                            : hours < 24 && hours >= 1
-                            ? hours + " hours ago"
-                            : minutes < 60 && minutes >= 1
-                            ? minutes + " minutes ago"
-                            : seconds < 60
-                            ? "a few seconds ago"
-                            : null}
+                              ? Math.floor(days / 7) + " week ago"
+                              : hours < 24 && hours >= 1
+                                ? hours + " hours ago"
+                                : minutes < 60 && minutes >= 1
+                                  ? minutes + " minutes ago"
+                                  : seconds < 60
+                                    ? "a few seconds ago"
+                                    : null}
                         </p>
                       </div>
                       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -531,7 +596,11 @@ function FillSurvey() {
                             onClick={() => handleUpVote(test)}
                             className="commentListItem"
                           >
-                            {upvotedcomments.includes(item.path[Object.keys(item.path).length-1]) ? <img src={FullUpvote}></img> : <img src={Arrow}></img>}
+                            {upvotedcomments.includes(test.commentID) ? (
+                                    <img src={FullUpvote}></img>
+                                  ) : (
+                                    <img src={UpVote}></img>
+                                  )}
                             <p style={{ marginLeft: "5px" }}>
                               {test.upvote === 0 ? "UpVote" : test.upvote}
                             </p>
@@ -544,28 +613,34 @@ function FillSurvey() {
                             <p style={{ marginLeft: "5px" }}>Reply</p>
                           </li>
                           <li
-                            onClick={() => {
+                            onClick={() => {if(!reportedComments.includes(test.commentID)){
+                              console.log(item)
+                              
+                              setSelectedReport(test.commentID);
                               setReportItem({});
                               setReportItem(test);
-                              setSelectedReport(test.commentID);
-                              setControlReportChild(!controlReportChild);
-                              setcontrolfullReport(!controlfullReport);
-                            }}
+                              setControlReportChild(!controlReportChild)
+                            }
+                            else{
+                              alert("You had reported this comment recently")
+                            }}}
                             className="commentListItem"
                           >
-                            <img
-                              src={controlfullReport ? Report : FullReport}
-                            />
+                            {reportedComments.includes(test.commentID) ? (
+                                    <img src={FullReport}></img>
+                                  ) : (
+                                    <img src={Report}></img>
+                                  )}
 
                             <p style={{ marginLeft: "5px" }}>
-                              {test.report === 0 ? "Report" : test.report}
+                              { "Report"}
                             </p>
 
                             <div
                               style={{
                                 display:
                                   selectedReport === test.commentID &&
-                                  controlReportChild
+                                    controlReportChild
                                     ? "flex"
                                     : "none",
                               }}
@@ -598,8 +673,8 @@ function FillSurvey() {
                             style={{
                               display:
                                 localStorage.getItem("auth") &&
-                                JSON.parse(localStorage.getItem("auth"))
-                                  .name === test.author
+                                  JSON.parse(localStorage.getItem("auth"))
+                                    .name === test.author
                                   ? "flex"
                                   : "none",
                             }}
@@ -622,6 +697,7 @@ function FillSurvey() {
       </ul>
     );
   };
+  //parent comment
   return (
     <div className="containerFill">
       <Menu isLogin={localStorage.getItem("auth") ? true : false} />
@@ -789,14 +865,14 @@ function FillSurvey() {
                                 {days >= 1 && days < 7
                                   ? days + " days ago"
                                   : days >= 7
-                                  ? Math.floor(days / 7) + " week ago"
-                                  : hours < 24 && hours >= 1
-                                  ? hours + " hours ago"
-                                  : minutes < 60 && minutes >= 1
-                                  ? minutes + " minutes ago"
-                                  : seconds < 60
-                                  ? "a few seconds ago"
-                                  : null}
+                                    ? Math.floor(days / 7) + " week ago"
+                                    : hours < 24 && hours >= 1
+                                      ? hours + " hours ago"
+                                      : minutes < 60 && minutes >= 1
+                                        ? minutes + " minutes ago"
+                                        : seconds < 60
+                                          ? "a few seconds ago"
+                                          : null}
                               </p>
                             </div>
                             <div
@@ -838,7 +914,7 @@ function FillSurvey() {
                                   {upvotedcomments.includes(item.commentID) ? (
                                     <img src={FullUpvote}></img>
                                   ) : (
-                                    <img src={Arrow}></img>
+                                    <img src={UpVote}></img>
                                   )}
                                   <p style={{ marginLeft: "5px" }}>
                                     {item.upvote === 0 ? "UpVote" : item.upvote}
@@ -851,24 +927,29 @@ function FillSurvey() {
                                   <img src={Reply}></img>
                                   <p style={{ marginLeft: "5px" }}>Reply</p>
                                 </li>
+                                {/* report*/}                  
                                 <li
                                   onClick={() => handleReport(item)}
                                   className="commentListItem"
                                 >
-                                  <img src={Report}></img>
+                                  {reportedComments.includes(item.commentID) ? 
+                                    <img src={FullReport}></img>
+                                   : 
+                                    <img src={Report}></img>
+                                  }
                                   <p style={{ marginLeft: "5px" }}>
-                                    {item.report === 0 ? "Report" : item.report}
+                                    {"Report"}
                                   </p>
                                   <div
                                     style={{
                                       display:
                                         selectedReport === item.commentID &&
-                                        controlReport
+                                          controlReportChild
                                           ? "flex"
-                                          : "none",
+                                          : "none"
                                     }}
                                     className="reportContainer"
-                                  >
+                                   >
                                     <div>
                                       <p
                                         style={{
@@ -900,8 +981,8 @@ function FillSurvey() {
                                   style={{
                                     display:
                                       localStorage.getItem("auth") &&
-                                      JSON.parse(localStorage.getItem("auth"))
-                                        .name === item.author
+                                        JSON.parse(localStorage.getItem("auth"))
+                                          .name === item.author
                                         ? "flex"
                                         : "none",
                                   }}
@@ -916,7 +997,9 @@ function FillSurvey() {
                           </div>
                         </div>
                       )}
-                      {item.path.length <= 1 ? recursive(item,upvotedcommentslist) : null}
+                      {item.path.length <= 1 ? recursive(item, upvotedcommentslist) : null}
+                      {/* {item.path.length <= 1 ? recursive(item, reportedCommentsList) : null} */}
+
                     </ul>
                   );
                 })}
