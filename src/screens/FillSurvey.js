@@ -314,6 +314,17 @@ function FillSurvey() {
     else{
       alert("You had reported this comment recently")
     }
+    if(!reportedComments.includes(test.commentID)){
+      console.log(test)
+      
+      setSelectedReport(test.commentID);
+      setReportItem({});
+      setReportItem(test);
+      setControlReportChild(!controlReportChild)
+    }
+    else{
+      alert("You had reported this comment recently")
+    }
       
   };
   const handleYesButton = (item) => {
@@ -602,12 +613,17 @@ function FillSurvey() {
                             <p style={{ marginLeft: "5px" }}>Reply</p>
                           </li>
                           <li
-                            onClick={() => {
+                            onClick={() => {if(!reportedComments.includes(test.commentID)){
+                              console.log(item)
+                              
+                              setSelectedReport(test.commentID);
                               setReportItem({});
                               setReportItem(test);
-                              setSelectedReport(test.commentID);
                               setControlReportChild(!controlReportChild)
-                            }}
+                            }
+                            else{
+                              alert("You had reported this comment recently")
+                            }}}
                             className="commentListItem"
                           >
                             {reportedComments.includes(test.commentID) ? (
@@ -617,7 +633,7 @@ function FillSurvey() {
                                   )}
 
                             <p style={{ marginLeft: "5px" }}>
-                              {test.report === 0 ? "Report" : ""}
+                              { "Report"}
                             </p>
 
                             <div
@@ -922,7 +938,7 @@ function FillSurvey() {
                                     <img src={Report}></img>
                                   }
                                   <p style={{ marginLeft: "5px" }}>
-                                    {item.report === 0 ? "Report" : ""}
+                                    {"Report"}
                                   </p>
                                   <div
                                     style={{
