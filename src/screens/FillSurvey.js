@@ -303,17 +303,22 @@ function FillSurvey() {
     setAddButtonControl(true);
   };
   const handleReport = (item) => {
+    if(!reportedComments.includes(item.commentID)){
       console.log(item)
       
       setSelectedReport(item.commentID);
       setReportItem({});
       setReportItem(item);
       setControlReportChild(!controlReportChild)
+    }
+    else{
+      alert("You had reported this comment recently")
+    }
       
-     
   };
   const handleYesButton = (item) => {
-    console.log(item);
+    if(!reportedComments.includes(item.commentID)){
+      console.log(item);
     if (
       localStorage.getItem("token") &&
       JSON.parse(localStorage.getItem("auth")).name === item.author
@@ -376,6 +381,7 @@ function FillSurvey() {
       alert("You must be logged in to add a report");
       navigate("/login");
     }
+    }    
   };
   const handleUpVote = (item) => {
     console.log(item)
