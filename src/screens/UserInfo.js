@@ -329,9 +329,11 @@ function UserInfo() {
                 class="form-control"
                 id="sel1"
               >
-                <option style={{ display: controlCity ? "block" : "none" }}>
+            {controlCity? <option  style={{ display: controlCity ? "block" : "none" }}>
                   {cityUpdate}
-                </option>
+                </option>:<option  style={{ display: controlCity ? "block" : "none" }}>
+
+                </option>}
 
                 {cityList.map((item) => {
                   return <option>{item}</option>;

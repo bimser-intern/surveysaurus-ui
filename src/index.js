@@ -17,6 +17,9 @@ import CreateSurveyWithLogin from './screens/CreateSurveyWithLogin';
 import FillSurvey from './screens/FillSurvey';
 import Home from './screens/Home';
 import UserInfo from './screens/UserInfo';
+import Map from './screens/Map';
+
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -32,6 +35,8 @@ root.render(
       <Route path='/createSurveyWithLogin' element={<CreateSurveyWithLogin/>}/>
       <Route path='/fillSurvey' element={<FillSurvey/>}/>
       <Route path='/userInfo' element={<UserInfo/>}/>
+      <Route path='/Map' element={<Map/>}/>
+
     </Routes>
   </BrowserRouter>
 );

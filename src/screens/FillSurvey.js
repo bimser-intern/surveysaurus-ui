@@ -11,7 +11,7 @@ import Face from "../image/face.png";
 import Gif from "../image/gif.png";
 import Header from "../image/header.png";
 import Italic from "../image/italic.png";
-import Link from "../image/link.png";
+import Link1 from "../image/link.png";
 import NumberedList from "../image/numberedList.png";
 import bold from "../image/bold.png";
 import bulletList from "../image/bulletList.png";
@@ -21,6 +21,7 @@ import Report from "../image/report.png";
 import FullReport from "../image/reportfull.png";
 import FullUpvote from "../image/upvotefull.png";
 import DeleteIcon from "../image/delete-icon.png";
+import { Link } from 'react-router-dom';
 
 function FillSurvey() {
   const location = useLocation();
@@ -789,7 +790,7 @@ function FillSurvey() {
                 style={control ? { justifyContent: "center" } : null}
                 className="fillSurveyFooter"
               >
-                <button className="mapButton">
+                <Link to={"/Map"} className="mapButton">
                   <img
                     width="60px"
                     height="80px"
@@ -798,7 +799,7 @@ function FillSurvey() {
                     alt=""
                   />
                   <p className="worldText">See what the world said</p>
-                </button>
+                </Link>
                 <button
                   style={control ? { display: "none" } : null}
                   onClick={handleDone}
@@ -1052,7 +1053,7 @@ function FillSurvey() {
                     <img src={Italic} alt="" />
                   </li>
                   <li>
-                    <img src={Link} alt="" />
+                    <img src={Link1} alt="" />
                   </li>
                   <li>
                     <img src={Header} alt="" />
