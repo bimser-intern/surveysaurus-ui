@@ -67,7 +67,7 @@ jobs:
           repo: surveysaurus-qa
           owner: bimser-intern
           run_id: ${{ steps.return_dispatch.outputs.run_id }}
-          run_timeout_seconds: 300 # Optional
+          run_timeout_seconds: 3000 # Optional
           poll_interval_ms: 5000 # Optional
 
   
