@@ -1,3 +1,62 @@
-.map{
-    background-image:url("../image/blueBack.jpg") !important;
+.notLogin{
+    position:absolute;
+    width: 80%;
+    height: 80px;
+    border-radius: 50px;
+    background-color: #92C0EA;
+    text-align:center;
+    top: 70%;
+    right: 10%;
+    opacity: 0.8;
+}
+.answerSee{
+    position: relative;
+    font-family: Roboto;
+    font-weight: 900;
+    top: 10%;
+    color: #000000;
+    font-size: 40px;
+    opacity:1;
+    &:hover{
+        color: #000000;
+    }
+
+}
+.footerMap{
+    position: relative;
+    margin-top: -60px;
+    width: 100%;
+    height: 100px;
+    border-top: 2px solid #D3D8FF;
+    
+
+    ul {
+        list-style-type: none;
+        margin-top: 10px;
+
+
+        a {
+            position: relative;
+            top: 40px;
+            cursor: pointer;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 23px;
+            text-align: center;
+            margin-right: 80px;
+            text-decoration: none;
+            
+        }
+
+        .logoImage {
+            position: absolute;
+            left: 45%;
+            width: 100px;
+            height: 100px;
+           
+        }
+
+    }
 }

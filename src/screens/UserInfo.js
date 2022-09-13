@@ -21,6 +21,7 @@ function UserInfo() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPassword1, setConfirmPassword1] = useState("");
   const [gender, setgender] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
@@ -108,6 +109,18 @@ function UserInfo() {
     }
     return true;
   }
+  function InvalidMsgConfirmPassword1(e) {
+    console.log("password confrim passwrod")
+    console.log(password)
+    console.log(confirmPassword)
+    if(confirmPassword1!=confirmPassword){
+        e.target.setCustomValidity('Passwords do not match.');
+    }
+    else{
+        e.target.setCustomValidity('');
+    }
+    return true;
+}
   const handleSubmit = async (e) => {
     console.log(nameUpdate);
     console.log(emailUpdate);
@@ -211,8 +224,12 @@ function UserInfo() {
   return (
     <div className="App">
       <Menu isLogin={true} test="false" to="/userInfo" />
+      
 
       <div className="tableImg">
+      <div className="aInfo">
+          Account Info
+      </div>
         <img src={TableImg} alt="" />
       </div>
       <div className="casualImg">
@@ -329,14 +346,17 @@ function UserInfo() {
                 class="form-control"
                 id="sel1"
               >
-            {controlCity? <option  style={{ display: controlCity ? "block" : "none" }}>
-                  {cityUpdate}
-                </option>:<option  style={{ display: controlCity ? "block" : "none" }}>
+                {controlCity ?
+                  <option style={{ display: controlCity ? "block" : "none" }}>
+                    {cityUpdate}
+                  </option> :
+                  <option style={{ display: controlCity ? "block" : "none" }}>
 
-                </option>}
+                  </option>
+                }
 
                 {cityList.map((item) => {
-                  return <option>{item}</option>;
+                  return <option value={item}>{item}</option>;
                 })}
               </select>
             </div>
@@ -365,7 +385,7 @@ function UserInfo() {
             <div
               class="form-group"
               style={{ position: "relative", top: "-20px" }}
-            >
+             >
               <label for="exampleInputPassword2">New Password</label>
               <input
                 value={confirmPassword}
@@ -378,6 +398,31 @@ function UserInfo() {
                 class="form-control"
                 id="exampleInputPassword2"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                placeholder="Enter your new password"
+              />
+              <div
+                className="eyeIcon"
+                style={{ left: "90%", position: "relative", top: "-25px" }}
+                type="button"
+                onClick={() => setControlVisibleConfirm(!controlVisibleConfirm)}
+              >
+                <img src={eyeIcon} alt="" />
+              </div>
+            </div>
+            <div
+              class="form-group"
+              style={{ position: "relative", top: "-40px" }}
+             >
+              <label for="exampleInputPassword2">Confirm Password</label>
+              <input
+                value={confirmPassword1}
+                onInput={ InvalidMsgConfirmPassword1}
+                onInvalidCapture={InvalidMsgConfirmPassword1}
+                onChange={(e) => setConfirmPassword1(e.target.value)}
+                type={controlVisibleConfirm ? "password" : "text"}
+                class="form-control"
+                id="exampleInputPassword2"
+                
                 placeholder="Confirm your password"
               />
               <div
@@ -389,11 +434,7 @@ function UserInfo() {
                 <img src={eyeIcon} alt="" />
               </div>
             </div>
-            {/* <div style={{ display: islogin ? 'flex' : 'none' }} className='wrongSignUp'>
-                            <img style={{ height: "20px" }} src={Warning} alt="" />
-                            <p style={{ marginLeft: "7px" }}>User name or email existing</p>
-                        </div> */}
-            <div className="buttonLayout">
+            <div style={{position:"relative", top:"-25px"}} className="buttonLayout">
               <button type="submit" className="submitButton">
                 Update
               </button>

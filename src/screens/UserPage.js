@@ -107,7 +107,7 @@ function UserPage() {
                             <Link to={"/"} href="" className='navItem'>About</Link>
                         </li>
                         <li>
-                            <a href=''>Contact Us</a>
+                            <a href=''><p style={{marginTop:'30px'}}>Contact Us</p></a>
                         </li>
                         <li>
                             <img className='logoImage' src={Logo} alt="" />
