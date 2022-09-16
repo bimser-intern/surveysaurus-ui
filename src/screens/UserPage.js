@@ -23,7 +23,7 @@ function UserPage() {
     }
     useEffect(() => {
         
-        axios.get("http://40.113.137.113/api/user/mysurveys", {
+        axios.get("/api/user/mysurveys", {
             headers: {
                 authorization: localStorage.getItem("token"),
             }

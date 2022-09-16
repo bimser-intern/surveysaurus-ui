@@ -58,7 +58,7 @@ function UserInfo() {
     console.log(cityUpdate);
     axios
       .get(
-        "http://40.113.137.113/api/user/countries",
+        "/api/user/countries",
 
         {}
       )
@@ -133,7 +133,7 @@ function UserInfo() {
       if (localStorage.getItem("token")) {
         await axios
           .put(
-            "http://40.113.137.113/api/profile/updatepassword",
+            "/api/profile/updatepassword",
 
             {
               oldPassword: document.getElementById("exampleInputPassword1")
@@ -177,7 +177,7 @@ function UserInfo() {
       if (localStorage.getItem("token")) {
         await axios
           .post(
-            "http://40.113.137.113/api/profile/update",
+            "/api/profile/update",
             {
               userName: nameUpdate,
               email: emailUpdate,
@@ -303,7 +303,7 @@ function UserInfo() {
                   setcontrolCity(false);
                   axios
                     .post(
-                      "http://40.113.137.113/api/user/cities",
+                      "/api/user/cities",
                       {
                         country: event.target.value,
                       },

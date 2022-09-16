@@ -28,7 +28,11 @@ function Profile() {
   }
   useEffect(() => {
       
-      axios.get("http://40.113.137.113/api/user/mysurveys", {
+
+
+
+      
+      axios.get("/api/user/mysurveys", {
           headers: {
               authorization: localStorage.getItem("token"),
           }
@@ -86,7 +90,7 @@ function Profile() {
               background: '#EDD2D2', width: '106px', height: '30', fontSize: '15px',
               borderRadius: '40px'
             }} href='#'>300 Point </a></li>
-            <li><a>Tophies</a></li>
+            <li><a>Trophies</a></li>
             <li><a>Survey</a></li>
             <li><a>Followers</a></li>
             <li><a>Followers</a></li>

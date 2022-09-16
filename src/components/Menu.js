@@ -57,8 +57,8 @@ function Menu({ isLogin, test = null,to="/" }) {
         </ul>
       
 
-      <ul>
-        <li style={{ display: isLogin ? "none" : "block" }}>
+      <ul style={{position:'relative', left:'60px'}}>
+        <li style={{ display: isLogin ? "none" : "block"}}>
           <Link to={"/signup"} className='signUpButton  ' >
             <p className='buttonTextLayout'>Sign Up</p>
           </Link>

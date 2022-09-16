@@ -76,7 +76,7 @@ function CreateSurveyComponenet() {
     //console.log(question)
     if(localStorage.getItem("token")){
             axios.post(
-              'http://40.113.137.113/api/survey/createSurvey',
+              '/api/survey/createSurvey',
               {
                   "title":title,
                   "question":question,

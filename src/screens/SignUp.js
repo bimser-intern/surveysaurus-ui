@@ -150,7 +150,7 @@ function SignUp() {
                     </li>
                 </ul>
 
-                <ul>
+                <ul style={{position:'relative', left:'60px'}}>
                     <li>
                         <Link to={"/login"} className='loginButton'>
                             <p className='buttonTextLayout'>Login</p>
