@@ -52,7 +52,7 @@ function Login() {
     e.preventDefault();
     console.log(email)
     console.log(password)
-    axios.post('http://40.113.137.113/api/user/login', {
+    axios.post('/api/user/login', {
       "email": email,
       "password": password,
     })
@@ -67,7 +67,7 @@ function Login() {
           if(localStorage.getItem('userSurvey')){
             let object=JSON.parse(localStorage.getItem('userSurvey'))
             axios.post(
-              'http://40.113.137.113/api/survey/createSurvey',
+              '/api/survey/createSurvey',
               {
                   "title":object.title,
                   "question":object.question,
@@ -86,7 +86,7 @@ function Login() {
           if(localStorage.getItem("commentText")){
             if(!(localStorage.getItem("commentID"))){
               axios.post(
-                'http://40.113.137.113/api/comment/addcomment',
+                '/api/comment/addcomment',
                 {
                   "title": JSON.parse(localStorage.getItem("item")).title,
                   "comment": localStorage.getItem("commentText"),
@@ -104,7 +104,7 @@ function Login() {
             }
             else{
               axios.post(
-                'http://40.113.137.113/api/comment/addcomment',
+                '/api/comment/addcomment',
                 {
                   "title": JSON.parse(localStorage.getItem("item")).title,
                   "comment": localStorage.getItem("commentText"),
@@ -125,7 +125,7 @@ function Login() {
           }
           if(localStorage.getItem("selectedOption")){
             axios.post(
-              'http://40.113.137.113/api/survey/fillSurvey',
+              '/api/survey/fillSurvey',
               {
                 "title": location.state.title,
                 "answer": localStorage.getItem("selectedOption"),
@@ -165,7 +165,7 @@ function Login() {
           </li>
         </ul>
 
-        <ul>
+        <ul style={{position:'relative', left:'60px'}}>
           <li>
             <Link to={"/signup"} className='signUpButton'>
               <p className='buttonTextLayout'>Sign Up</p>

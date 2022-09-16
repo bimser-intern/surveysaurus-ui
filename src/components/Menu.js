@@ -47,24 +47,24 @@ function Menu({ isLogin, test = null,to="/" }) {
         <ul className='navInfo'>
           <li><a href="/#create" className='navItem nav-item' active-color='#E49192'>Home</a>
           </li>
-          <li style={{ display: test !== null ? "none" : "block" }}><a href="/#about" className='navItem nav-item' active-color='#E49192'>About</a></li>
-          <li style={{ display: test !== null ? "none" : "block" }}><a href="/#survey" className='navItem nav-item' active-color='#E49192' >Surveys</a></li>
-          <li style={{ display: to !== "/userPage" ? "none" : "block" }}><Link to={"/userPage"} className='navItem nav-item' active-color='#E49192'>My Survey</Link></li>
-          <li style={{ display: to === "/userInfo" ? "block" : "none" }}><Link to={"/userInfo"}  className='navItem nav-item ' active-color='#E49192'>Account Info</Link></li>
+          <li style={{ display: test !== null || to==="/Profile" ?  "none" : "block" }}><a href="/#about" className='navItem nav-item' active-color='#E49192'>About</a></li>
+          <li style={{ display: test !== null ? "none" : "block" }}><a href= {to==="/Profile"? "#surveyscardmini":"/#survey"} className='navItem nav-item' active-color='#E49192' >Surveys</a></li>
+          <li style={{ display: to !== "/userPage" ? "none" : "block" }}><Link to={"/userPage"} className='navItem nav-item' active-color='#E49192'>Survey</Link></li>
+          <li style={{ display: to === "/userInfo" ? "block" : "none" }}><Link to={"/userInfo"}  className='navItem nav-item ' active-color='#E49192'>Account</Link></li>
           <li>
             <img className='logoImg' src={Logo} alt="" />
           </li>
         </ul>
       
 
-      <ul>
-        <li style={{ display: isLogin ? "none" : "block" }}>
+      <ul style={{position:'relative', left:'60px'}}>
+        <li style={{ display: isLogin ? "none" : "block"}}>
           <Link to={"/signup"} className='signUpButton  ' >
             <p className='buttonTextLayout'>Sign Up</p>
           </Link>
         </li>
         <li>
-          <Link to={localStorage.getItem("token") ? "/" : "/login"} className='loginButton '>
+          <Link to={localStorage.getItem("token") ? "/Profile" : "/login"} className='loginButton '>
             <p className='buttonTextLayout'>{isLogin ? JSON.parse(localStorage.getItem("auth")).name : "Login"}</p>
           </Link>
         </li>
@@ -83,7 +83,7 @@ function Menu({ isLogin, test = null,to="/" }) {
                   backgroundColor: "#E491924D",
                   marginTop: "10px"
                 }} className='openMenuLogIn' >
-                  <div className='profileContainer' onClick={() => navigate("/")} style={{
+                  <div className='profileContainer' onClick={() => navigate("/Profile")} style={{
                     width: "80%", height: "30px", backgroundColor: "#F5F5F5CC", marginBottom: "10px", display: "flex",
                     justifyContent: "center",
                     alignItems: "center",

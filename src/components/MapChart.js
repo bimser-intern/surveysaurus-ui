@@ -9,7 +9,7 @@ import {
   Graticule,
   ZoomableGroup
 } from "react-simple-maps";
-import "../style/MapChart.scss"
+
 
 
 
@@ -34,7 +34,7 @@ const MapChart = () => {
     <ComposableMap
       projectionConfig={{
         rotate: [-10, 0, 0],
-        scale: 147
+        scale: 127
       }}
     ><ZoomableGroup>
       <Sphere stroke="#E4E5E6" fill="#5380EA" strokeWidth={0.5} />

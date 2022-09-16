@@ -53,7 +53,7 @@ function FillSurvey() {
     if (localStorage.getItem("token")) {
       axios
         .post(
-          "http://40.113.137.113/api/survey/isfilled",
+          "/api/survey/isfilled",
           {
             title: location.state.surveyInfo.title,
           },
@@ -70,7 +70,7 @@ function FillSurvey() {
         });
     }
     axios
-      .post("http://40.113.137.113/api/survey/getSurvey", {
+      .post("/api/survey/getSurvey", {
         title: location.state.surveyInfo.title,
       })
       .then((result) => {
@@ -84,7 +84,7 @@ function FillSurvey() {
     setTimeout(() => {
       axios
         .post(
-          "http://40.113.137.113/api/comment/comments",
+          "/api/comment/comments",
           {
             title: location.state.surveyInfo.title,
           },
@@ -162,7 +162,7 @@ function FillSurvey() {
     } else {
       axios
         .post(
-          "http://40.113.137.113/api/survey/fillSurvey",
+          "/api/survey/fillSurvey",
           {
             title: location.state.surveyInfo.title,
             answer: selected,
@@ -176,7 +176,7 @@ function FillSurvey() {
         .then((result) => {
           console.log(result);
           axios
-            .post("http://40.113.137.113/api/survey/getSurvey", {
+            .post("/api/survey/getSurvey", {
               title: location.state.surveyInfo.title,
             })
             .then((result) => {
@@ -209,7 +209,7 @@ function FillSurvey() {
       navigate("/login");
     } else if (commentID === 0) {
       axios.post(
-        "http://40.113.137.113/api/comment/addcomment",
+        "/api/comment/addcomment",
         {
           title: location.state.surveyInfo.title,
           comment: commentText,
@@ -223,7 +223,7 @@ function FillSurvey() {
       setTimeout(() => {
         axios
           .post(
-            "http://40.113.137.113/api/comment/comments",
+            "/api/comment/comments",
             {
               title: location.state.surveyInfo.title,
             },
@@ -249,7 +249,7 @@ function FillSurvey() {
     } else if (commentID !== 0) {
       axios
         .post(
-          "http://40.113.137.113/api/comment/addcomment",
+          "/api/comment/addcomment",
           {
             title: location.state.surveyInfo.title,
             comment: commentText,
@@ -270,7 +270,7 @@ function FillSurvey() {
       setTimeout(() => {
         axios
           .post(
-            "http://40.113.137.113/api/comment/comments",
+            "/api/comment/comments",
             {
               title: location.state.surveyInfo.title,
             },
@@ -339,7 +339,7 @@ function FillSurvey() {
     } else if (localStorage.getItem("token")) {
       axios
         .post(
-          "http://40.113.137.113/api/comment/report",
+          "/api/comment/report",
           {
             commentID: item.commentID,
           },
@@ -352,7 +352,7 @@ function FillSurvey() {
         .then((result) => {
           axios
             .post(
-              "http://40.113.137.113/api/comment/comments",
+              "/api/comment/comments",
               {
                 title: location.state.surveyInfo.title,
               },
@@ -403,7 +403,7 @@ function FillSurvey() {
     } else {
       axios
         .post(
-          "http://40.113.137.113/api/comment/upVote",
+          "/api/comment/upVote",
           {
             commentID: item.commentID,
           },
@@ -425,7 +425,7 @@ function FillSurvey() {
           }
           axios
             .post(
-              "http://40.113.137.113/api/comment/comments",
+              "/api/comment/comments",
               {
                 title: location.state.surveyInfo.title,
               },
@@ -470,7 +470,7 @@ function FillSurvey() {
   const handleDeleteComment = (item) => {
     axios
       .post(
-        "http://40.113.137.113/api/comment/delete",
+        "/api/comment/delete",
         {
           commentID: item.commentID,
         },
@@ -484,7 +484,7 @@ function FillSurvey() {
         console.log(result);
         axios
           .post(
-            "http://40.113.137.113/api/comment/comments",
+            "/api/comment/comments",
             {
               title: location.state.surveyInfo.title,
             },

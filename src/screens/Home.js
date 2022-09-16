@@ -30,7 +30,7 @@ function Home() {
     slidesToScroll: 3,
   };
   useEffect(() => {
-    axios.get('http://40.113.137.113/api/survey/sample', {
+    axios.get('/api/survey/sample', {
       params: {
         "count": 6
       }
@@ -104,7 +104,7 @@ function Home() {
 
                 </li>
                 <li>
-                  <a href=''>Contact Us</a>
+                  <a href=''><p style={{marginTop:'30px'}}>Contact Us</p></a>
                 </li>
                 <li>
                   <img className='logoImage' src={Logo} alt="" />

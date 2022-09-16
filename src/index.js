@@ -18,6 +18,7 @@ import FillSurvey from './screens/FillSurvey';
 import Home from './screens/Home';
 import UserInfo from './screens/UserInfo';
 import Map from './screens/Map';
+import Profile from './screens/Profile';
 
 
 
@@ -36,6 +37,8 @@ root.render(
       <Route path='/fillSurvey' element={<FillSurvey/>}/>
       <Route path='/userInfo' element={<UserInfo/>}/>
       <Route path='/Map' element={<Map/>}/>
+      <Route path='/Profile' element={<Profile/>}/>
+
 
     </Routes>
   </BrowserRouter>
