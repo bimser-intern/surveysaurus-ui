@@ -15,10 +15,18 @@ import "../style/Profile.scss";
 import axios from 'axios';
 
 
+
 function Profile() {
+  
+  // function Trophies(){
+  //   const trop=document.getElementById('listgifticon').children.length;
+  //   console.log('çalıştı');
+  //   return trop;
+  // }
   window.scrollTo(0, 0)
   const navigate = useNavigate()
   const [control, setControl] = useState(true);
+  const [Trophies, setTrophies] = useState(1);
   const [userInfo, setUserInfo] = useState([])
   const [userSurvey, setUserSurvey] = useState([])
   const logOut = () => {
@@ -26,12 +34,31 @@ function Profile() {
       localStorage.removeItem('auth')
       navigate("/login")
   }
+
   useEffect(() => {
       
+      if(JSON.parse(localStorage.getItem('auth')).point){
+        if(JSON.parse(localStorage.getItem('auth')).point>500){
+          setTrophies(Trophies+1);
+          
+
+        }
+        if(JSON.parse(localStorage.getItem('auth')).point>1500){
+          setTrophies(Trophies+1);
+          
+
+        }
+        if(JSON.parse(localStorage.getItem('auth')).point>3000){
+          setTrophies(Trophies+1);
+          
+
+        }
+        if(userSurvey.length>=10){
+          setTrophies(Trophies+1)
+        }
 
 
-
-      
+      }
       axios.get("/api/user/mysurveys", {
           headers: {
               authorization: localStorage.getItem("token"),
@@ -64,6 +91,7 @@ function Profile() {
       }
   }, [])
 
+
   return (
 
     <div>
@@ -89,11 +117,11 @@ function Profile() {
             <li><a className='btn' id='point' style={{
               background: '#EDD2D2', width: '106px', height: '30', fontSize: '15px',
               borderRadius: '40px'
-            }} href='#'>300 Point </a></li>
-            <li><a>Trophies</a></li>
-            <li><a>Survey</a></li>
-            <li><a>Followers</a></li>
-            <li><a>Followers</a></li>
+            }} href='#'>{JSON.parse(localStorage.getItem("auth")).point} Point </a></li>
+            <li><a> {Trophies} Trophies</a></li>
+            <li><a> {userSurvey.length} Survey</a></li>
+            <li><a> Followers</a></li>
+            <li><a> Followers</a></li>
           </ul>
 
         </div>
@@ -104,11 +132,11 @@ function Profile() {
       <div className='Gifticon'>
         <h1>Trophies</h1>
         <ul id='listgifticon'>
-          <li><img src={Gold1} /><p>Baby saurus</p> </li>
-          <li><img src={Bronze} /><p>Bronze</p></li>
-          <li><img src={Silver} /><p style={{ paddingLeft: '10px' }}>Silver</p></li>
-          <li><img src={Gold} /><p style={{ paddingLeft: '10px' }}>Gold</p></li>
-          <li>< img style={{ position: 'relative', marginTop: '-30px', top: '10px' }} src={Signed} /><p>Saurus lover</p></li>
+          <li><img src={Gold1} /><p id='p1'>Baby saurus</p></li>
+          <li style={{display:JSON.parse(localStorage.getItem('auth')).point > 500 ? "block":"none"}}><img src={Bronze}  /><p>Bronze</p></li>
+          <li style={{display:JSON.parse(localStorage.getItem('auth')).point > 1500 ? "block":"none"}}><img src={Silver} /><p style={{ paddingLeft: '10px' }}>Silver</p></li>
+          <li style={{display:JSON.parse(localStorage.getItem('auth')).point > 3000 ? "block":"none"}}><img src={Gold} /><p style={{ paddingLeft: '10px' }}>Gold</p></li>
+          <li style={{display: userSurvey.length>=10 ? "block":"none"}}><img style={{ position: 'relative', marginTop: '-30px', top: '10px' }} src={Signed} /><p>Saurus lover</p></li>
         </ul>
       </div>
 
