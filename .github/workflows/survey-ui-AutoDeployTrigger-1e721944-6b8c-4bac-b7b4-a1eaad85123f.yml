@@ -39,11 +39,8 @@ jobs:
           file: ./Dockerfile
           context: ./
   
-<<<<<<< HEAD:.github/workflows/survey-ui-AutoDeployTrigger-c6ebdcaf-5925-4e33-8746-835c810ea2ab.yml
-  
-=======
 
->>>>>>> master:.github/workflows/survey-ui-AutoDeployTrigger-1e721944-6b8c-4bac-b7b4-a1eaad85123f.yml
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -61,8 +58,3 @@ jobs:
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
             az containerapp registry set -n survey-ui -g surveysaurus2 --server surveyacr.azurecr.io --username  ${{ secrets.SURVEYUI_REGISTRY_USERNAME }} --password ${{ secrets.SURVEYUI_REGISTRY_PASSWORD }}
-<<<<<<< HEAD:.github/workflows/survey-ui-AutoDeployTrigger-c6ebdcaf-5925-4e33-8746-835c810ea2ab.yml
-            az containerapp update -n survey-ui -g surveysaurus2 --image surveyacr.azurecr.io/survey-ui:${{ github.sha }}
-=======
-            az containerapp update -n survey-ui -g surveysaurus2 --image surveyacr.azurecr.io/survey-ui:${{ github.sha }}
->>>>>>> master:.github/workflows/survey-ui-AutoDeployTrigger-1e721944-6b8c-4bac-b7b4-a1eaad85123f.yml
