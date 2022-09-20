@@ -126,14 +126,6 @@ function FillSurvey() {
           });
           console.log("strReporteds: " + strReporteds)
           setReportedCommnetsArray(ReportedsArr);
-          //upvotedcomments = result.data.data.comments.filter(_comment=>_comment.upvoted).map(_comment=>_comment.commentID)
-          // let commentData = [];
-          // let counter = 0
-          // result.data.data.comments.map((item) => {
-          //   counter++
-          //   commentData.push(item);
-          // });
-          // setSurveyCommentData(commentData);
           let reportedList = [];
           for (let i = 0; i < counter; i++) {
             reportedList.push(strReporteds)

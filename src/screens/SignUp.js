@@ -1,48 +1,24 @@
-import React, { useEffect } from 'react'
-import Menu from '../components/Menu'
-import "../style/SignUp.scss"
-import TableImg from "../image/table.png"
+import React, { useEffect } from 'react';
+import "../style/SignUp.scss";
+import TableImg from "../image/table.png";
 import CasualLife from "../image/CasualLife.png"
 import googleIcon from "../image/google.png"
 import eyeIcon from "../image/eye.png"
 import Warning from "../image/warning.png"
-import Logo from "../image/logo.png"
-import "../style/Login.scss"
+import Logo from "../image/logo.png";
+import "../style/Login.scss";
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Vector from "../image/Vector.png"
-import axios from "axios"
+import { Link } from 'react-router-dom';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 function SignUp() {
     const navigate = useNavigate();
-    const countryCitylist = [
-        {
-            countryName: "Turkey",
-            id: 0,
-            city: [
-                { cityName: "İstanbul" },
-                { cityName: "Kocaeli" },
-                { cityName: "Ankara" },
-            ]
-        },
-        {
-            countryName: "Germany",
-            id: 1,
-            city: [
-                { cityName: "Berlin" },
-                { cityName: "Hamburg" },
-                { cityName: "Munich" },
-            ]
-
-        }
-    ]
-    const [countryId, setCountryId] = useState(0);
-    const [countryOption, setcountryOption] = useState(0);
+    // const [countryId, setCountryId] = useState(0);
+    // const [countryOption, setcountryOption] = useState(0);
     const [controlVisible, setControlVisible] = useState(true);
     const [controlVisibleConfirm, setControlVisibleConfirm] = useState(true);
     const [control, setControl] = useState(true);
-    const [vectorControl, setvectorControl] = useState(false);
+    // const [vectorControl, setvectorControl] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -56,7 +32,7 @@ function SignUp() {
 
     useEffect(() => {
         axios.get(
-            'http://40.113.137.113/api/user/countries',
+            '/api/user/countries',
 
             {}
         ).then((result) => {
@@ -118,7 +94,7 @@ function SignUp() {
         console.log(gender);
         console.log(city);
         console.log(country);
-        axios.post('http://40.113.137.113/api/user/register', {
+        axios.post('/api/user/register', {
             "userName": name,
             "email": email,
             "password": password,
@@ -216,7 +192,7 @@ function SignUp() {
                             <select value={country} onInput={(e) => e.target.setCustomValidity("")} onInvalidCapture={(e) => e.target.setCustomValidity("Please Choose Country")} onChange={(event) => {
                                 setCountry(event.target.value)
                                 axios.post(
-                                    'http://40.113.137.113/api/user/cities',
+                                    '/api/user/cities',
                                     {
                                         "country": event.target.value,
                                     },

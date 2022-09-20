@@ -61,7 +61,7 @@ function Login() {
         if (result.status === 200) {
           localStorage.setItem('token',result.data.accessToken)
           localStorage.setItem('auth',JSON.stringify(result.data.data))
-          console.log(result.data.data)
+          console.log(result.data.data + "Login 64 Çalıştı.")
           navigate("/")
 
           if(localStorage.getItem('userSurvey')){

@@ -53,8 +53,42 @@ function UserInfo() {
       ? JSON.parse(localStorage.getItem("auth")).city
       : null
   );
+  const [pointUpdate, setpointUpdate] = useState(
+    localStorage.getItem("auth")
+      ? JSON.parse(localStorage.getItem("auth")).point
+      : null
+  );
   const [controlCity, setcontrolCity] = useState(true);
+  const [controlCountry, setcontrolCountry] = useState(true);
   useEffect(() => {
+    setcountryUpdate(JSON.parse(localStorage.getItem('auth')).country);
+
+    setcontrolCity(false);
+    setcontrolCountry(false);
+    axios
+      .post(
+        "/api/user/cities",
+        {
+          country: JSON.parse(localStorage.getItem('auth')).country,
+        },
+
+        {}
+      )
+      .then((result) => {
+        console.log(result);
+        const cityData = [];
+        result.data.data.surveys.map((item) => {
+          //console.log(item)
+          cityData.push(item);
+        });
+
+        setCityList(cityData);
+      });
+
+    //alert(countryOption)
+
+    //
+
     console.log(cityUpdate);
     axios
       .get(
@@ -113,20 +147,21 @@ function UserInfo() {
     console.log("password confrim passwrod")
     console.log(password)
     console.log(confirmPassword)
-    if(confirmPassword1!=confirmPassword){
-        e.target.setCustomValidity('Passwords do not match.');
+    if (confirmPassword1 != confirmPassword) {
+      e.target.setCustomValidity('Passwords do not match.');
     }
-    else{
-        e.target.setCustomValidity('');
+    else {
+      e.target.setCustomValidity('');
     }
     return true;
-}
+  }
   const handleSubmit = async (e) => {
     console.log(nameUpdate);
     console.log(emailUpdate);
     console.log(genderUpdate);
     console.log(cityUpdate);
     console.log(countryUpdate);
+    console.log(pointUpdate)
     e.preventDefault();
     let alertMessage = "";
     if (document.getElementById("exampleInputPassword2").value.length >= 8) {
@@ -184,6 +219,7 @@ function UserInfo() {
               city: cityUpdate,
               country: countryUpdate,
               gender: genderUpdate,
+              point: pointUpdate
             },
             {
               headers: {
@@ -202,6 +238,7 @@ function UserInfo() {
                 email: emailUpdate,
                 city: cityUpdate,
                 country: countryUpdate,
+                point: pointUpdate,
               };
               localStorage.setItem("auth", JSON.stringify(object));
             }
@@ -224,12 +261,12 @@ function UserInfo() {
   return (
     <div className="App">
       <Menu isLogin={true} test="false" to="/userInfo" />
-      
+
 
       <div className="tableImg">
-      <div className="aInfo">
+        <div className="aInfo">
           Account Info
-      </div>
+        </div>
         <img src={TableImg} alt="" />
       </div>
       <div className="casualImg">
@@ -327,7 +364,12 @@ function UserInfo() {
                 class="form-control"
                 id="sel1"
               >
-                <option></option>
+                {
+                  
+                  <option value={countryList} >{countryUpdate}</option>
+                  
+                }
+                
                 {countryList.map((country, index) => {
                   return <option value={country}>{country}</option>;
                 })}
@@ -350,7 +392,7 @@ function UserInfo() {
                   <option style={{ display: controlCity ? "block" : "none" }}>
                     {cityUpdate}
                   </option> :
-                  <option style={{ display: controlCity ? "block" : "none" }}>
+                  <option>
 
                   </option>
                 }
@@ -385,7 +427,7 @@ function UserInfo() {
             <div
               class="form-group"
               style={{ position: "relative", top: "-20px" }}
-             >
+            >
               <label for="exampleInputPassword2">New Password</label>
               <input
                 value={confirmPassword}
@@ -412,17 +454,17 @@ function UserInfo() {
             <div
               class="form-group"
               style={{ position: "relative", top: "-40px" }}
-             >
+            >
               <label for="exampleInputPassword2">Confirm Password</label>
               <input
                 value={confirmPassword1}
-                onInput={ InvalidMsgConfirmPassword1}
+                onInput={InvalidMsgConfirmPassword1}
                 onInvalidCapture={InvalidMsgConfirmPassword1}
                 onChange={(e) => setConfirmPassword1(e.target.value)}
                 type={controlVisibleConfirm ? "password" : "text"}
                 class="form-control"
                 id="exampleInputPassword2"
-                
+
                 placeholder="Confirm your password"
               />
               <div
@@ -434,7 +476,7 @@ function UserInfo() {
                 <img src={eyeIcon} alt="" />
               </div>
             </div>
-            <div style={{position:"relative", top:"-25px"}} className="buttonLayout">
+            <div style={{ position: "relative", top: "-25px" }} className="buttonLayout">
               <button type="submit" className="submitButton">
                 Update
               </button>
