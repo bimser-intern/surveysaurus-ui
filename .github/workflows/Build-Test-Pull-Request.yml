@@ -21,6 +21,7 @@ jobs:
       - name: Checkout to the branch
         uses: actions/checkout@v2
 
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
@@ -38,10 +39,40 @@ jobs:
           tags: surveyacr.azurecr.io/survey-ui:${{ github.sha }}
           file: ./Dockerfile
           context: ./
+      
+      - name: Dispatch and return Run ID
+        uses: codex-/return-dispatch@v1.5.0
+        id: return_dispatch
+        with:
+          token: ${{ secrets.PAT_TOKEN }} # Note this is NOT GITHUB_TOKEN but a PAT
+          ref: master
+          repo: surveysaurus-qa
+          owner: bimser-intern
+          workflow: TestTheUI.yml
+          workflow_inputs: '{"cake":"delicious"}'
+          workflow_timeout_seconds: 100 # Default: 300
           
-      - name: Trigger QA Test Automation
+      - name: Evaluate that the Run ID output has been set
         run: |
-          curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/bimser-intern/surveysaurus-qa/dispatches --data '{"event_type": "build_application"}'
-    
+          if [ "${{ steps.return_dispatch.outputs.run_id }}" == "" ]; then
+            echo "Failed to return Run ID"
+            exit 1
+          fi
+      - name: Output fetched Run ID
+        run: echo ${{ steps.return_dispatch.outputs.run_id }}
 
+      - name: Await Run ID ${{ steps.return_dispatch.outputs.run_id }}
+        uses: Codex-/await-remote-run@v1.4.0
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          repo: surveysaurus-qa
+          owner: bimser-intern
+          run_id: ${{ steps.return_dispatch.outputs.run_id }}
+          run_timeout_seconds: 300 # Optional
+          poll_interval_ms: 5000 # Optional
+      
+      # - name: Trigger QA Test Automation
+      #   run: |
+      #     curl -XPOST -u "${{ secrets.PAT_USERNAME}}:${{secrets.PAT_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/bimser-intern/surveysaurus-qa/dispatches --data '{"event_type": "build_application"}'
+    
 
