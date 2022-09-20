@@ -18,7 +18,7 @@ function UserInfo() {
   const [control, setControl] = useState(true);
   const [vectorControl, setvectorControl] = useState(false);
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPassword1, setConfirmPassword1] = useState("");
@@ -268,6 +268,7 @@ function UserInfo() {
           Account Info
         </div>
         <img src={TableImg} alt="" />
+        
       </div>
       <div className="casualImg">
         <img src={CasualLife} alt="" />
