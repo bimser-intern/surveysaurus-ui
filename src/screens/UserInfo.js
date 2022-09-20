@@ -23,7 +23,7 @@ function UserInfo() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPassword1, setConfirmPassword1] = useState("");
   const [gender, setgender] = useState("");
-  const [city, setCity] = useState("");
+  // const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [islogin, setIsLogin] = useState(false);
   const [countryList, setCountryList] = useState([]);
