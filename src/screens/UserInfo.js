@@ -60,12 +60,11 @@ function UserInfo() {
   );
   const [controlCity, setcontrolCity] = useState(true);
   const [controlCountry, setcontrolCountry] = useState(true);
-  useEffect(() => {
-    setcountryUpdate(JSON.parse(localStorage.getItem('auth')).country);
-
-    setcontrolCity(false);
-    setcontrolCountry(false);
-    axios
+  useEffect(  ()  =>  {
+    setTimeout(() => {
+      setcontrolCity(false);
+    
+     axios
       .post(
         "/api/user/cities",
         {
@@ -90,23 +89,30 @@ function UserInfo() {
     //
 
     console.log(cityUpdate);
-    axios
-      .get(
-        "/api/user/countries",
+      
+    }, 200);
+       axios 
+    .get(
+      "/api/user/countries",
 
-        {}
-      )
-      .then((result) => {
-        const countryData = [];
-        result.data.data.surveys.map((item) => {
-          //console.log(item)
-          countryData.push(item);
-        });
-
-        setCountryList(countryData);
+      {}
+    )
+    .then((result) => {
+      console.log('jefnksjdmnlşawösdixşawçsd')
+      const countryData = [];
+      result.data.data.surveys.map((item) => {
+        //console.log(item)
+        countryData.push(item);
       });
-  }, []);
+      console.log('ülke:',countryData)
+      setCountryList(countryData);
+    });
+   
 
+    
+  
+  }, []);
+ 
   function InvalidMsg(e) {
     if (e.target.value == "") {
       e.target.setCustomValidity("Please fill in the marked fields");
@@ -365,11 +371,11 @@ function UserInfo() {
                 class="form-control"
                 id="sel1"
               >
-                {
+              
                   
-                  <option value={countryList} >{countryUpdate}</option>
                   
-                }
+                  
+              
                 
                 {countryList.map((country, index) => {
                   return <option value={country}>{country}</option>;
