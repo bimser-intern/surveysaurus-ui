@@ -43,7 +43,7 @@ const MapChart = () => {
         <Geographies  geography={geoUrl} stroke="#000000">
           {({ geographies }) =>
             geographies.map((geo) => {
-              const d = data.find((s) => s.ISO3 === geo.id);
+              const d = data.find((s) => s.code === geo.id);
               
               return (
                 <Geography
