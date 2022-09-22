@@ -112,6 +112,16 @@ function SignUp() {
                 console.log(result);
                 setIsLogin(true)
             })
+           
+
+
+
+
+
+
+
+
+    ///////////
 
         //console.log(email);
     }
