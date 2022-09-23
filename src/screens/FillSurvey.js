@@ -43,10 +43,6 @@ function FillSurvey() {
   const [upvotedcommentslist, setUpvotedCommentsArrayList] = useState([]);
   const [reportedComments, setReportedCommnetsArray] = useState([]);
   const [reportedCommentsList, setReportedCommnetsList] = useState([]);
-  let reported = false;
-  let reportedcount = 0;
-  let upvoted = false;
-  let upvoteCount = 0;
   let now = new Date();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -404,17 +400,9 @@ function FillSurvey() {
               authorization: localStorage.getItem("token"),
             },
           }
-        )
-
-        .then((result) => {
-          if (
-            JSON.stringify(result.data.message) ==
-            '"Upvote deleted successfully"'
-          ) {
-            upvoted = false;
-          } else {
-            upvoted = true;
-          }
+          ////////////////////////////////////////////////////////////////////Hata Olabilir
+        ).then((result) => {
+        
           axios
             .post(
               "/api/comment/comments",

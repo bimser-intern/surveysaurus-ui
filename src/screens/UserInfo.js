@@ -6,25 +6,17 @@ import CasualLife from "../image/CasualLife.png";
 import eyeIcon from "../image/eye.png";
 import Logo from "../image/logo.png";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 function UserInfo() {
   const navigate = useNavigate();
-  const [countryId, setCountryId] = useState(0);
-  const [countryOption, setcountryOption] = useState(0);
   const [controlVisible, setControlVisible] = useState(true);
   const [controlVisibleConfirm, setControlVisibleConfirm] = useState(true);
-  const [control, setControl] = useState(true);
-  const [vectorControl, setvectorControl] = useState(false);
-  const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
+  const [controlVisibleConfirm1, setControlVisibleConfirm1] = useState(true);
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPassword1, setConfirmPassword1] = useState("");
-  const [gender, setgender] = useState("");
-  // const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
   const [islogin, setIsLogin] = useState(false);
   const [countryList, setCountryList] = useState([]);
   const [cityList, setCityList] = useState([]);
@@ -59,8 +51,7 @@ function UserInfo() {
       : null
   );
   const [controlCity, setcontrolCity] = useState(true);
-  const [controlCountry, setcontrolCountry] = useState(true);
-  useEffect(  ()  =>  {
+  useEffect( ()  =>  {
     setTimeout(() => {
       setcontrolCity(false);
     
@@ -138,6 +129,7 @@ function UserInfo() {
     console.log("password confrim passwrod");
     console.log(password);
     console.log(confirmPassword);
+    console.log(nameUpdate);
     if (e.target.value == "") {
       e.target.setCustomValidity("Please fill in the marked fields");
     } else if (password == confirmPassword) {
@@ -146,6 +138,12 @@ function UserInfo() {
       );
     } else {
       e.target.setCustomValidity("");
+    }
+    if (confirmPassword != confirmPassword1) {
+      e.target.setCustomValidity('Passwords do not match.');
+    }
+    else {
+      e.target.setCustomValidity('');
     }
     return true;
   }
@@ -413,7 +411,7 @@ function UserInfo() {
               <label for="exampleInputPassword1">Old Password</label>
               <input
                 onChange={(e) => setPassword(e.target.value)}
-                onInput={nameUpdate.length > 0 ? null : InvalidMsgPassword}
+                onInput={JSON.parse(localStorage.getItem("auth")).name != nameUpdate ? null : InvalidMsgPassword}
                 onInvalidCapture={InvalidMsgPassword}
                 value={password}
                 type={controlVisible ? "password" : "text"}
@@ -439,7 +437,7 @@ function UserInfo() {
               <input
                 value={confirmPassword}
                 onInput={
-                  nameUpdate.length > 0 ? null : InvalidMsgConfirmPassword
+                  JSON.parse(localStorage.getItem("auth")).name != nameUpdate ? null : InvalidMsgConfirmPassword
                 }
                 onInvalidCapture={InvalidMsgConfirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -468,7 +466,7 @@ function UserInfo() {
                 onInput={InvalidMsgConfirmPassword1}
                 onInvalidCapture={InvalidMsgConfirmPassword1}
                 onChange={(e) => setConfirmPassword1(e.target.value)}
-                type={controlVisibleConfirm ? "password" : "text"}
+                type={controlVisibleConfirm1 ? "password" : "text"}
                 class="form-control"
                 id="exampleInputPassword2"
 
@@ -478,7 +476,7 @@ function UserInfo() {
                 className="eyeIcon"
                 style={{ left: "90%", position: "relative", top: "-25px" }}
                 type="button"
-                onClick={() => setControlVisibleConfirm(!controlVisibleConfirm)}
+                onClick={() => setControlVisibleConfirm1(!controlVisibleConfirm1)}
               >
                 <img src={eyeIcon} alt="" />
               </div>

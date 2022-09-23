@@ -14,13 +14,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 
 function Home() {
-  const [value, setValue] = useState('1');
   const [sampleSurvey, setSampleSurvey] = useState([]);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  
 
   const settings = {
     dots: true,

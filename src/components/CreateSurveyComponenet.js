@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Menu from '../components/Menu'
 import "../style/CreateSurvey.scss"
 import Circle from "../image/circle.png"
 import Delete from "../image/delete.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
-import SignOut from "../image/signOut.png"
 import { useLocation } from 'react-router-dom'
 
 
@@ -19,7 +16,6 @@ function CreateSurveyComponenet() {
     { option: ''}, 
   ])
   const location=useLocation()
-  const [control, setControl] = useState(true);
   const [title, setTitle] = useState("");
   const [choiceData, setChoiceData] = useState([]);
   const [question, setQuestion] = useState("");
@@ -60,14 +56,13 @@ function CreateSurveyComponenet() {
   }
 
   const handleSubmit=(e)=>{
-    //alert("handle submit")
+    
     e.preventDefault()
     let storageData=[]
     formFields.map((item)=>{
         storageData.push(item.option)
     })
-    //console.log(formFields)
-    //console.log(storageData)
+   
     setChoiceData(storageData)
     console.log(storageData)
     console.log(title)
