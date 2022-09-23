@@ -12,7 +12,6 @@ import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 import CreateSurvey from './screens/CreateSurvey';
 import UserPage from './screens/UserPage';
-import CarouselComponent from './components/CarouselComponent';
 import CreateSurveyWithLogin from './screens/CreateSurveyWithLogin';
 import FillSurvey from './screens/FillSurvey';
 import Home from './screens/Home';

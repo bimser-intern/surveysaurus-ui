@@ -1,10 +1,7 @@
-import { fontSize, fontStyle, fontWeight, lineHeight, textAlign } from '@mui/system';
 import axios from 'axios';
-import { Button } from 'bootstrap';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import SignOut from "../image/signOut.png"
 import PlusIcon from "../image/plusIcon.png"
 import Logo from "../image/logo.png"
 import ListIcon from "../image/list.png"
@@ -13,14 +10,9 @@ import Menu from '../components/Menu';
 function UserPage() {
     window.scrollTo(0, 0)
     const navigate = useNavigate()
-    const [control, setControl] = useState(true);
     const [userInfo, setUserInfo] = useState([])
     const [userSurvey, setUserSurvey] = useState([])
-    const logOut = () => {
-        localStorage.removeItem("token")
-        localStorage.removeItem('auth')
-        navigate("/login")
-    }
+    
     useEffect(() => {
         
         axios.get("/api/user/mysurveys", {

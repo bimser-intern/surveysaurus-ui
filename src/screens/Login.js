@@ -1,5 +1,4 @@
 import React from 'react'
-import Menu from "../components/Menu"
 import TableImg from "../image/table.png"
 import CasualLife from "../image/CasualLife.png"
 import googleIcon from "../image/google.png"
@@ -12,7 +11,6 @@ import { Link } from 'react-router-dom'
 import '../style/Menu.scss'
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 function Login() {
 
